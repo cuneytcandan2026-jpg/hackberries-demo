@@ -1,0 +1,1257 @@
+{
+  "dessert-french-toast": {
+    "source": "Dessert 1.png",
+    "native": "707x782",
+    "placeholder": "#8e5e37",
+    "roles": {
+      "hero": {
+        "ar": 0.8,
+        "crop": "626x782+41+0",
+        "stem": "dessert-french-toast-hero",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 525
+          },
+          {
+            "w": 626,
+            "h": 783
+          }
+        ]
+      },
+      "square": {
+        "ar": 1,
+        "crop": "707x707+0+14",
+        "stem": "dessert-french-toast-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 640,
+            "h": 640
+          },
+          {
+            "w": 707,
+            "h": 707
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "626x782+41+0",
+        "stem": "dessert-french-toast-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 626,
+            "h": 783
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "707x566+0+85",
+        "stem": "dessert-french-toast-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 707,
+            "h": 566
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "707x471+0+132",
+        "stem": "dessert-french-toast-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 640,
+            "h": 427
+          },
+          {
+            "w": 707,
+            "h": 471
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "707x707+0+14",
+        "stem": "dessert-french-toast-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "food-menemen": {
+    "source": "Food 1.png",
+    "native": "637x780",
+    "placeholder": "#948153",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "637x637+0+111",
+        "stem": "food-menemen-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 637,
+            "h": 637
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "624x780+13+0",
+        "stem": "food-menemen-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 624,
+            "h": 780
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "637x510+0+174",
+        "stem": "food-menemen-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 637,
+            "h": 510
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "637x425+0+217",
+        "stem": "food-menemen-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 637,
+            "h": 425
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "637x637+0+111",
+        "stem": "food-menemen-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "food-omelette": {
+    "source": "Food 2.png",
+    "native": "637x750",
+    "placeholder": "#bdb477",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "637x637+0+94",
+        "stem": "food-omelette-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 637,
+            "h": 637
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "600x750+19+0",
+        "stem": "food-omelette-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 600,
+            "h": 750
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "637x510+0+158",
+        "stem": "food-omelette-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 637,
+            "h": 510
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "637x425+0+200",
+        "stem": "food-omelette-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 637,
+            "h": 425
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "637x637+0+94",
+        "stem": "food-omelette-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "food-avocado-eggs": {
+    "source": "Food 3.png",
+    "native": "636x797",
+    "placeholder": "#908a70",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "636x636+0+81",
+        "stem": "food-avocado-eggs-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 636,
+            "h": 636
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "636x795+0+1",
+        "stem": "food-avocado-eggs-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 636,
+            "h": 795
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "636x509+0+144",
+        "stem": "food-avocado-eggs-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 636,
+            "h": 509
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "636x424+0+187",
+        "stem": "food-avocado-eggs-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 636,
+            "h": 424
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "636x636+0+81",
+        "stem": "food-avocado-eggs-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "drink-iced-latte": {
+    "source": "Drink 4.png",
+    "native": "635x787",
+    "placeholder": "#7f5229",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "635x635+0+115",
+        "stem": "drink-iced-latte-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 635,
+            "h": 635
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "630x787+3+0",
+        "stem": "drink-iced-latte-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 630,
+            "h": 788
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "635x508+0+179",
+        "stem": "drink-iced-latte-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 635,
+            "h": 508
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "635x423+0+221",
+        "stem": "drink-iced-latte-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 635,
+            "h": 423
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "635x635+0+115",
+        "stem": "drink-iced-latte-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "drink-coolers": {
+    "source": "Drink 1.png",
+    "native": "637x801",
+    "placeholder": "#7e887f",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "637x637+0+122",
+        "stem": "drink-coolers-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 637,
+            "h": 637
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "637x796+0+5",
+        "stem": "drink-coolers-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 637,
+            "h": 796
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "637x510+0+186",
+        "stem": "drink-coolers-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 637,
+            "h": 510
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "637x425+0+228",
+        "stem": "drink-coolers-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 637,
+            "h": 425
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "637x637+0+122",
+        "stem": "drink-coolers-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "drink-smoothies": {
+    "source": "Drink 2.png",
+    "native": "592x802",
+    "placeholder": "#7f7a52",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "592x592+0+108",
+        "stem": "drink-smoothies-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 592,
+            "h": 592
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "592x740+0+34",
+        "stem": "drink-smoothies-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 592,
+            "h": 740
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "592x474+0+167",
+        "stem": "drink-smoothies-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "592x395+0+206",
+        "stem": "drink-smoothies-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 592,
+            "h": 395
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "592x592+0+108",
+        "stem": "drink-smoothies-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "drink-strawberry": {
+    "source": "Drink 3.png",
+    "native": "627x786",
+    "placeholder": "#815139",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "627x627+0+40",
+        "stem": "drink-strawberry-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 627,
+            "h": 627
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "627x784+0+0",
+        "stem": "drink-strawberry-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 627,
+            "h": 784
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "627x502+0+103",
+        "stem": "drink-strawberry-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 627,
+            "h": 502
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "627x418+0+145",
+        "stem": "drink-strawberry-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 627,
+            "h": 418
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "627x627+0+40",
+        "stem": "drink-strawberry-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "drink-coffee-smoothie": {
+    "source": "Coffe & Smoothie.png",
+    "native": "717x797",
+    "placeholder": "#766d51",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "717x717+0+80",
+        "stem": "drink-coffee-smoothie-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 640,
+            "h": 640
+          },
+          {
+            "w": 717,
+            "h": 717
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "638x797+40+0",
+        "stem": "drink-coffee-smoothie-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 638,
+            "h": 798
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "717x574+0+175",
+        "stem": "drink-coffee-smoothie-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 717,
+            "h": 574
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "717x478+0+223",
+        "stem": "drink-coffee-smoothie-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 640,
+            "h": 427
+          },
+          {
+            "w": 717,
+            "h": 478
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "717x717+0+80",
+        "stem": "drink-coffee-smoothie-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "food-lamb-chops": {
+    "source": "Lamb Chops.png",
+    "native": "1402x1122",
+    "placeholder": "#a5774d",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "1122x1122+140+0",
+        "stem": "food-lamb-chops-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 640,
+            "h": 640
+          },
+          {
+            "w": 1122,
+            "h": 1122
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "898x1122+252+0",
+        "stem": "food-lamb-chops-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 760,
+            "h": 950
+          },
+          {
+            "w": 898,
+            "h": 1123
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "1402x1122+0+0",
+        "stem": "food-lamb-chops-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 760,
+            "h": 608
+          },
+          {
+            "w": 1402,
+            "h": 1122
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "1402x935+0+94",
+        "stem": "food-lamb-chops-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 640,
+            "h": 427
+          },
+          {
+            "w": 900,
+            "h": 600
+          },
+          {
+            "w": 1402,
+            "h": 935
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "1122x1122+140+0",
+        "stem": "food-lamb-chops-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "food-burger": {
+    "source": "Burger.png",
+    "native": "1402x1122",
+    "placeholder": "#906130",
+    "roles": {
+      "square": {
+        "ar": 1,
+        "crop": "1122x1122+140+0",
+        "stem": "food-burger-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 640,
+            "h": 640
+          },
+          {
+            "w": 1122,
+            "h": 1122
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "898x1122+252+0",
+        "stem": "food-burger-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 520,
+            "h": 650
+          },
+          {
+            "w": 760,
+            "h": 950
+          },
+          {
+            "w": 898,
+            "h": 1123
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "1402x1122+0+0",
+        "stem": "food-burger-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 760,
+            "h": 608
+          },
+          {
+            "w": 1402,
+            "h": 1122
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "1402x935+0+94",
+        "stem": "food-burger-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 640,
+            "h": 427
+          },
+          {
+            "w": 900,
+            "h": 600
+          },
+          {
+            "w": 1402,
+            "h": 935
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "1122x1122+140+0",
+        "stem": "food-burger-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "venue-room": {
+    "source": "Venue.png",
+    "native": "757x600",
+    "placeholder": "#796e5b",
+    "roles": {
+      "wide": {
+        "ar": 1.6,
+        "crop": "757x473+0+53",
+        "stem": "venue-room-wide",
+        "sizes": [
+          {
+            "w": 480,
+            "h": 300
+          },
+          {
+            "w": 757,
+            "h": 473
+          }
+        ]
+      },
+      "square": {
+        "ar": 1,
+        "crop": "578x578+90+0",
+        "stem": "venue-room-square",
+        "sizes": [
+          {
+            "w": 300,
+            "h": 300
+          },
+          {
+            "w": 480,
+            "h": 480
+          },
+          {
+            "w": 578,
+            "h": 578
+          }
+        ]
+      },
+      "portrait": {
+        "ar": 0.8,
+        "crop": "462x578+148+0",
+        "stem": "venue-room-portrait",
+        "sizes": [
+          {
+            "w": 320,
+            "h": 400
+          },
+          {
+            "w": 462,
+            "h": 578
+          }
+        ]
+      },
+      "panel": {
+        "ar": 1.25,
+        "crop": "723x578+17+0",
+        "stem": "venue-room-panel",
+        "sizes": [
+          {
+            "w": 380,
+            "h": 304
+          },
+          {
+            "w": 560,
+            "h": 448
+          },
+          {
+            "w": 723,
+            "h": 578
+          }
+        ]
+      },
+      "landscape": {
+        "ar": 1.5,
+        "crop": "757x505+0+37",
+        "stem": "venue-room-landscape",
+        "sizes": [
+          {
+            "w": 420,
+            "h": 280
+          },
+          {
+            "w": 640,
+            "h": 427
+          },
+          {
+            "w": 757,
+            "h": 505
+          }
+        ]
+      },
+      "thumb": {
+        "ar": 1,
+        "crop": "578x578+90+0",
+        "stem": "venue-room-thumb",
+        "sizes": [
+          {
+            "w": 120,
+            "h": 120
+          },
+          {
+            "w": 240,
+            "h": 240
+          }
+        ]
+      }
+    }
+  },
+  "venue-hero": {
+    "source": "Hero background image.png",
+    "native": "1672x941",
+    "placeholder": "#6b5943",
+    "roles": {
+      "cover": {
+        "ar": 1.7778,
+        "crop": "1672x941+0+0",
+        "stem": "venue-hero-cover",
+        "sizes": [
+          {
+            "w": 640,
+            "h": 360
+          },
+          {
+            "w": 960,
+            "h": 540
+          },
+          {
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "w": 1672,
+            "h": 941
+          }
+        ]
+      },
+      "tall": {
+        "ar": 0.8,
+        "crop": "601x751+736+0",
+        "stem": "venue-hero-tall",
+        "sizes": [
+          {
+            "w": 480,
+            "h": 600
+          },
+          {
+            "w": 601,
+            "h": 751
+          }
+        ]
+      }
+    }
+  }
+}

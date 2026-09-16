@@ -1,0 +1,251 @@
+/* ==========================================================================
+   Hackberries - design tokens
+   --------------------------------------------------------------------------
+   BOTANICAL PALETTE, DERIVED FROM THE CLIENT PHOTOGRAPHS.
+
+   Green is the Hackberries brand colour because green is what the room
+   actually is: a foliage-and-white-flower wall behind the counter, green
+   velvet banquettes, plants on the marble. Sampling all ten supplied
+   photographs (64x64, every pixel with hue 70-165deg and saturation >= 0.14)
+   put 12.9% of the frame in the green band, and clustered it by lightness:
+
+     deep    L 0.06-0.20   n=2534   #193B0A    <- dominant. Foliage in shadow.
+     mid     L 0.20-0.38   n=1589   #436823
+     fresh   L 0.38-0.62   n= 566   #79995A
+     light   L 0.62-0.85   n= 300   #C1CFB0
+
+   The green ramp below is built on those four anchors. The earlier palette
+   read as cream-with-an-accent; this one is green-led, with warm neutrals
+   kept deliberately generous so the page never becomes oppressive. Roughly
+   half the homepage stays on a cream or oat ground.
+
+   Supporting colours, also sampled:
+     warm marble/oat   #DAD5CB #C3BBAE   tabletops, pendant light
+     brick / ember     #B14307 #B26C0B   exposed brick, neon sign, toast
+     petrol teal       #455A68           banquettes, glazed plates
+     blackberry        #9D5669           berry smoothie
+
+   Every foreground/background pairing used below is asserted in
+   tools/contrast.mjs. Run `npm run contrast` after any colour change.
+   ========================================================================== */
+
+:root {
+  /* ---- Green ramp - the brand colour ------------------------------------ */
+  --c-forest-deep: #0e2108;    /* deepest ground: hero, gallery, footer */
+  --c-forest: #16330d;         /* dark section ground (from sampled #193B0A) */
+  --c-bough: #1f4412;          /* raised surface on a dark ground */
+  --c-canopy: #2c5c1c;         /* PRIMARY: buttons, active states, links */
+  --c-canopy-deep: #234a16;    /* primary hover */
+  --c-grass: #3f7a28;          /* fresh grass: rules, indicators, large text */
+  --c-leaf: #9fc67b;           /* fresh green ON dark: links, active chips */
+  --c-grass-bright: #6faf45;   /* hero accent: the CTA icon and its hover fill.
+                                  Only ever carries --c-forest-deep type. */
+  --c-leaf-soft: #c3d9a8;      /* pale green: quiet surfaces, dividers */
+
+  /* ---- Warm neutrals - the counterweight -------------------------------- */
+  --c-cream: #f6f1e4;          /* page ground - warm marble */
+  --c-shell: #ece4d1;          /* recessed surface / alternating band */
+  --c-paper: #fffdf7;          /* cards and menu sheets */
+
+  /* ---- Ink and secondary type ------------------------------------------- */
+  --c-ink: #13250d;            /* near-black, but a leaf green - primary type */
+  --c-mute: #55604b;           /* secondary copy on light - green-grey */
+  --c-bark: #6a5a45;           /* warm neutral, for wood/marble contexts */
+  --c-on-dark: #f2eee0;        /* copy on dark grounds */
+  --c-on-dark-mute: #c6d2b5;   /* secondary copy on dark grounds - green-tinted */
+
+  /* ---- Warm accents - used sparingly, for appetite ---------------------- */
+  --c-ember: #b04216;          /* brick + neon sign. Secondary accent only. */
+  --c-ember-deep: #8e3210;     /* ember text, for 4.5:1 on cream */
+  --c-honey: #e6b95f;          /* pendant glow - small highlights on dark */
+  --c-berry: #7a3a4d;          /* blackberry - the wordmark dot, "to confirm" */
+  --c-teal: #2f4d5e;           /* banquettes and glazed plates - quiet support */
+
+  /* ---- Semantic roles ---------------------------------------------------- */
+  --bg-page: var(--c-cream);
+  --bg-band: var(--c-shell);
+  --bg-dark: var(--c-forest);
+  --bg-deep: var(--c-forest-deep);
+  --fg: var(--c-ink);
+  --fg-mute: var(--c-mute);
+
+  /* Primary action colour. Green, everywhere, on every ground. */
+  --accent: var(--c-canopy);
+  --accent-hover: var(--c-canopy-deep);
+  --accent-text: var(--c-canopy);
+  --accent-on-dark: var(--c-leaf);
+  /* The warm accent is deliberately secondary: it marks food, not navigation. */
+  --accent-warm: var(--c-ember);
+  --accent-warm-text: var(--c-ember-deep);
+
+  --rule: color-mix(in srgb, var(--c-ink) 15%, transparent);
+  --rule-strong: color-mix(in srgb, var(--c-ink) 32%, transparent);
+  --rule-green: color-mix(in srgb, var(--c-canopy) 30%, transparent);
+  --focus: var(--c-canopy);
+  --focus-on-dark: var(--c-leaf);
+
+  /* Tinted washes, for surfaces that should read green without going dark. */
+  --wash-green: color-mix(in srgb, var(--c-canopy) 7%, var(--c-cream));
+  --wash-green-strong: color-mix(in srgb, var(--c-canopy) 13%, var(--c-cream));
+
+  /* ---- Type ------------------------------------------------------------- */
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype',
+    'Book Antiqua', Georgia, serif;
+  --font-body: 'Karla', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue',
+    Arial, sans-serif;
+
+  /* 44px at 320w -> 112px at 1440w (brief: 44-68 mobile, 80-132 desktop) */
+  --t-hero: clamp(2.75rem, 1.55rem + 5.6vw, 5.75rem);
+  --t-h2: clamp(2rem, 1.25rem + 3.2vw, 4.25rem);
+  --t-h3: clamp(1.375rem, 1.1rem + 1.1vw, 2rem);
+  --t-h4: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  --t-body: clamp(1rem, 0.955rem + 0.22vw, 1.125rem);
+  --t-lead: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
+  --t-small: clamp(0.875rem, 0.85rem + 0.11vw, 0.9375rem);
+  --t-eyebrow: clamp(0.6875rem, 0.66rem + 0.14vw, 0.8125rem);
+
+  --lh-tight: 0.94;
+  --lh-snug: 1.15;
+  --lh-body: 1.6;
+  --measure: 62ch;
+  --measure-tight: 46ch;
+
+  /* ---- Space ------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* 40px mobile -> 112px desktop section rhythm */
+  --pad-section: clamp(2.5rem, 1.5rem + 5vw, 7rem);
+  --pad-gutter: clamp(1.25rem, 0.9rem + 1.8vw, 3rem);
+  --shell-max: 84rem;
+  --prose-max: 46rem;
+
+  /* ---- Shape ------------------------------------------------------------ */
+  --r-sm: 0.5rem;
+  --r-md: 0.875rem;
+  --r-frame: 1.25rem;
+  --r-lg: 1.75rem;
+  --r-pill: 999px;
+
+  /* Photographs read as printed frames, not as flat rectangles. */
+  --shadow-print:
+    0 1px 2px color-mix(in srgb, var(--c-ink) 10%, transparent),
+    0 10px 24px -12px color-mix(in srgb, var(--c-ink) 30%, transparent);
+  --shadow-lift:
+    0 2px 6px color-mix(in srgb, var(--c-ink) 12%, transparent),
+    0 26px 50px -20px color-mix(in srgb, var(--c-ink) 42%, transparent);
+  --shadow-float:
+    0 4px 10px color-mix(in srgb, var(--c-forest-deep) 22%, transparent),
+    0 40px 70px -26px color-mix(in srgb, var(--c-forest-deep) 62%, transparent);
+
+  /* ---- Motion ----------------------------------------------------------- */
+  /* One ease for entrances, one firmer ease for controls, one spring kept
+     for the single small decorative element that is allowed to bounce. */
+  --ease-out: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-firm: cubic-bezier(0.32, 0.72, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.42, 0.64, 1);
+
+  --d-control: 200ms;   /* buttons, chips */
+  --d-swap: 280ms;      /* photo crossfades */
+  --d-select: 340ms;    /* photo-stack selection */
+  --d-panel: 300ms;     /* menu panel */
+  --d-reveal: 620ms;    /* section entrance */
+  --d-hero-text: 760ms;
+  --d-hero-image: 980ms;
+
+  --stagger: 82ms;
+
+  /* Scaled to 0 by the reduced-motion layer in motion.css, so a single
+     multiplier disables translation without deleting the transitions. */
+  --motion-scale: 1;
+
+  --header-h: 4.25rem;
+  /* Height of the "Bean to Brew" strip under the header. Zero unless the page
+     carries the strip (html.has-brew), so the menu page is unaffected. */
+  --brew-h: 0px;
+}
+
+@media (min-width: 60rem) {
+  :root {
+    --header-h: 5rem;
+  }
+}
+
+/* ==========================================================================
+   "Bean to Brew" - the scroll journey (styles/brew.css, scripts/brew.js)
+   --------------------------------------------------------------------------
+   Every colour, size and duration the feature uses is here. The JavaScript
+   reads the durations and spring values from these properties rather than
+   keeping its own copies, so pacing is tuned in one place.
+   ========================================================================== */
+:root {
+  /* Roasted bean. Warm enough to read against both the cream bar and the
+     deep green hero; on dark grounds it also gains a pale rim. */
+  --brew-bean-hi: #c08650;
+  --brew-bean: #7c4a26;
+  --brew-bean-deep: #3f220f;
+  --brew-bean-crease: #2e180a;
+  --brew-bean-rim: transparent;
+
+  /* Coffee, crema and foam. */
+  --brew-coffee: #3e2413;
+  --brew-crema: #9b6334;
+  --brew-crema-hi: #d7a46e;
+  --brew-foam: #fbf1de;
+
+  /* Porcelain, in the same warm marble as the page ground. */
+  --brew-porcelain: var(--c-paper);
+  --brew-porcelain-shade: #dccfb3;
+  --brew-cup-inside: #cdbd9c;
+
+  /* Track: rich grass fill on a quiet rail. */
+  --brew-fill: var(--c-grass);
+  --brew-rail: color-mix(in srgb, var(--c-ink) 11%, transparent);
+  --brew-mark: color-mix(in srgb, var(--c-ink) 32%, transparent);
+  --brew-mark-hit: var(--c-canopy);
+
+  /* Sizes: 30px bean on a 5px track on desktop. */
+  --brew-strip-h: 2.25rem;
+  --brew-bean-size: 1.875rem;
+  --brew-track: 5px;
+  --brew-mark-size: 1.125rem;
+  --brew-cup-size: 2.125rem;
+
+  /* Motion. Durations in ms, read by scripts/brew.js as numbers. */
+  --brew-intro: 900ms;          /* bean settles, sprout opens */
+  --brew-hop: 420ms;            /* hop over a landmark */
+  --brew-hop-height: 9px;
+  --brew-spring: 190;           /* bean follow stiffness (critically damped) */
+  --brew-flight: 950ms;         /* strip -> footer cup */
+  --brew-drop: 560ms;
+  --brew-pour-delay: 380ms;
+  --brew-pour: 1150ms;
+  --brew-art-delay: 1350ms;
+  --brew-art: 1000ms;
+  --brew-steam-delay: 2050ms;
+  --brew-steam: 1300ms;
+  --brew-stagger: 170ms;
+  --brew-settle-delay: 3050ms;
+  --brew-settle: 780ms;
+  --brew-total: 3900ms;         /* when the sequence is declared complete */
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --brew-strip-h: 2rem;
+    --brew-bean-size: 1.5rem;
+    --brew-track: 4px;
+    --brew-mark-size: 0.95rem;
+    --brew-cup-size: 1.75rem;
+  }
+}
+
+html.has-brew { --brew-h: var(--brew-strip-h); }

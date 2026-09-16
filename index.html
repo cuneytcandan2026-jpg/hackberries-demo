@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="en-GB" class="has-brew">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hackberries — café and kitchen in Cheshunt</title>
+<meta name="description" content="Hackberries is a neighbourhood café on Windmill Lane, Cheshunt. Breakfast served all day, a full coffee list, grills, salads and cakes.">
+
+<!-- Unpublished client concept. This must be reviewed deliberately before any
+     real launch: remove the noindex and set STATUS.isPreview to false. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hackberries">
+<meta property="og:title" content="Hackberries — café and kitchen in Cheshunt">
+<meta property="og:description" content="Hackberries is a neighbourhood café on Windmill Lane, Cheshunt. Breakfast served all day, a full coffee list, grills, salads and cakes.">
+<meta property="og:image" content="media/dessert-french-toast-square-640.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e2108">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="preload" as="font" type="font/woff2" href="fonts/fraunces-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/karla-latin.woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" media="(min-aspect-ratio: 801/1000)" imagesrcset="media/venue-hero-cover-640.webp 640w, media/venue-hero-cover-960.webp 960w, media/venue-hero-cover-1280.webp 1280w, media/venue-hero-cover-1672.webp 1672w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" media="(max-aspect-ratio: 4/5)" imagesrcset="media/venue-hero-tall-480.webp 480w, media/venue-hero-tall-601.webp 601w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/sections.css">
+<link rel="stylesheet" href="styles/brew.css">
+<link rel="stylesheet" href="styles/contact.css">
+<link rel="stylesheet" href="styles/motion.css">
+</head>
+<!-- data-header-mode="over" opts this page into the transparent-header-over-
+     the-hero treatment. Only the homepage has a dark section at the top, so
+     only the homepage sets it; the menu page keeps the solid cream bar. -->
+<body data-header-mode="over">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="preview-bar">
+  <div class="shell">
+    <b>Preview</b>
+    <p>Concept by Laara Digital. Details and prices are unconfirmed.</p>
+  </div>
+</div>
+<span class="header-sentinel" id="header-sentinel" aria-hidden="true"></span>
+<header class="site-header" id="site-header">
+  
+  <div class="shell header-bar">
+    <div class="header-side header-side-start">
+      <p class="header-hours" id="header-hours" data-hours="[[[1,2,3,4,5],&quot;7am&quot;,&quot;5pm&quot;],[[6,0],&quot;8am&quot;,&quot;5pm&quot;]]">
+        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-hours-text>Open daily · until 5pm</span>
+      </p>
+      <span class="header-rule" aria-hidden="true"></span>
+    </div>
+    <a class="wordmark" href="index.html">
+      Hackberries<span class="dot-berry" aria-hidden="true"></span>
+    </a>
+    <div class="header-side header-side-end">
+      <span class="header-rule" aria-hidden="true"></span>
+      <a class="header-place" href="#visit">
+        <span>190 Windmill Lane, Cheshunt</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+      <button class="menu-toggle" type="button" id="menu-toggle"
+              aria-expanded="false" aria-controls="nav-panel">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="label">Menu</span>
+      </button>
+    </div>
+  </div>
+  <div class="brew-strip" id="brew-strip" data-stage="1">
+    <div class="brew-inner">
+      <div class="brew-track" id="brew-track">
+        <span class="brew-rail" aria-hidden="true"></span>
+        <span class="brew-fill" aria-hidden="true"></span>
+        <span class="brew-sprout" aria-hidden="true"><svg class="sprout-svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+    <path class="sprout-stem" d="M10 19.5V11"/>
+    <g class="sprout-leaf sprout-left">
+      <path d="M10 12.4C5.6 12.8 3 9.8 3.2 5.8c4.2 0 6.8 2.5 6.8 6.6z"/>
+      <path class="sprout-vein" d="M9.6 12 5 7.4"/>
+    </g>
+    <g class="sprout-leaf sprout-right">
+      <path d="M10 10.8c.2-4.2 3.1-6.9 7.1-6.8.2 4-2.5 6.9-7.1 6.8z"/>
+      <path class="sprout-vein" d="m10.4 10.4 4.8-4.6"/>
+    </g>
+  </svg></span>
+        <span class="brew-mark" data-brew-anchor="favourites"
+              data-at="0.22" data-name="Favourites" data-mobile
+              style="--at:0.22" aria-hidden="true"><svg class="lm-svg lm-plate" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+    <ellipse class="lm-fill" cx="10" cy="13" rx="8.6" ry="3.4"/>
+    <ellipse class="lm-inner" cx="10" cy="12.6" rx="5.2" ry="1.9"/>
+    <path class="lm-food" d="M6.3 12.2c.3-2.9 1.9-4.4 3.7-4.4s3.4 1.5 3.7 4.4z"/>
+    <path class="lm-line lm-draw" pathLength="1" d="M8.4 6c-.8-.9-.2-1.8.4-2.3M11.4 6c-.8-.9-.2-1.8.4-2.3"/>
+  </svg></span>
+        <span class="brew-mark brew-anchor" data-brew-anchor="menu-preview"
+              data-at="0.31" data-name="What we serve"
+              style="--at:0.31" aria-hidden="true"></span>
+        <span class="brew-mark" data-brew-anchor="the-cafe"
+              data-at="0.4" data-name="The café" data-mobile
+              style="--at:0.4" aria-hidden="true"><svg class="lm-svg lm-leaf" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+    <g class="lm-unfold">
+      <path class="lm-fill" d="M3.6 16.4C3.1 9 8 3.9 16.4 3.6c.5 7.9-4.9 13.2-12.8 12.8z"/>
+      <path class="lm-line lm-draw" pathLength="1" d="M4.2 15.8 13.6 6.4M8 12l-.4-3.4M11 9l3 .2"/>
+    </g>
+  </svg></span>
+        <span class="brew-mark brew-anchor" data-brew-anchor="more-about"
+              data-at="0.47" data-name="More about Hackberries"
+              style="--at:0.47" aria-hidden="true"></span>
+        <span class="brew-mark" data-brew-anchor="gallery"
+              data-at="0.54" data-name="Gallery"
+              style="--at:0.54" aria-hidden="true"><svg class="lm-svg lm-swirl" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+    <circle class="lm-fill" cx="10" cy="10" r="7.6"/>
+    <path class="lm-line lm-draw" pathLength="1"
+          d="M10 10.3c0-1.1 1.4-1.5 2.1-.6 1 1.1.1 2.9-1.5 3.1-2.1.2-3.5-1.8-3-3.7.6-2.4 3.6-3.4 5.6-2"/>
+  </svg></span>
+        <span class="brew-mark brew-anchor" data-brew-anchor="visit"
+              data-at="0.72" data-name="Visit us"
+              style="--at:0.72" aria-hidden="true"></span>
+        <span class="brew-bean-slot" id="brew-bean-slot">
+          <button class="brew-bean" type="button" id="brew-bean" aria-label="Give the coffee bean a spin">
+            <span class="brew-bean-hop"><span class="brew-bean-lean"><span class="brew-bean-roll"><svg class="bean-svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><radialGradient id="strip-bean" cx="0.36" cy="0.3" r="0.82">
+      <stop offset="0" style="stop-color:var(--brew-bean-hi)"/><stop offset="0.52" style="stop-color:var(--brew-bean)"/><stop offset="1" style="stop-color:var(--brew-bean-deep)"/>
+    </radialGradient></defs>
+    <g transform="rotate(-32 16 16)">
+      <ellipse class="bean-shade" cx="16.6" cy="17" rx="10.4" ry="13.4"/>
+      <ellipse class="bean-body" cx="16" cy="16" rx="10.4" ry="13.4" fill="url(#strip-bean)"/>
+      <path class="bean-crease" d="M16.7 3.3c-3.7 3.4-4 8-.9 12.6 3 4.7 2.7 9.2-.7 13"/>
+      <path class="bean-crease-hi" d="M18.3 5c-2.7 3.1-2.8 7-.3 10.9 2.5 3.9 2.3 7.6-.1 10.8"/>
+      <ellipse class="bean-shine" cx="11.2" cy="10.2" rx="2.2" ry="4.3" transform="rotate(14 11.2 10.2)"/>
+    </g>
+  </svg></span></span></span>
+          </button>
+        </span>
+      </div>
+      <span class="brew-mini-cup" id="brew-mini-cup" aria-hidden="true"><svg class="mini-cup-svg" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+    <path class="mini-steam" pathLength="1" d="M15.4 10.6c-2.4-1.9-.6-4 .8-5.2 1.5-1.3 1.6-3 .3-4.4"/>
+    <path class="mini-steam mini-steam-2" pathLength="1" d="M20.4 10.8c-2-1.6-.5-3.4.7-4.4 1.2-1.1 1.3-2.5.2-3.7"/>
+    <ellipse class="mini-saucer" cx="17" cy="31.2" rx="14.5" ry="2.7"/>
+    <path class="mini-handle" d="M26.6 18.2c3.8-.7 5.1 2.7 3.2 5.1-1 1.3-2.7 1.7-4.4 1.7"/>
+    <path class="mini-body" d="M5.8 14.6h22.4c0 7.8-2.6 14.9-8.8 15.4h-4.8C8.4 29.5 5.8 22.4 5.8 14.6z"/>
+    <path class="mini-band" d="M6.1 19.6h21.8c-.2 1.3-.4 2.4-.7 3.4H6.8c-.3-1-.5-2.1-.7-3.4z"/>
+    <ellipse class="mini-rim" cx="17" cy="14.6" rx="11.2" ry="3.1"/>
+    <ellipse class="mini-inside" cx="17" cy="14.8" rx="9.4" ry="2.2"/>
+    <ellipse class="mini-coffee" cx="17" cy="15" rx="8.8" ry="1.9"/>
+  </svg></span>
+      <span class="visually-hidden" role="progressbar" id="brew-progress"
+            aria-label="Page progress" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0" aria-valuetext="0%, top of the page"></span>
+    </div>
+  </div>
+</header>
+
+<div class="nav-panel u-dark" id="nav-panel" role="dialog" aria-modal="true"
+     aria-label="Site navigation" hidden>
+  <div class="nav-panel-head">
+    <a class="wordmark" href="index.html">Hackberries<span class="dot-berry" aria-hidden="true"></span></a>
+    <button class="nav-panel-close" type="button" id="nav-close" aria-label="Close navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Main">
+    <div class="nav-panel-links">
+        <a href="menu.html">
+          Menu<span aria-hidden="true">01</span>
+        </a>
+        <a href="#the-cafe" data-nav-section="the-cafe">
+          The café<span aria-hidden="true">02</span>
+        </a>
+        <a href="#gallery" data-nav-section="gallery">
+          Gallery<span aria-hidden="true">03</span>
+        </a>
+        <a href="#contact-us" data-nav-section="contact-us">
+          Contact us<span aria-hidden="true">04</span>
+        </a>
+        <a href="#visit" data-nav-section="visit">
+          Visit us<span aria-hidden="true">05</span>
+        </a>
+    </div>
+  </nav>
+  <div class="nav-panel-foot">
+    <div class="row">
+      <a class="btn" href="contact.html#book" data-contact-open="book">Book a table</a>
+      <a class="btn btn-secondary" href="tel:+441992910057">Call 01992 910057</a>
+      <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=Hackberries%2C%20190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF"
+         target="_blank" rel="noopener">Directions</a>
+    </div>
+    <address>
+      190 Windmill Lane<br>
+      Cheshunt, Waltham Cross EN8 9AF
+    </address>
+  </div>
+</div>
+
+<main id="main">
+<section class="hero on-dark" id="top" aria-labelledby="hero-title">
+  <div class="hero-media">
+    <picture class="hero-photo">
+      <source media="(max-aspect-ratio: 4/5)" type="image/webp" srcset="media/venue-hero-tall-480.webp 480w, media/venue-hero-tall-601.webp 601w" sizes="100vw">
+      <source media="(max-aspect-ratio: 4/5)" srcset="media/venue-hero-tall-480.jpg 480w, media/venue-hero-tall-601.jpg 601w" sizes="100vw">
+      <source type="image/webp" srcset="media/venue-hero-cover-640.webp 640w, media/venue-hero-cover-960.webp 960w, media/venue-hero-cover-1280.webp 1280w, media/venue-hero-cover-1672.webp 1672w" sizes="100vw">
+      <img src="media/venue-hero-cover-1280.jpg" srcset="media/venue-hero-cover-640.jpg 640w, media/venue-hero-cover-960.jpg 960w, media/venue-hero-cover-1280.jpg 1280w, media/venue-hero-cover-1672.jpg 1672w" sizes="100vw"
+           width="1280" height="720" alt="Inside Hackberries: rattan pendant lights over marble tables, velvet chairs, and a foliage wall hung with white flowers beside exposed brick."
+           loading="eager" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="shell hero-inner">
+    <div class="hero-copy">
+      <h1 id="hero-title">
+        <span class="line" style="--i:0"><span>Good food.</span></span>
+        <span class="line" style="--i:1"><span>Great company.</span></span>
+        <span class="line" style="--i:2"><span><em>Right here</em> in Cheshunt.</span></span>
+      </h1>
+      <p class="hero-lead">
+        Breakfast, brunch and proper coffee&nbsp;— made for slow mornings and good&nbsp;company.
+      </p>
+      <div class="hero-actions">
+        <a class="cta-glass" href="menu.html">
+          <span class="cta-glass-label">Explore the menu</span>
+          <span class="cta-glass-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+        <a class="cta-glass hero-contact" href="contact.html">
+          <span class="cta-glass-label">Contact us</span>
+          <span class="cta-glass-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+        <!-- Phones and tablets only: there, the header has no room for the
+             address, so this is the first viewport's single location link. -->
+        <a class="hero-findus" href="#visit">Find us <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="hero-aside">
+      <p class="hero-note">
+        <svg viewBox="0 0 593 78" aria-hidden="true" focusable="false"><path d="M13 66L13 66Q12 66 10 66Q8 66 6 65L6 65Q4 65 4 64Q3 64 2 62L2 62Q1 61 1 60Q1 58 1 57Q2 56 3 56L3 56Q4 56 4 56L4 56Q5 57 5 57L5 57Q5 56 5 55L5 55Q5 53 5 51L5 51Q6 49 7 47Q7 45 8 42Q9 40 10 38Q10 36 11 35L11 35Q11 33 12 29L12 29Q13 27 14 25Q14 23 15 22Q16 20 16 19L16 19Q16 18 17 16Q17 14 19 11L19 11L19 8L18 8Q17 8 17 8Q16 8 16 8L16 8Q16 8 15 7Q14 7 14 6Q13 5 13 5L13 5Q13 5 13 4L13 4L13 4Q13 3 14 3Q15 2 17 2Q19 1 21 1Q24 1 26 1L26 1Q28 1 30 2Q33 3 35 4L35 4Q38 5 41 7Q43 9 46 12Q48 16 49 19L49 19Q49 20 50 22Q50 24 50 25Q50 27 49 27L49 27Q49 28 49 28Q49 29 50 29L50 29Q49 29 49 31Q49 32 48 33L48 33Q48 35 47 38Q46 40 45 43Q44 45 43 46L43 46Q43 46 43 46L43 46Q43 47 43 47L43 47Q43 47 43 47L43 47Q43 47 42 48L42 48Q42 48 41 49Q40 50 40 51L40 51Q40 51 39 52Q39 52 39 52L39 52L39 52Q38 52 38 52L38 52Q38 53 36 55Q35 56 33 58Q31 59 29 60Q27 62 26 62L26 62Q25 63 24 63Q23 64 22 64L22 64Q22 64 20 65Q19 65 17 65Q15 66 13 66ZM9 59L9 59Q9 59 9 59L9 59Q11 60 13 60L13 60Q14 60 16 59Q17 59 19 59Q20 59 21 58L21 58Q25 55 28 53L28 53L30 52Q30 51 30 51Q31 51 32 51L32 51Q32 50 33 49Q34 48 35 47Q36 46 36 46L36 46Q37 45 37 45Q37 44 37 44L37 44Q37 43 39 41Q40 39 41 36Q42 34 42 32L42 32Q43 27 43 23Q43 20 41 17Q39 14 37 12L37 12Q36 11 35 10Q33 9 31 9Q30 8 28 8Q27 7 27 7L27 7Q27 7 26 10Q25 12 23 16Q22 20 21 24Q19 28 18 32L18 32Q17 33 17 35Q16 37 16 38Q15 39 15 40L15 40Q14 41 14 44Q13 46 12 51L12 51Q11 54 11 56L11 56Q11 57 11 57L11 57Q11 57 11 57L11 57L10 58Q10 58 10 59L10 59Q10 59 9 59L9 59Q9 59 9 59ZM53 55L53 55Q52 55 52 54Q51 53 51 52L51 52Q52 49 52 48Q52 46 53 44L53 44Q53 43 54 40Q55 38 56 35Q57 33 58 30Q59 28 59 27L59 27Q60 26 62 26Q63 26 64 27L64 27Q65 27 64 29Q64 31 62 35L62 35Q61 36 61 37Q60 38 60 39L60 39Q60 39 60 39L60 39Q60 39 61 39L61 39Q61 38 62 37Q64 36 65 35Q66 34 68 33Q69 32 69 32L69 32Q70 31 71 31Q72 31 72 31L72 31Q74 30 76 30Q78 30 79 31L79 31Q79 32 79 32L79 32L80 33Q80 33 80 33L80 33L80 33Q80 34 79 34Q78 35 77 35L77 35Q76 35 75 36Q74 36 73 36L73 36Q70 38 67 40Q65 41 62 44L62 44Q62 44 61 45Q61 46 60 47L60 47Q59 47 59 49Q59 50 58 51Q58 52 58 53L58 53L58 53Q58 54 57 55L57 55Q56 56 55 56Q54 57 53 55ZM86 57L86 57Q85 57 84 57Q84 56 83 55L83 55Q81 54 80 52Q80 50 80 49L80 49Q80 48 80 48L80 48L80 47Q80 47 80 47L80 47Q80 47 80 47L80 47Q80 47 80 46L80 46Q80 46 80 46L80 46Q81 46 80 45L80 45Q80 45 81 43Q82 40 83 39L83 39Q83 38 84 36Q85 35 86 34Q88 32 89 32L89 32Q91 30 92 29Q94 28 96 28Q97 27 99 27Q100 27 102 29L102 29Q103 29 104 31Q105 32 105 34L105 34Q105 36 105 40Q104 43 101 48L101 48Q99 51 97 52Q95 54 93 55L93 55Q91 56 89 56Q88 57 86 57ZM94 48L94 48Q96 46 97 44Q97 42 98 39L98 39Q99 39 99 38Q99 37 99 35Q99 34 98 34L98 34Q97 34 97 34Q96 34 94 35L94 35Q92 37 90 40Q88 43 87 46L87 46Q86 49 87 50Q88 51 89 51Q91 50 94 48ZM106 76L106 76Q106 76 105 76Q105 76 104 75L104 75Q104 75 103 74Q103 73 103 71L103 71Q104 70 104 68Q104 67 104 66L104 66Q104 66 104 65Q105 64 105 64L105 64Q105 63 105 62Q106 61 106 60L106 60Q106 59 107 58L107 58Q107 58 107 57Q107 56 107 55L107 55Q107 54 108 51Q109 49 110 45Q111 41 113 38Q114 34 115 32L115 32Q116 30 116 28Q117 26 117 25L117 25Q117 25 117 25Q117 25 118 24L118 24Q119 23 120 23Q121 24 122 24L122 24Q122 25 123 26Q123 27 123 29L123 29Q123 30 122 31Q121 32 121 32L121 32Q121 33 121 33L121 33Q121 33 121 33L121 33Q124 31 127 31Q130 31 132 32Q133 33 134 35Q135 37 135 39L135 39Q135 40 135 41Q134 43 134 44Q133 45 132 46L132 46Q132 46 132 46Q131 47 131 48L131 48Q131 48 129 49Q128 50 126 51Q125 52 124 51L124 51L124 51Q124 52 124 52L124 52Q124 52 122 53Q121 53 120 54Q118 54 117 54L117 54Q115 54 114 53L114 53Q114 54 114 54Q114 54 114 54L114 54Q114 55 114 56Q113 57 113 58Q112 59 112 59L112 59L112 59Q111 60 112 60L112 60L112 61Q112 62 111 62L111 62Q111 63 111 64Q111 66 111 66L111 66Q111 67 110 68Q110 69 110 69L110 69Q109 69 109 70Q109 71 109 71L109 71Q109 73 108 75Q107 76 106 76ZM116 49L116 49Q117 49 119 48Q120 47 122 47Q124 46 125 45L125 45Q127 43 128 41Q130 39 128 37L128 37Q128 36 126 36Q125 36 123 37Q121 38 119 40L119 40Q118 41 118 43Q117 44 116 45Q116 47 116 48L116 48Q116 48 116 48L116 48Q116 49 116 49ZM159 56L159 56Q159 55 158 54Q158 53 158 52Q158 51 159 50L159 50Q159 49 159 49Q159 49 159 48L159 48Q159 48 159 47Q159 46 159 46L159 46Q160 44 161 42Q161 41 162 39Q163 37 163 35Q164 34 164 33L164 33Q164 32 165 32L165 32Q166 32 167 33Q168 34 169 35L169 35Q170 35 169 37Q169 38 168 40L168 40Q168 40 168 42Q167 43 167 44L167 44Q167 45 166 46Q166 47 165 48L165 48Q165 48 165 49Q165 50 165 51Q165 52 164 53L164 53Q163 56 162 57Q161 57 159 56ZM168 24L168 24Q167 23 166 22Q166 21 166 21Q166 20 166 20L166 20Q167 19 168 18Q168 17 169 15L169 15Q169 15 169 15Q169 14 170 14L170 14Q171 14 172 14Q173 15 174 16L174 16Q175 18 175 19Q174 21 173 22L173 22Q172 24 170 24Q169 25 168 24ZM202 55L202 55Q200 55 199 54Q198 54 197 52L197 52Q197 51 197 49Q197 48 197 47Q197 45 197 45L197 45Q197 45 197 44L197 44L197 43Q197 41 197 41Q196 41 195 41L195 41Q193 42 191 44Q189 45 187 47Q185 48 182 50L182 50Q181 52 180 53Q179 55 179 55L179 55Q178 55 177 54Q177 54 176 53L176 53Q175 53 175 52Q174 51 174 51L174 51Q174 50 174 49Q174 47 175 46Q175 45 175 44L175 44Q176 44 176 43Q176 42 177 41L177 41Q177 40 178 39Q178 37 179 36L179 36Q180 34 180 33Q181 31 181 29L181 29Q181 29 181 29Q181 29 182 29L182 29L182 29Q182 28 184 28Q185 29 186 29L186 29Q187 31 187 33Q187 35 185 39L185 39Q184 40 184 41Q183 42 183 43L183 43L184 42Q185 42 186 41Q187 40 187 40L187 40Q188 40 189 38Q190 37 192 36Q194 35 195 35L195 35Q195 34 196 34Q198 33 198 33L198 33Q199 33 200 34Q201 34 202 35Q203 36 203 37L203 37Q203 37 203 37Q203 38 203 38L203 38Q203 39 203 41Q203 43 203 45Q203 46 203 47L203 47L203 47Q203 48 203 48L203 48Q203 48 203 48L203 48L203 48Q203 49 203 49Q203 50 204 50Q204 51 204 52L204 52Q205 53 204 54Q203 55 202 55ZM215 54L215 54Q214 54 213 54Q212 54 210 53L210 53Q209 52 209 50Q210 48 212 47L212 47Q214 46 214 46Q215 46 217 46L217 46Q219 48 219 50Q219 52 215 54ZM259 63L259 63Q257 62 257 62L257 62L256 62Q256 61 256 61Q255 61 254 60L254 60Q253 60 252 58Q251 57 250 56Q249 54 249 54L249 54Q248 52 249 52Q249 52 250 51L250 51Q251 51 252 51Q252 51 253 52L253 52Q254 54 256 55Q259 56 262 56Q265 56 268 55L268 55Q270 54 270 53Q271 51 269 49L269 49Q269 48 269 48Q268 48 267 47Q267 46 265 45L265 45Q264 44 263 44Q262 43 261 43L261 43Q259 42 258 41Q256 40 255 38Q253 37 253 36L253 36Q251 34 251 32Q250 30 251 28Q251 25 252 23L252 23Q253 22 254 21Q255 19 257 17Q258 15 260 14Q261 12 262 12L262 12Q263 11 263 10L263 10L264 10Q264 9 264 9L264 9L264 9Q265 9 266 8Q268 8 269 6L269 6Q275 4 278 3Q282 2 284 2L284 2Q286 2 288 3Q290 4 291 5Q292 7 292 9L292 9Q293 11 292 13Q291 16 289 18Q287 20 285 21L285 21Q283 22 282 22Q281 21 281 20L281 20Q281 19 281 18Q281 17 283 15L283 15Q286 11 286 10L286 10Q286 9 286 8L286 8Q286 8 285 8L285 8Q285 7 283 8Q282 8 280 8Q279 9 278 9Q277 9 277 9L277 9L277 10Q277 10 277 10L277 10Q277 10 276 10L276 10Q276 10 275 10Q274 11 273 12Q271 13 270 14Q268 15 267 15Q267 16 266 16L266 16Q266 17 265 18L265 18Q263 19 262 20Q261 22 259 25L259 25Q258 27 257 29Q256 31 257 32L257 32Q257 34 259 35Q261 37 264 38L264 38Q267 40 269 42Q272 43 273 45Q275 46 275 47L275 47Q276 49 277 50Q277 52 277 53Q277 55 276 56L276 56Q276 57 274 59Q273 60 272 60L272 60Q271 60 271 60Q271 61 270 61L270 61Q269 61 267 62Q265 62 263 62Q261 63 259 63ZM293 58L293 58Q292 57 291 57Q290 56 289 55Q288 53 288 53L288 53Q288 53 288 52L288 52L288 52Q287 52 287 50Q287 48 287 46Q288 43 288 42L288 42Q288 41 289 39Q290 36 291 35L291 35L293 30L290 29Q289 29 289 28Q288 28 288 28L288 28Q288 27 289 26Q290 25 290 25L290 25Q290 25 292 25Q293 25 294 25Q295 25 295 25L295 25Q295 24 296 24Q296 24 296 23L296 23Q296 22 297 22Q297 21 298 20L298 20Q298 19 299 19Q299 18 300 17L300 17Q300 16 301 15Q301 14 302 14L302 14Q303 13 304 13Q305 13 306 14L306 14Q307 15 307 15Q307 16 307 17L307 17Q306 18 305 20Q304 21 303 22L303 22Q302 24 303 24L303 24Q303 24 303 24L303 24Q304 24 307 24L307 24Q310 23 311 24Q312 25 312 26L312 26Q312 28 312 29Q311 29 308 29L308 29Q306 29 305 29Q303 29 303 29L303 29Q302 30 301 30Q301 30 300 30Q300 30 299 30Q299 31 299 31L299 31Q299 32 298 33Q297 34 296 36L296 36Q295 39 294 42Q294 46 293 49L293 49Q293 50 293 51Q294 52 295 52L295 52Q296 52 298 52Q300 52 301 51L301 51Q302 51 303 51Q304 50 304 50L304 50Q305 49 306 49L306 49L307 48Q307 48 307 48L307 48Q307 48 308 48L308 48Q308 49 309 50L309 50Q309 51 308 52Q308 53 305 55L305 55Q302 57 298 58Q295 58 293 58ZM315 56L315 56Q314 55 314 54Q313 54 313 54Q313 53 312 53Q312 52 312 52L312 52Q311 51 312 49Q313 48 314 45Q315 42 317 40L317 40Q317 39 318 38Q319 37 319 37L319 37Q319 36 319 36Q319 36 320 36L320 36L320 35Q320 34 321 33Q322 32 323 31Q324 30 325 29Q327 28 327 27L327 27Q329 26 331 26Q333 26 334 27L334 27Q334 28 335 28Q336 29 337 30Q338 31 338 31L338 31L341 34L340 38Q339 41 340 43Q340 46 341 48L341 48Q341 49 342 49Q343 50 344 50L344 50Q345 50 345 50Q346 51 346 52L346 52Q346 53 345 54Q345 55 344 55L344 55Q341 55 339 54Q337 53 335 49L335 49Q335 49 334 47Q333 46 333 46L333 46Q333 46 332 47Q332 48 331 48L331 48Q326 54 322 56Q317 57 315 56ZM319 48L319 50Q319 50 320 49Q322 49 324 47L324 47Q327 45 329 43Q331 41 332 38L332 38L334 36Q333 34 333 33Q332 33 331 33L331 33Q330 33 329 34Q327 36 325 38Q323 41 321 45L321 45Q320 47 319 48L319 48ZM346 74L346 74Q343 75 341 74Q338 74 336 73Q335 72 334 71L334 71Q334 69 335 68Q336 68 337 67Q338 67 338 68L338 68Q339 68 340 69Q342 70 344 69L344 69Q346 69 347 67Q349 66 350 64L350 64Q350 63 352 61Q353 58 355 55L355 55Q355 55 355 55L355 55Q354 55 354 54L354 54Q352 53 351 51Q351 50 351 49L351 49L351 48Q350 48 350 47Q350 45 350 43Q349 41 349 39Q349 37 350 35L350 35Q350 33 350 32Q350 30 350 29L350 29Q350 28 350 27Q351 27 351 26L351 26Q354 25 355 28Q356 30 356 36L356 36Q356 39 356 42Q356 45 357 47L357 47Q357 49 358 50L358 50Q358 50 358 50L358 50Q358 49 358 48Q359 47 359 47L359 47Q360 46 360 45Q360 44 361 44L361 44Q361 44 361 42Q362 41 362 40L362 40Q363 39 364 36Q364 34 365 33L365 33Q366 31 367 30Q367 29 368 28L368 28Q369 28 369 28Q370 28 371 28L371 28Q372 29 372 30Q373 31 372 32Q372 34 371 36L371 36Q370 38 370 39Q369 41 369 41L369 41Q368 42 368 44Q367 45 367 46L367 46Q365 49 364 51Q363 53 362 55Q362 56 361 58L361 58Q359 61 357 64Q355 67 353 69L353 69Q353 70 351 71Q350 72 348 73Q347 74 346 74ZM395 56L395 56Q395 55 394 54Q393 54 393 54Q393 53 393 53Q393 52 392 52L392 52Q392 51 393 49Q393 48 394 45Q396 42 397 40L397 40Q398 39 398 38Q399 37 399 37L399 37Q399 36 400 36Q400 36 400 36L400 36L401 35Q401 34 401 33Q402 32 403 31Q405 30 406 29Q407 28 408 27L408 27Q410 26 411 26Q413 26 414 27L414 27Q415 28 415 28Q416 29 417 30Q418 31 419 31L419 31L422 34L421 38Q419 41 420 43Q421 46 421 48L421 48Q422 49 423 49Q424 50 425 50L425 50Q425 50 426 50Q427 51 427 52L427 52Q427 53 426 54Q425 55 425 55L425 55Q422 55 420 54Q417 53 415 49L415 49Q415 49 414 47Q414 46 414 46L414 46Q414 46 413 47Q412 48 412 48L412 48Q406 54 402 56Q398 57 395 56ZM400 48L399 50Q400 50 401 49Q402 49 404 47L404 47Q407 45 409 43Q411 41 413 38L413 38L415 36Q414 34 413 33Q412 33 412 33L412 33Q411 33 409 34Q407 36 405 38Q403 41 401 45L401 45Q400 47 400 48L400 48ZM454 55L454 55Q453 55 452 53Q451 52 450 49Q450 46 450 44L450 44Q450 41 450 40Q450 38 451 37L451 37Q451 36 451 36Q451 36 451 35Q451 34 452 32L452 32Q452 31 452 30Q453 29 453 29L453 29Q454 28 455 28Q456 28 457 28Q458 28 458 29L458 29Q458 30 458 31Q458 33 458 34Q458 36 457 36L457 36Q457 37 457 38Q457 40 457 42Q456 44 456 45L456 45Q456 46 456 47Q457 47 458 46Q459 45 462 42L462 42Q463 40 464 38Q465 37 465 36Q466 35 466 33L466 33Q467 32 467 31Q467 30 468 30L468 30Q468 29 470 29Q471 29 472 30L472 30Q473 31 473 32Q473 34 472 36L472 36Q472 37 471 39Q470 41 470 43Q470 44 470 46L470 46Q470 47 470 48Q471 48 471 48L471 48Q472 48 473 47Q474 47 476 45L476 45Q477 44 478 43Q479 41 480 40Q481 38 481 37Q482 36 482 35L482 35Q482 35 483 34L483 34Q483 33 484 33Q484 33 485 32L485 32Q485 32 486 32Q487 32 487 33L487 33Q488 33 488 34Q488 35 488 36L488 36Q488 37 487 39Q487 40 486 41Q486 43 485 43L485 43Q485 44 484 44Q483 45 483 46L483 46Q481 49 480 49Q479 50 478 51L478 51Q477 52 474 53Q472 54 471 54Q469 54 468 54L468 54Q465 52 465 49L465 49Q465 49 465 48L465 48L465 48Q464 48 464 48Q463 48 463 49L463 49Q462 50 460 52Q459 53 457 54Q455 55 454 55ZM493 54L493 54Q492 54 492 54Q491 54 491 53L491 53Q490 52 490 52Q489 51 489 50Q489 49 490 48L490 48Q490 47 491 45Q491 42 492 40L492 40Q492 39 492 38Q493 36 493 35Q494 34 494 33L494 33Q495 31 495 29Q496 27 497 25Q498 23 499 19L499 19Q501 14 502 12Q502 9 503 8Q503 7 503 7L503 7Q503 6 504 6Q505 5 506 5L506 5Q507 5 508 6Q509 7 509 9Q509 11 508 12L508 12Q507 15 506 19Q504 23 503 26Q502 30 501 33L501 33Q501 33 500 34Q500 35 500 35L500 35L499 37Q499 38 498 38Q498 39 498 40L498 40Q498 41 497 42Q497 43 497 43L497 43Q498 43 498 42Q499 41 500 40L500 40Q502 39 503 38Q504 37 505 36L505 36Q506 36 507 35L507 35L507 35Q508 34 508 34Q508 34 508 34Q509 34 509 33Q509 33 509 33L509 33Q510 32 511 32Q511 32 512 32Q513 31 514 31L514 31Q515 31 516 32Q517 33 518 34L518 34Q519 35 519 37Q519 38 519 40L519 40Q519 41 519 43Q518 44 518 45L518 45L518 48L518 48Q519 48 520 48L520 48L521 48Q521 48 521 49Q522 49 522 49L522 49Q523 50 522 51Q522 52 521 52L521 52Q519 53 517 54Q516 54 514 53L514 53Q513 52 513 50Q512 49 512 46L512 46Q513 43 513 41L513 41Q513 40 512 40L512 40Q512 39 512 39L512 39Q511 39 509 40Q507 41 505 43Q503 45 501 47Q499 49 497 51L497 51Q496 52 495 53Q494 54 493 54ZM528 56L528 56Q527 55 527 54Q527 53 527 52Q527 51 527 50L527 50Q527 49 528 49Q528 49 528 48L528 48Q528 48 528 47Q528 46 528 46L528 46Q529 44 530 42Q530 41 531 39Q532 37 532 35Q532 34 533 33L533 33Q533 32 534 32L534 32Q535 32 536 33Q537 34 538 35L538 35Q538 35 538 37Q538 38 537 40L537 40Q537 40 536 42Q536 43 536 44L536 44Q535 45 535 46Q535 47 534 48L534 48Q534 48 534 49Q534 50 534 51Q533 52 533 53L533 53Q532 56 531 57Q529 57 528 56ZM536 24L536 24Q536 23 535 22Q535 21 535 21Q535 20 535 20L535 20Q536 19 536 18Q537 17 537 15L537 15Q538 15 538 15Q538 14 538 14L538 14Q539 14 541 14Q542 15 543 16L543 16Q544 18 544 19Q543 21 542 22L542 22Q541 24 539 24Q537 25 536 24ZM546 58L546 58Q545 59 543 58Q542 56 542 54Q542 52 542 49L542 49Q543 48 543 47Q543 46 543 45L543 45Q543 45 544 43Q544 41 545 40Q545 38 546 37Q546 35 547 35L547 35Q547 35 547 35Q547 34 547 33L547 33Q547 33 548 32Q548 31 548 31L548 31Q548 31 548 30Q549 29 549 29Q549 29 549 29Q549 28 549 28L549 28Q550 27 550 25Q551 22 552 19Q554 17 555 14Q555 11 556 9Q557 7 557 7L557 7Q557 6 557 6Q558 5 558 5L558 5Q558 5 559 5Q560 5 560 5L560 5L561 6Q562 7 562 8Q563 8 563 9L563 9Q563 10 563 11Q562 12 562 14Q561 15 559 19L559 19Q559 20 558 22Q557 23 557 23Q557 24 557 24Q557 25 557 26L557 26Q556 26 556 28Q555 29 554 30Q554 32 553 33Q553 34 553 34L553 34Q553 34 553 35Q553 35 553 35L553 35Q552 35 552 36L552 36L552 36Q552 37 551 40L551 40Q550 45 549 48Q548 52 548 54L548 54Q548 56 547 57Q547 58 546 58ZM572 56L572 56Q570 57 567 57Q565 58 563 57Q560 56 559 54L559 54Q558 53 557 50Q557 48 557 44L557 44Q557 41 559 37Q561 34 564 31Q566 28 569 27L569 27Q570 27 571 26Q572 26 574 26L574 26Q576 27 577 27Q579 28 579 29L579 29Q581 30 581 31Q581 32 581 33L581 33Q581 36 579 39Q577 41 574 43L574 43Q572 43 570 43Q568 44 566 43L566 43Q564 42 563 43Q563 44 563 47L563 47Q563 49 563 50Q564 51 565 51L565 51Q567 52 568 51Q569 51 570 51L570 51Q571 50 572 50Q572 49 572 49Q573 49 573 48L573 48Q574 48 574 48Q575 47 575 47L575 47Q576 48 576 48Q577 49 577 50L577 50Q578 50 577 51Q576 52 575 53Q574 55 572 56ZM571 38L571 38Q572 38 573 37Q574 36 575 35Q576 34 576 34L576 34Q576 33 575 32Q573 31 571 32L571 32Q571 32 570 33Q569 34 568 35Q567 36 566 36Q566 37 566 38L566 38Q566 38 567 38Q568 38 569 38Q570 38 571 38ZM588 54L588 54Q587 54 585 54Q584 54 583 53L583 53Q582 52 582 50Q583 48 585 47L585 47Q586 46 587 46Q588 46 589 46L589 46Q592 48 592 50Q591 52 588 54Z"/></svg>
+        <span class="visually-hidden">Drop in. Stay a while.</span>
+      </p>
+      <div class="hero-stamp" aria-hidden="true">
+      <svg viewBox="0 0 120 120" focusable="false">
+        <defs>
+          <path id="hero-stamp-path" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"></path>
+        </defs>
+        <circle class="hero-stamp-edge" cx="60" cy="60" r="57"></circle>
+        <g class="hero-stamp-ring">
+          <text font-size="8.6" letter-spacing="2.2" font-family="Karla, sans-serif" font-weight="700">
+            <textPath href="#hero-stamp-path" startOffset="0" textLength="282">BREAKFAST SERVED ALL DAY · HACKBERRIES · </textPath>
+          </text>
+        </g>
+        <circle class="hero-stamp-inner" cx="60" cy="60" r="31"></circle>
+        <g class="hero-stamp-leaf" transform="translate(60 60)">
+          <path d="M0 13C-9 9-12 0-9-11c9 1 14 9 9 24z"></path>
+          <path class="vein" d="M-1 11C-4 4-5-2-6-7"></path>
+          <path d="M1 13C9 11 13 3 10-6 2-5-2 3 1 13z" opacity=".72"></path>
+        </g>
+      </svg>
+    </div>
+    </div>
+  </div>
+
+  <a class="hero-brew" href="#favourites">
+    <span>Keep scrolling. Something good is brewing.</span>
+    <span class="hero-brew-bean" aria-hidden="true"><svg class="bean-svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><radialGradient id="cue-bean" cx="0.36" cy="0.3" r="0.82">
+      <stop offset="0" style="stop-color:var(--brew-bean-hi)"/><stop offset="0.52" style="stop-color:var(--brew-bean)"/><stop offset="1" style="stop-color:var(--brew-bean-deep)"/>
+    </radialGradient></defs>
+    <g transform="rotate(-32 16 16)">
+      <ellipse class="bean-shade" cx="16.6" cy="17" rx="10.4" ry="13.4"/>
+      <ellipse class="bean-body" cx="16" cy="16" rx="10.4" ry="13.4" fill="url(#cue-bean)"/>
+      <path class="bean-crease" d="M16.7 3.3c-3.7 3.4-4 8-.9 12.6 3 4.7 2.7 9.2-.7 13"/>
+      <path class="bean-crease-hi" d="M18.3 5c-2.7 3.1-2.8 7-.3 10.9 2.5 3.9 2.3 7.6-.1 10.8"/>
+      <ellipse class="bean-shine" cx="11.2" cy="10.2" rx="2.2" ry="4.3" transform="rotate(14 11.2 10.2)"/>
+    </g>
+  </svg></span>
+  </a>
+</section>
+<section class="section leafy leafy-dark" id="favourites"
+         aria-labelledby="favourites-h">
+  <div class="shell">
+    <div class="section-head" data-reveal="left">
+      <p class="eyebrow">Find your favourite</p>
+      <h2 id="favourites-h" data-lines>
+        <span class="line"><span>Four good reasons</span></span>
+        <span class="line"><span>to sit down.</span></span>
+      </h2>
+      <p class="lead muted prose">
+        One dish from each corner of the menu. Open a photograph to see what
+        it is, or press play and let them come to you.
+      </p>
+    </div>
+
+    <div class="fav" data-showcase data-reveal="scale">
+      <div class="fav-wash" data-stage-wash aria-hidden="true"
+           style="--wash:#948153"></div>
+
+      <div class="fav-rail" role="tablist" aria-label="Choose a dish" data-fav-rail>
+        <button class="fav-slat" type="button" role="tab" id="sc-tab-menemen"
+                aria-selected="true" aria-controls="sc-readout" data-showcase-index="0"
+                tabindex="0" style="--ph:#948153">
+          <picture class="src"><source type="image/webp" srcset="media/food-menemen-square-300.webp 300w, media/food-menemen-square-480.webp 480w, media/food-menemen-square-637.webp 637w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"><img data-showcase-layer="0" src="media/food-menemen-square-480.jpg" srcset="media/food-menemen-square-300.jpg 300w, media/food-menemen-square-480.jpg 480w, media/food-menemen-square-637.jpg 637w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"
+     width="637" height="637" alt="" loading="lazy"
+     decoding="async" class="is-shown"></picture>
+          <span class="fav-shade" aria-hidden="true"></span>
+          <span class="fav-glare" aria-hidden="true"></span>
+          <span class="fav-num" aria-hidden="true">01</span>
+          <span class="fav-side" aria-hidden="true">Breakfast</span>
+          <span class="fav-tag">Breakfast</span>
+          <span class="fav-bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fav-slat" type="button" role="tab" id="sc-tab-avocado"
+                aria-selected="false" aria-controls="sc-readout" data-showcase-index="1"
+                tabindex="-1" style="--ph:#908a70">
+          <picture class="src"><source type="image/webp" srcset="media/food-avocado-eggs-square-300.webp 300w, media/food-avocado-eggs-square-480.webp 480w, media/food-avocado-eggs-square-636.webp 636w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"><img data-showcase-layer="1" src="media/food-avocado-eggs-square-480.jpg" srcset="media/food-avocado-eggs-square-300.jpg 300w, media/food-avocado-eggs-square-480.jpg 480w, media/food-avocado-eggs-square-636.jpg 636w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"
+     width="636" height="636" alt="" loading="lazy"
+     decoding="async"></picture>
+          <span class="fav-shade" aria-hidden="true"></span>
+          <span class="fav-glare" aria-hidden="true"></span>
+          <span class="fav-num" aria-hidden="true">02</span>
+          <span class="fav-side" aria-hidden="true">Brunch</span>
+          <span class="fav-tag">Brunch</span>
+          <span class="fav-bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fav-slat" type="button" role="tab" id="sc-tab-french-toast"
+                aria-selected="false" aria-controls="sc-readout" data-showcase-index="2"
+                tabindex="-1" style="--ph:#8e5e37">
+          <picture class="src"><source type="image/webp" srcset="media/dessert-french-toast-square-300.webp 300w, media/dessert-french-toast-square-480.webp 480w, media/dessert-french-toast-square-640.webp 640w, media/dessert-french-toast-square-707.webp 707w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"><img data-showcase-layer="2" src="media/dessert-french-toast-square-480.jpg" srcset="media/dessert-french-toast-square-300.jpg 300w, media/dessert-french-toast-square-480.jpg 480w, media/dessert-french-toast-square-640.jpg 640w, media/dessert-french-toast-square-707.jpg 707w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"
+     width="707" height="707" alt="" loading="lazy"
+     decoding="async"></picture>
+          <span class="fav-shade" aria-hidden="true"></span>
+          <span class="fav-glare" aria-hidden="true"></span>
+          <span class="fav-num" aria-hidden="true">03</span>
+          <span class="fav-side" aria-hidden="true">Sweet treats</span>
+          <span class="fav-tag">Sweet treats</span>
+          <span class="fav-bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fav-slat" type="button" role="tab" id="sc-tab-iced-latte"
+                aria-selected="false" aria-controls="sc-readout" data-showcase-index="3"
+                tabindex="-1" style="--ph:#7f5229">
+          <picture class="src"><source type="image/webp" srcset="media/drink-iced-latte-square-300.webp 300w, media/drink-iced-latte-square-480.webp 480w, media/drink-iced-latte-square-635.webp 635w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"><img data-showcase-layer="3" src="media/drink-iced-latte-square-480.jpg" srcset="media/drink-iced-latte-square-300.jpg 300w, media/drink-iced-latte-square-480.jpg 480w, media/drink-iced-latte-square-635.jpg 635w" sizes="(min-width: 64rem) 30rem, (min-width: 40rem) 60vw, 92vw"
+     width="635" height="635" alt="" loading="lazy"
+     decoding="async"></picture>
+          <span class="fav-shade" aria-hidden="true"></span>
+          <span class="fav-glare" aria-hidden="true"></span>
+          <span class="fav-num" aria-hidden="true">04</span>
+          <span class="fav-side" aria-hidden="true">Coffee</span>
+          <span class="fav-tag">Coffee</span>
+          <span class="fav-bar" aria-hidden="true"><i></i></span>
+        </button>
+      </div>
+
+      <div class="fav-card">
+        <div class="fav-segments" aria-hidden="true"><span class="fav-seg is-current" data-fav-seg="0"><i></i></span><span class="fav-seg" data-fav-seg="1"><i></i></span><span class="fav-seg" data-fav-seg="2"><i></i></span><span class="fav-seg" data-fav-seg="3"><i></i></span></div>
+
+        <div class="fav-meta">
+          <p class="fav-count" aria-hidden="true">
+            <span class="fav-count-now" data-fav-roll><span data-sc-count>01</span></span>
+            <span class="of">/ 04</span>
+          </p>
+          <p class="fav-menu-name swap" data-sc-menuname>HOMEMADE MENEMEN (V)</p>
+        </div>
+
+        <div class="fav-readout" id="sc-readout" role="tabpanel"
+             aria-live="polite" tabindex="0"
+             aria-labelledby="sc-tab-menemen">
+          <h3 class="fav-title swap" style="--i:1" data-sc-title>Homemade menemen</h3>
+          <p class="fav-text muted swap" style="--i:2" data-sc-text>Two eggs folded through a fresh tomato sauce with mozzarella, served with caramelised Turkish bread. The one to order if you want breakfast to taste of somewhere.</p>
+          <p class="visually-hidden" data-sc-alt>A cast-iron pan of eggs cooked in tomato and pepper sauce, scattered with chives, served on a wooden board with toasted bread, in front of the café’s foliage and white-flower wall.</p>
+        </div>
+
+        <div class="fav-actions">
+          <a class="fav-link swap" style="--i:3" href="menu.html#breakfast" data-sc-link>
+            Find it on the menu <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+          </a>
+          <div class="fav-controls">
+            <button class="icon-btn" type="button" data-showcase-prev aria-label="Previous dish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <button class="fav-play" type="button" data-showcase-play aria-pressed="false">
+              <svg class="fav-play-ring" viewBox="0 0 60 60" aria-hidden="true" focusable="false"><circle cx="30" cy="30" r="26"></circle></svg>
+              <span data-play-icon><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+              <span class="visually-hidden" data-play-label>Play showcase</span>
+            </button>
+            <button class="icon-btn" type="button" data-showcase-next aria-label="Next dish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+
+        <p class="fav-note small muted">Every dish shown is on the printed menu.</p>
+      </div>
+
+      <div class="fav-cursor" data-fav-cursor aria-hidden="true">Open</div>
+    </div>
+
+    <ul class="visually-hidden" data-showcase-static>
+      <li>
+        <h3>Homemade menemen</h3>
+        <p class="muted small">Two eggs folded through a fresh tomato sauce with mozzarella, served with caramelised Turkish bread. The one to order if you want breakfast to taste of somewhere.</p>
+      </li>
+      <li>
+        <h3>Egg &amp; avocado toast</h3>
+        <p class="muted small">Two poached eggs on sourdough with crushed avocado and a mixed salad. The quiet, reliable one — and the plate it arrives on is half the reason people photograph it.</p>
+      </li>
+      <li>
+        <h3>French toast</h3>
+        <p class="muted small">Brioche dipped in cinnamon-vanilla batter, stacked with fresh fruit, cream, butter and maple syrup or Nutella. Order it for the table and pretend you are sharing.</p>
+      </li>
+      <li>
+        <h3>Iced latte</h3>
+        <p class="muted small">Espresso poured long over milk and ice. There is a full coffee list behind it — flat white, cortado, Turkish coffee, matcha — plus frappés and shakes when it is warm.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="section section-band" id="menu-preview" aria-labelledby="menu-preview-h">
+  <div class="shell">
+    <div class="section-head" data-reveal="drop">
+      <p class="eyebrow">What we serve</p>
+      <h2 id="menu-preview-h" data-lines>
+        <span class="line"><span>Breakfast until close,</span></span>
+        <span class="line"><span>and a great deal after it.</span></span>
+      </h2>
+      <p class="lead muted prose">
+        The kitchen runs breakfast all day, then a grill, burgers, pasta and
+        salad bowls alongside it. The drinks list is longer than you expect.
+      </p>
+    </div>
+
+    <div class="serve" data-serve data-reveal="fade">
+      <div class="serve-index" role="tablist" aria-label="Parts of the menu" data-serve-index>
+        <button class="serve-tab" type="button" role="tab" id="sv-tab-breakfast"
+                aria-selected="true" aria-controls="sv-card-breakfast" data-serve-tab="0"
+                tabindex="0" style="--ph:#bdb477">
+          <span class="serve-tab-fill" aria-hidden="true"></span>
+          <span class="serve-tab-num" aria-hidden="true">01</span>
+          <span class="serve-tab-thumb" aria-hidden="true"><picture class="src"><source type="image/webp" srcset="media/food-omelette-square-300.webp 300w, media/food-omelette-square-480.webp 480w, media/food-omelette-square-637.webp 637w" sizes="4rem"><img src="media/food-omelette-square-480.jpg" srcset="media/food-omelette-square-300.jpg 300w, media/food-omelette-square-480.jpg 480w, media/food-omelette-square-637.jpg 637w" sizes="4rem"
+     width="637" height="637" alt="" loading="lazy"
+     decoding="async"></picture></span>
+          <span class="serve-tab-name">Breakfast</span>
+          <span class="serve-tab-meta">50 dishes</span>
+          <span class="serve-tab-go" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="serve-tab" type="button" role="tab" id="sv-tab-sweet"
+                aria-selected="false" aria-controls="sv-card-sweet" data-serve-tab="1"
+                tabindex="-1" style="--ph:#8e5e37">
+          <span class="serve-tab-fill" aria-hidden="true"></span>
+          <span class="serve-tab-num" aria-hidden="true">02</span>
+          <span class="serve-tab-thumb" aria-hidden="true"><picture class="src"><source type="image/webp" srcset="media/dessert-french-toast-square-300.webp 300w, media/dessert-french-toast-square-480.webp 480w, media/dessert-french-toast-square-640.webp 640w, media/dessert-french-toast-square-707.webp 707w" sizes="4rem"><img src="media/dessert-french-toast-square-480.jpg" srcset="media/dessert-french-toast-square-300.jpg 300w, media/dessert-french-toast-square-480.jpg 480w, media/dessert-french-toast-square-640.jpg 640w, media/dessert-french-toast-square-707.jpg 707w" sizes="4rem"
+     width="707" height="707" alt="" loading="lazy"
+     decoding="async"></picture></span>
+          <span class="serve-tab-name">Sweet things</span>
+          <span class="serve-tab-meta">11 dishes</span>
+          <span class="serve-tab-go" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="serve-tab" type="button" role="tab" id="sv-tab-drinks"
+                aria-selected="false" aria-controls="sv-card-drinks" data-serve-tab="2"
+                tabindex="-1" style="--ph:#7e887f">
+          <span class="serve-tab-fill" aria-hidden="true"></span>
+          <span class="serve-tab-num" aria-hidden="true">03</span>
+          <span class="serve-tab-thumb" aria-hidden="true"><picture class="src"><source type="image/webp" srcset="media/drink-coolers-square-300.webp 300w, media/drink-coolers-square-480.webp 480w, media/drink-coolers-square-637.webp 637w" sizes="4rem"><img src="media/drink-coolers-square-480.jpg" srcset="media/drink-coolers-square-300.jpg 300w, media/drink-coolers-square-480.jpg 480w, media/drink-coolers-square-637.jpg 637w" sizes="4rem"
+     width="637" height="637" alt="" loading="lazy"
+     decoding="async"></picture></span>
+          <span class="serve-tab-name">Coffee &amp; drinks</span>
+          <span class="serve-tab-meta">58 dishes</span>
+          <span class="serve-tab-go" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="serve-tab" type="button" role="tab" id="sv-tab-lunch"
+                aria-selected="false" aria-controls="sv-card-lunch" data-serve-tab="3"
+                tabindex="-1" style="--ph:#a5774d">
+          <span class="serve-tab-fill" aria-hidden="true"></span>
+          <span class="serve-tab-num" aria-hidden="true">04</span>
+          <span class="serve-tab-thumb" aria-hidden="true"><picture class="src"><source type="image/webp" srcset="media/food-lamb-chops-square-300.webp 300w, media/food-lamb-chops-square-480.webp 480w, media/food-lamb-chops-square-640.webp 640w, media/food-lamb-chops-square-1122.webp 1122w" sizes="4rem"><img src="media/food-lamb-chops-square-480.jpg" srcset="media/food-lamb-chops-square-300.jpg 300w, media/food-lamb-chops-square-480.jpg 480w, media/food-lamb-chops-square-640.jpg 640w, media/food-lamb-chops-square-1122.jpg 1122w" sizes="4rem"
+     width="1122" height="1122" alt="" loading="lazy"
+     decoding="async"></picture></span>
+          <span class="serve-tab-name">Lunch &amp; grills</span>
+          <span class="serve-tab-meta">53 dishes</span>
+          <span class="serve-tab-go" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+
+      <div class="serve-deck" data-serve-deck>
+      <article class="serve-card is-current" id="sv-card-breakfast" role="tabpanel"
+               aria-labelledby="sv-tab-breakfast" data-serve-card="0"
+               style="--ph:#bdb477; view-transition-name: cat-breakfast">
+        <div class="serve-media">
+          <picture class="src"><source type="image/webp" srcset="media/food-omelette-panel-380.webp 380w, media/food-omelette-panel-560.webp 560w, media/food-omelette-panel-637.webp 637w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/food-omelette-panel-560.jpg" srcset="media/food-omelette-panel-380.jpg 380w, media/food-omelette-panel-560.jpg 560w, media/food-omelette-panel-637.jpg 637w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="637" height="510" alt="A folded omelette scattered with chives and paprika on a long white plate, with toasted bread and a dressed side salad, on a marble table." loading="lazy"
+     decoding="async" class="serve-img is-a"></picture>
+          <picture class="src"><source type="image/webp" srcset="media/food-avocado-eggs-panel-380.webp 380w, media/food-avocado-eggs-panel-560.webp 560w, media/food-avocado-eggs-panel-636.webp 636w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/food-avocado-eggs-panel-560.jpg" srcset="media/food-avocado-eggs-panel-380.jpg 380w, media/food-avocado-eggs-panel-560.jpg 560w, media/food-avocado-eggs-panel-636.jpg 636w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="636" height="509" alt="Two poached eggs dusted with paprika on crushed avocado toast, with a dressed side salad, on a deep blue glazed oval plate set on marble." loading="lazy"
+     decoding="async" class="serve-img is-b"></picture>
+          <span class="serve-stamp" aria-hidden="true">01</span>
+            <button class="serve-swap" type="button" data-serve-swap aria-pressed="false"
+                    aria-label="Show another breakfast photograph">
+              <picture class="src"><source type="image/webp" srcset="media/food-avocado-eggs-square-300.webp 300w, media/food-avocado-eggs-square-480.webp 480w, media/food-avocado-eggs-square-636.webp 636w" sizes="6rem"><img src="media/food-avocado-eggs-square-480.jpg" srcset="media/food-avocado-eggs-square-300.jpg 300w, media/food-avocado-eggs-square-480.jpg 480w, media/food-avocado-eggs-square-636.jpg 636w" sizes="6rem"
+     width="636" height="636" alt="" loading="lazy"
+     decoding="async" class="is-a"></picture>
+              <picture class="src"><source type="image/webp" srcset="media/food-omelette-square-300.webp 300w, media/food-omelette-square-480.webp 480w, media/food-omelette-square-637.webp 637w" sizes="6rem"><img src="media/food-omelette-square-480.jpg" srcset="media/food-omelette-square-300.jpg 300w, media/food-omelette-square-480.jpg 480w, media/food-omelette-square-637.jpg 637w" sizes="6rem"
+     width="637" height="637" alt="" loading="lazy"
+     decoding="async" class="is-b"></picture>
+              <span class="serve-swap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14.5-3.5L20 7M20 3v4h-4M20 15a8 8 0 0 1-14.5 3.5L4 17M4 21v-4h4"/></svg></span>
+            </button>
+        </div>
+        <div class="serve-body">
+          <p class="serve-count"><strong>50</strong> dishes across 7 lists</p>
+          <h3 class="serve-name">Breakfast</h3>
+          <p class="serve-text">Served until close. Turkish, full English, American, veggie and vegan breakfasts, benedicts, omelettes, set breakfasts and things on toast.</p>
+          <ul class="serve-lists" aria-label="Lists in breakfast"><li><a href="menu.html#breakfast">Full breakfasts</a></li><li><a href="menu.html#benedict-select">Benedicts</a></li><li><a href="menu.html#brunch-plates">Brunch plates</a></li><li><a href="menu.html#set-breakfast">Set breakfasts</a></li><li><a href="menu.html#omelettes">Omelettes</a></li><li><a class="is-more" href="menu.html#breakfast">+2 more</a></li></ul>
+          <a class="serve-go" href="menu.html#breakfast">See the breakfast <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="serve-card" id="sv-card-sweet" role="tabpanel"
+               aria-labelledby="sv-tab-sweet" data-serve-card="1"
+               style="--ph:#8e5e37; view-transition-name: cat-sweet-breakfast">
+        <div class="serve-media">
+          <picture class="src"><source type="image/webp" srcset="media/dessert-french-toast-panel-380.webp 380w, media/dessert-french-toast-panel-560.webp 560w, media/dessert-french-toast-panel-707.webp 707w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/dessert-french-toast-panel-560.jpg" srcset="media/dessert-french-toast-panel-380.jpg 380w, media/dessert-french-toast-panel-560.jpg 560w, media/dessert-french-toast-panel-707.jpg 707w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="707" height="566" alt="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate." loading="lazy"
+     decoding="async" class="serve-img is-a"></picture>
+          <picture class="src"><source type="image/webp" srcset="media/drink-smoothies-panel-380.webp 380w, media/drink-smoothies-panel-560.webp 560w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/drink-smoothies-panel-560.jpg" srcset="media/drink-smoothies-panel-380.jpg 380w, media/drink-smoothies-panel-560.jpg 560w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="560" height="448" alt="A berry smoothie topped with a blackberry and raspberry beside a green smoothie garnished with orange and mint, both in handled glass jars on a marble table dressed with fresh flowers." loading="lazy"
+     decoding="async" class="serve-img is-b"></picture>
+          <span class="serve-stamp" aria-hidden="true">02</span>
+            <button class="serve-swap" type="button" data-serve-swap aria-pressed="false"
+                    aria-label="Show another sweet things photograph">
+              <picture class="src"><source type="image/webp" srcset="media/drink-smoothies-square-300.webp 300w, media/drink-smoothies-square-480.webp 480w, media/drink-smoothies-square-592.webp 592w" sizes="6rem"><img src="media/drink-smoothies-square-480.jpg" srcset="media/drink-smoothies-square-300.jpg 300w, media/drink-smoothies-square-480.jpg 480w, media/drink-smoothies-square-592.jpg 592w" sizes="6rem"
+     width="592" height="592" alt="" loading="lazy"
+     decoding="async" class="is-a"></picture>
+              <picture class="src"><source type="image/webp" srcset="media/dessert-french-toast-square-300.webp 300w, media/dessert-french-toast-square-480.webp 480w, media/dessert-french-toast-square-640.webp 640w, media/dessert-french-toast-square-707.webp 707w" sizes="6rem"><img src="media/dessert-french-toast-square-480.jpg" srcset="media/dessert-french-toast-square-300.jpg 300w, media/dessert-french-toast-square-480.jpg 480w, media/dessert-french-toast-square-640.jpg 640w, media/dessert-french-toast-square-707.jpg 707w" sizes="6rem"
+     width="707" height="707" alt="" loading="lazy"
+     decoding="async" class="is-b"></picture>
+              <span class="serve-swap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14.5-3.5L20 7M20 3v4h-4M20 15a8 8 0 0 1-14.5 3.5L4 17M4 21v-4h4"/></svg></span>
+            </button>
+        </div>
+        <div class="serve-body">
+          <p class="serve-count"><strong>11</strong> dishes across 2 lists</p>
+          <h3 class="serve-name">Sweet things</h3>
+          <p class="serve-text">Pancakes, waffles, French toast and granola in the morning; sponge, carrot cake, red velvet, cheesecake and ice cream for the afternoon.</p>
+          <ul class="serve-lists" aria-label="Lists in sweet things"><li><a href="menu.html#sweet-breakfast">Sweet breakfast</a></li><li><a href="menu.html#desserts">Cakes &amp; desserts</a></li></ul>
+          <a class="serve-go" href="menu.html#sweet-breakfast">See the sweet things <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="serve-card" id="sv-card-drinks" role="tabpanel"
+               aria-labelledby="sv-tab-drinks" data-serve-card="2"
+               style="--ph:#7e887f; view-transition-name: cat-hot-drinks">
+        <div class="serve-media">
+          <picture class="src"><source type="image/webp" srcset="media/drink-coolers-panel-380.webp 380w, media/drink-coolers-panel-560.webp 560w, media/drink-coolers-panel-637.webp 637w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/drink-coolers-panel-560.jpg" srcset="media/drink-coolers-panel-380.jpg 380w, media/drink-coolers-panel-560.jpg 560w, media/drink-coolers-panel-637.jpg 637w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="637" height="510" alt="Three tall iced drinks side by side — a dark berry one topped with blackberries, a red one, and a bright blue one with lime and a sour sweet garnish — against the café’s white-flower wall." loading="lazy"
+     decoding="async" class="serve-img is-a"></picture>
+          <picture class="src"><source type="image/webp" srcset="media/drink-strawberry-panel-380.webp 380w, media/drink-strawberry-panel-560.webp 560w, media/drink-strawberry-panel-627.webp 627w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/drink-strawberry-panel-560.jpg" srcset="media/drink-strawberry-panel-380.jpg 380w, media/drink-strawberry-panel-560.jpg 560w, media/drink-strawberry-panel-627.jpg 627w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="627" height="502" alt="A frozen strawberry drink served in a martini glass with mint, lime and a paper parasol, with the café’s teal banquettes behind it." loading="lazy"
+     decoding="async" class="serve-img is-b"></picture>
+          <span class="serve-stamp" aria-hidden="true">03</span>
+            <button class="serve-swap" type="button" data-serve-swap aria-pressed="false"
+                    aria-label="Show another coffee &amp; drinks photograph">
+              <picture class="src"><source type="image/webp" srcset="media/drink-strawberry-square-300.webp 300w, media/drink-strawberry-square-480.webp 480w, media/drink-strawberry-square-627.webp 627w" sizes="6rem"><img src="media/drink-strawberry-square-480.jpg" srcset="media/drink-strawberry-square-300.jpg 300w, media/drink-strawberry-square-480.jpg 480w, media/drink-strawberry-square-627.jpg 627w" sizes="6rem"
+     width="627" height="627" alt="" loading="lazy"
+     decoding="async" class="is-a"></picture>
+              <picture class="src"><source type="image/webp" srcset="media/drink-coolers-square-300.webp 300w, media/drink-coolers-square-480.webp 480w, media/drink-coolers-square-637.webp 637w" sizes="6rem"><img src="media/drink-coolers-square-480.jpg" srcset="media/drink-coolers-square-300.jpg 300w, media/drink-coolers-square-480.jpg 480w, media/drink-coolers-square-637.jpg 637w" sizes="6rem"
+     width="637" height="637" alt="" loading="lazy"
+     decoding="async" class="is-b"></picture>
+              <span class="serve-swap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14.5-3.5L20 7M20 3v4h-4M20 15a8 8 0 0 1-14.5 3.5L4 17M4 21v-4h4"/></svg></span>
+            </button>
+        </div>
+        <div class="serve-body">
+          <p class="serve-count"><strong>58</strong> dishes across 9 lists</p>
+          <h3 class="serve-name">Coffee &amp; drinks</h3>
+          <p class="serve-text">A full coffee list, Turkish coffee and tea, herbal teas, frappés, milkshakes, protein shakes, fresh juice and smoothies — plus a bar list.</p>
+          <ul class="serve-lists" aria-label="Lists in coffee &amp; drinks"><li><a href="menu.html#hot-drinks">Coffee &amp; tea</a></li><li><a href="menu.html#herbal-tea">Herbal tea</a></li><li><a href="menu.html#iced-coffee">Iced coffee</a></li><li><a href="menu.html#frappe">Frappé</a></li><li><a href="menu.html#milkshakes">Milkshakes</a></li><li><a class="is-more" href="menu.html#hot-drinks">+4 more</a></li></ul>
+          <a class="serve-go" href="menu.html#hot-drinks">See the coffee &amp; drinks <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="serve-card" id="sv-card-lunch" role="tabpanel"
+               aria-labelledby="sv-tab-lunch" data-serve-card="3"
+               style="--ph:#a5774d; view-transition-name: cat-grills">
+        <div class="serve-media">
+          <picture class="src"><source type="image/webp" srcset="media/food-lamb-chops-panel-380.webp 380w, media/food-lamb-chops-panel-560.webp 560w, media/food-lamb-chops-panel-760.webp 760w, media/food-lamb-chops-panel-1402.webp 1402w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/food-lamb-chops-panel-560.jpg" srcset="media/food-lamb-chops-panel-380.jpg 380w, media/food-lamb-chops-panel-560.jpg 560w, media/food-lamb-chops-panel-760.jpg 760w, media/food-lamb-chops-panel-1402.jpg 1402w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="1402" height="1122" alt="Grilled lamb chops with roast potatoes, red pepper, a lemon wedge, salad and a pot of chilli sauce on a long white plate." loading="lazy"
+     decoding="async" class="serve-img is-a"></picture>
+          <picture class="src"><source type="image/webp" srcset="media/food-burger-panel-380.webp 380w, media/food-burger-panel-560.webp 560w, media/food-burger-panel-760.webp 760w, media/food-burger-panel-1402.webp 1402w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"><img src="media/food-burger-panel-560.jpg" srcset="media/food-burger-panel-380.jpg 380w, media/food-burger-panel-560.jpg 560w, media/food-burger-panel-760.jpg 760w, media/food-burger-panel-1402.jpg 1402w" sizes="(min-width: 64rem) 36rem, (min-width: 40rem) 64vw, 86vw"
+     width="1402" height="1122" alt="A cheeseburger with bacon, topped with a whole pickle, beside seasoned chips and a wire basket of fries on a blue glazed plate, on marble." loading="lazy"
+     decoding="async" class="serve-img is-b"></picture>
+          <span class="serve-stamp" aria-hidden="true">04</span>
+            <button class="serve-swap" type="button" data-serve-swap aria-pressed="false"
+                    aria-label="Show another lunch &amp; grills photograph">
+              <picture class="src"><source type="image/webp" srcset="media/food-burger-square-300.webp 300w, media/food-burger-square-480.webp 480w, media/food-burger-square-640.webp 640w, media/food-burger-square-1122.webp 1122w" sizes="6rem"><img src="media/food-burger-square-480.jpg" srcset="media/food-burger-square-300.jpg 300w, media/food-burger-square-480.jpg 480w, media/food-burger-square-640.jpg 640w, media/food-burger-square-1122.jpg 1122w" sizes="6rem"
+     width="1122" height="1122" alt="" loading="lazy"
+     decoding="async" class="is-a"></picture>
+              <picture class="src"><source type="image/webp" srcset="media/food-lamb-chops-square-300.webp 300w, media/food-lamb-chops-square-480.webp 480w, media/food-lamb-chops-square-640.webp 640w, media/food-lamb-chops-square-1122.webp 1122w" sizes="6rem"><img src="media/food-lamb-chops-square-480.jpg" srcset="media/food-lamb-chops-square-300.jpg 300w, media/food-lamb-chops-square-480.jpg 480w, media/food-lamb-chops-square-640.jpg 640w, media/food-lamb-chops-square-1122.jpg 1122w" sizes="6rem"
+     width="1122" height="1122" alt="" loading="lazy"
+     decoding="async" class="is-b"></picture>
+              <span class="serve-swap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14.5-3.5L20 7M20 3v4h-4M20 15a8 8 0 0 1-14.5 3.5L4 17M4 21v-4h4"/></svg></span>
+            </button>
+        </div>
+        <div class="serve-body">
+          <p class="serve-count"><strong>53</strong> dishes across 12 lists</p>
+          <h3 class="serve-name">Lunch &amp; grills</h3>
+          <p class="serve-text">Lamb chops, shish, köfte, seabass and salmon from the grill. Burgers, panini, wraps, jacket potatoes, homemade pasta, soups and salad bowls.</p>
+          <ul class="serve-lists" aria-label="Lists in lunch &amp; grills"><li><a href="menu.html#grills">Grills</a></li><li><a href="menu.html#burgers">Burgers</a></li><li><a href="menu.html#pasta">Homemade pasta</a></li><li><a href="menu.html#wraps">Wraps</a></li><li><a href="menu.html#panini">Panini</a></li><li><a class="is-more" href="menu.html#grills">+7 more</a></li></ul>
+          <a class="serve-go" href="menu.html#grills">See the lunch &amp; grills <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      </div>
+
+      <div class="serve-progress" aria-hidden="true">
+        <span class="serve-progress-count"><span data-serve-count>01</span> / 04</span>
+        <span class="serve-dots"><span class="serve-dot is-current" data-serve-dot="0"></span><span class="serve-dot" data-serve-dot="1"></span><span class="serve-dot" data-serve-dot="2"></span><span class="serve-dot" data-serve-dot="3"></span></span>
+        <span class="serve-hint">Swipe for more</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section section-dark on-dark leafy" id="the-cafe"
+         aria-labelledby="the-cafe-h">
+  <div class="shell">
+    <div class="atmos-grid">
+      <div class="atmos-copy" data-reveal="left">
+        <p class="eyebrow">The café</p>
+        <h2 id="the-cafe-h" data-lines>
+          <span class="line"><span>A place to pause.</span></span>
+          <span class="line"><span>A reason to return.</span></span>
+        </h2>
+        <p class="lead muted prose">
+          Hackberries is a neighbourhood café on Windmill Lane. It is the kind
+          of room where a quick coffee turns into an hour, and nobody minds.
+        </p>
+
+        <div class="atmos-labels" role="tablist" aria-label="Choose a view of the café">
+        <button class="atmos-label" type="button" role="tab" id="at-tab-inside"
+                aria-selected="true" aria-controls="at-readout"
+                data-atmos-index="0" tabindex="0">
+          <span class="num" aria-hidden="true">1</span>
+          <span>Inside Hackberries</span>
+        </button>
+        <button class="atmos-label" type="button" role="tab" id="at-tab-coffee"
+                aria-selected="false" aria-controls="at-readout"
+                data-atmos-index="1" tabindex="-1">
+          <span class="num" aria-hidden="true">2</span>
+          <span>The coffee</span>
+        </button>
+        <button class="atmos-label" type="button" role="tab" id="at-tab-table"
+                aria-selected="false" aria-controls="at-readout"
+                data-atmos-index="2" tabindex="-1">
+          <span class="num" aria-hidden="true">3</span>
+          <span>At the table</span>
+        </button>
+        </div>
+
+        <p class="atmos-readout" id="at-readout" role="tabpanel" tabindex="0"
+           aria-live="polite" aria-labelledby="at-tab-inside"
+           data-atmos-text>Marble tables, velvet chairs in green and blue, rattan pendants and a wall of foliage and white flowers against exposed brick. Bright enough to work in, soft enough to stay in.</p>
+      </div>
+
+      <div class="atmos-stack" data-atmos-stack data-reveal="scale">
+        <figure class="atmos-print" data-atmos-print="0"
+             data-state="front"
+             style="--ph:#796e5b">
+          <picture class="src"><source type="image/webp" srcset="media/venue-room-portrait-320.webp 320w, media/venue-room-portrait-462.webp 462w" sizes="(min-width: 64rem) 32rem, 88vw"><img src="media/venue-room-portrait-462.jpg" srcset="media/venue-room-portrait-320.jpg 320w, media/venue-room-portrait-462.jpg 462w" sizes="(min-width: 64rem) 32rem, 88vw"
+     width="462" height="578" alt="Inside Hackberries: marble-topped tables with green and blue velvet chairs and banquettes, rattan pendant lights, an exposed brick wall and a foliage wall hung with white flowers." loading="lazy"
+     decoding="async"></picture>
+        </figure>
+        <figure class="atmos-print" data-atmos-print="1"
+             data-state="mid"
+             style="--ph:#766d51">
+          <picture class="src"><source type="image/webp" srcset="media/drink-coffee-smoothie-portrait-320.webp 320w, media/drink-coffee-smoothie-portrait-520.webp 520w, media/drink-coffee-smoothie-portrait-638.webp 638w" sizes="(min-width: 64rem) 32rem, 88vw"><img src="media/drink-coffee-smoothie-portrait-520.jpg" srcset="media/drink-coffee-smoothie-portrait-320.jpg 320w, media/drink-coffee-smoothie-portrait-520.jpg 520w, media/drink-coffee-smoothie-portrait-638.jpg 638w" sizes="(min-width: 64rem) 32rem, 88vw"
+     width="638" height="798" alt="An iced coffee and a green smoothie in handled glass jars with red striped straws, in front of the café’s foliage wall and orange neon Hackberries sign." loading="lazy"
+     decoding="async"></picture>
+        </figure>
+        <figure class="atmos-print" data-atmos-print="2"
+             data-state="back"
+             style="--ph:#bdb477">
+          <picture class="src"><source type="image/webp" srcset="media/food-omelette-portrait-320.webp 320w, media/food-omelette-portrait-520.webp 520w, media/food-omelette-portrait-600.webp 600w" sizes="(min-width: 64rem) 32rem, 88vw"><img src="media/food-omelette-portrait-520.jpg" srcset="media/food-omelette-portrait-320.jpg 320w, media/food-omelette-portrait-520.jpg 520w, media/food-omelette-portrait-600.jpg 600w" sizes="(min-width: 64rem) 32rem, 88vw"
+     width="600" height="750" alt="A folded omelette scattered with chives and paprika on a long white plate, with toasted bread and a dressed side salad, on a marble table." loading="lazy"
+     decoding="async"></picture>
+        </figure>
+        <p class="atmos-caption" data-atmos-caption>Inside Hackberries</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="more-about" aria-label="More about Hackberries">
+  <div class="shell">
+    <div class="rows" data-reveal-group="left">
+    <a class="row-link" href="menu.html" data-row>
+      <span class="row-thumb" style="--ph:#948153">
+        <picture class="src"><source type="image/webp" srcset="media/food-menemen-thumb-120.webp 120w, media/food-menemen-thumb-240.webp 240w" sizes="3.5rem"><img src="media/food-menemen-thumb-240.jpg" srcset="media/food-menemen-thumb-120.jpg 120w, media/food-menemen-thumb-240.jpg 240w" sizes="3.5rem"
+     width="240" height="240" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+      <span class="row-index" aria-hidden="true">01</span>
+      <span class="row-title">Explore the menu</span>
+      <span class="row-text">Breakfast until close, a grill, and a drinks list that runs long.</span>
+      <span class="row-go">See the full menu <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      <span class="row-preview" aria-hidden="true" data-row-preview
+            style="--ph:#948153">
+        <picture class="src"><source type="image/webp" srcset="media/food-menemen-portrait-320.webp 320w, media/food-menemen-portrait-520.webp 520w, media/food-menemen-portrait-624.webp 624w" sizes="8.5rem"><img src="media/food-menemen-portrait-520.jpg" srcset="media/food-menemen-portrait-320.jpg 320w, media/food-menemen-portrait-520.jpg 520w, media/food-menemen-portrait-624.jpg 624w" sizes="8.5rem"
+     width="624" height="780" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+    </a>
+    <a class="row-link" href="#the-cafe" data-row>
+      <span class="row-thumb" style="--ph:#815139">
+        <picture class="src"><source type="image/webp" srcset="media/drink-strawberry-thumb-120.webp 120w, media/drink-strawberry-thumb-240.webp 240w" sizes="3.5rem"><img src="media/drink-strawberry-thumb-240.jpg" srcset="media/drink-strawberry-thumb-120.jpg 120w, media/drink-strawberry-thumb-240.jpg 240w" sizes="3.5rem"
+     width="240" height="240" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+      <span class="row-index" aria-hidden="true">02</span>
+      <span class="row-title">Meet at Hackberries</span>
+      <span class="row-text">Two seats, two coffees, and no one hurrying you along.</span>
+      <span class="row-go">See the café <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      <span class="row-preview" aria-hidden="true" data-row-preview
+            style="--ph:#815139">
+        <picture class="src"><source type="image/webp" srcset="media/drink-strawberry-portrait-320.webp 320w, media/drink-strawberry-portrait-520.webp 520w, media/drink-strawberry-portrait-627.webp 627w" sizes="8.5rem"><img src="media/drink-strawberry-portrait-520.jpg" srcset="media/drink-strawberry-portrait-320.jpg 320w, media/drink-strawberry-portrait-520.jpg 520w, media/drink-strawberry-portrait-627.jpg 627w" sizes="8.5rem"
+     width="627" height="784" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+    </a>
+    <a class="row-link" href="#visit" data-row>
+      <span class="row-thumb" style="--ph:#796e5b">
+        <picture class="src"><source type="image/webp" srcset="media/venue-room-thumb-120.webp 120w, media/venue-room-thumb-240.webp 240w" sizes="3.5rem"><img src="media/venue-room-thumb-240.jpg" srcset="media/venue-room-thumb-120.jpg 120w, media/venue-room-thumb-240.jpg 240w" sizes="3.5rem"
+     width="240" height="240" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+      <span class="row-index" aria-hidden="true">03</span>
+      <span class="row-title">Find your way here</span>
+      <span class="row-text">Windmill Lane, Cheshunt. Open from seven on weekdays.</span>
+      <span class="row-go">Get directions <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      <span class="row-preview" aria-hidden="true" data-row-preview
+            style="--ph:#796e5b">
+        <picture class="src"><source type="image/webp" srcset="media/venue-room-portrait-320.webp 320w, media/venue-room-portrait-462.webp 462w" sizes="8.5rem"><img src="media/venue-room-portrait-462.jpg" srcset="media/venue-room-portrait-320.jpg 320w, media/venue-room-portrait-462.jpg 462w" sizes="8.5rem"
+     width="462" height="578" alt="" loading="lazy"
+     decoding="async"></picture>
+      </span>
+    </a>
+    </div>
+  </div>
+</section>
+<section class="section section-deep on-dark leafy" id="gallery"
+         aria-labelledby="gallery-h">
+  <div class="shell">
+    <div class="gallery-head" data-reveal="drop">
+      <div class="stack">
+        <p class="eyebrow">Life at Hackberries</p>
+        <h2 id="gallery-h" data-lines>
+          <span class="line"><span>Ten photographs,</span></span>
+          <span class="line"><span>one very green wall.</span></span>
+        </h2>
+        <p class="collage-hint" id="collage-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l-3 3 3 3M19 9l3 3-3 3M9 5l3-3 3 3M9 19l3 3 3-3"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>
+          <span>Photographs can be nudged around with a mouse. Everything opens
+          at full size without dragging.</span>
+        </p>
+      </div>
+      <div class="gallery-actions">
+        <button class="chip" type="button" id="collage-reset" hidden>Reset layout</button>
+        <a class="btn btn-secondary" href="https://www.instagram.com/_hackberries/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg> @_hackberries
+        </a>
+      </div>
+    </div>
+
+    <div class="collage" id="collage" data-collage data-reveal-group="fade">
+      <figure class="print" data-print="0"
+             style="--cols:4;--ar:4 / 3;--tilt:-1.4deg;--ph:#796e5b">
+        <button type="button" data-lightbox-open="0">
+          <picture class="src"><source type="image/webp" srcset="media/venue-room-landscape-420.webp 420w, media/venue-room-landscape-640.webp 640w, media/venue-room-landscape-757.webp 757w" sizes="(min-width: 64rem) 59vw, (min-width: 48rem) 30vw, 46vw"><img src="media/venue-room-landscape-640.jpg" srcset="media/venue-room-landscape-420.jpg 420w, media/venue-room-landscape-640.jpg 640w, media/venue-room-landscape-757.jpg 757w" sizes="(min-width: 64rem) 59vw, (min-width: 48rem) 30vw, 46vw"
+     width="757" height="505" alt="Inside Hackberries: marble-topped tables with green and blue velvet chairs and banquettes, rattan pendant lights, an exposed brick wall and a foliage wall hung with white flowers." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: Inside Hackberries: marble-topped tables with green and blue…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="1"
+             style="--cols:2;--ar:2 / 3;--tilt:1.8deg;--ph:#8e5e37">
+        <button type="button" data-lightbox-open="1">
+          <picture class="src"><source type="image/webp" srcset="media/dessert-french-toast-portrait-320.webp 320w, media/dessert-french-toast-portrait-520.webp 520w, media/dessert-french-toast-portrait-626.webp 626w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/dessert-french-toast-portrait-520.jpg" srcset="media/dessert-french-toast-portrait-320.jpg 320w, media/dessert-french-toast-portrait-520.jpg 520w, media/dessert-french-toast-portrait-626.jpg 626w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="626" height="783" alt="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: Two thick slices of French toast dusted with icing sugar, pi…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="2"
+             style="--cols:2;--ar:1 / 1;--tilt:-2.2deg;--ph:#948153">
+        <button type="button" data-lightbox-open="2">
+          <picture class="src"><source type="image/webp" srcset="media/food-menemen-square-300.webp 300w, media/food-menemen-square-480.webp 480w, media/food-menemen-square-637.webp 637w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/food-menemen-square-480.jpg" srcset="media/food-menemen-square-300.jpg 300w, media/food-menemen-square-480.jpg 480w, media/food-menemen-square-637.jpg 637w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="637" height="637" alt="A cast-iron pan of eggs cooked in tomato and pepper sauce, scattered with chives, served on a wooden board with toasted bread, in front of the café’s foliage and white-flower wall." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: A cast-iron pan of eggs cooked in tomato and pepper sauce, s…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="3"
+             style="--cols:2;--ar:1 / 1;--tilt:1.2deg;--ph:#7e887f">
+        <button type="button" data-lightbox-open="3">
+          <picture class="src"><source type="image/webp" srcset="media/drink-coolers-square-300.webp 300w, media/drink-coolers-square-480.webp 480w, media/drink-coolers-square-637.webp 637w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/drink-coolers-square-480.jpg" srcset="media/drink-coolers-square-300.jpg 300w, media/drink-coolers-square-480.jpg 480w, media/drink-coolers-square-637.jpg 637w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="637" height="637" alt="Three tall iced drinks side by side — a dark berry one topped with blackberries, a red one, and a bright blue one with lime and a sour sweet garnish — against the café’s white-flower wall." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: Three tall iced drinks side by side — a dark berry one toppe…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="4"
+             style="--cols:2;--ar:1 / 1;--tilt:2.4deg;--ph:#908a70">
+        <button type="button" data-lightbox-open="4">
+          <picture class="src"><source type="image/webp" srcset="media/food-avocado-eggs-square-300.webp 300w, media/food-avocado-eggs-square-480.webp 480w, media/food-avocado-eggs-square-636.webp 636w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/food-avocado-eggs-square-480.jpg" srcset="media/food-avocado-eggs-square-300.jpg 300w, media/food-avocado-eggs-square-480.jpg 480w, media/food-avocado-eggs-square-636.jpg 636w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="636" height="636" alt="Two poached eggs dusted with paprika on crushed avocado toast, with a dressed side salad, on a deep blue glazed oval plate set on marble." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: Two poached eggs dusted with paprika on crushed avocado toas…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="5"
+             style="--cols:2;--ar:2 / 3;--tilt:-1.6deg;--ph:#766d51">
+        <button type="button" data-lightbox-open="5">
+          <picture class="src"><source type="image/webp" srcset="media/drink-coffee-smoothie-portrait-320.webp 320w, media/drink-coffee-smoothie-portrait-520.webp 520w, media/drink-coffee-smoothie-portrait-638.webp 638w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/drink-coffee-smoothie-portrait-520.jpg" srcset="media/drink-coffee-smoothie-portrait-320.jpg 320w, media/drink-coffee-smoothie-portrait-520.jpg 520w, media/drink-coffee-smoothie-portrait-638.jpg 638w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="638" height="798" alt="An iced coffee and a green smoothie in handled glass jars with red striped straws, in front of the café’s foliage wall and orange neon Hackberries sign." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: An iced coffee and a green smoothie in handled glass jars wi…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="6"
+             style="--cols:2;--ar:2 / 3;--tilt:2deg;--ph:#7f7a52">
+        <button type="button" data-lightbox-open="6">
+          <picture class="src"><source type="image/webp" srcset="media/drink-smoothies-portrait-320.webp 320w, media/drink-smoothies-portrait-520.webp 520w, media/drink-smoothies-portrait-592.webp 592w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/drink-smoothies-portrait-520.jpg" srcset="media/drink-smoothies-portrait-320.jpg 320w, media/drink-smoothies-portrait-520.jpg 520w, media/drink-smoothies-portrait-592.jpg 592w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="592" height="740" alt="A berry smoothie topped with a blackberry and raspberry beside a green smoothie garnished with orange and mint, both in handled glass jars on a marble table dressed with fresh flowers." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: A berry smoothie topped with a blackberry and raspberry besi…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="7"
+             style="--cols:2;--ar:2 / 3;--tilt:-1.8deg;--ph:#bdb477">
+        <button type="button" data-lightbox-open="7">
+          <picture class="src"><source type="image/webp" srcset="media/food-omelette-portrait-320.webp 320w, media/food-omelette-portrait-520.webp 520w, media/food-omelette-portrait-600.webp 600w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"><img src="media/food-omelette-portrait-520.jpg" srcset="media/food-omelette-portrait-320.jpg 320w, media/food-omelette-portrait-520.jpg 520w, media/food-omelette-portrait-600.jpg 600w" sizes="(min-width: 64rem) 29vw, (min-width: 48rem) 30vw, 46vw"
+     width="600" height="750" alt="A folded omelette scattered with chives and paprika on a long white plate, with toasted bread and a dressed side salad, on a marble table." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: A folded omelette scattered with chives and paprika on a lon…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="8"
+             style="--cols:3;--ar:3 / 2;--tilt:1.5deg;--ph:#815139">
+        <button type="button" data-lightbox-open="8">
+          <picture class="src"><source type="image/webp" srcset="media/drink-strawberry-landscape-420.webp 420w, media/drink-strawberry-landscape-627.webp 627w" sizes="(min-width: 64rem) 44vw, (min-width: 48rem) 30vw, 46vw"><img src="media/drink-strawberry-landscape-627.jpg" srcset="media/drink-strawberry-landscape-420.jpg 420w, media/drink-strawberry-landscape-627.jpg 627w" sizes="(min-width: 64rem) 44vw, (min-width: 48rem) 30vw, 46vw"
+     width="627" height="418" alt="A frozen strawberry drink served in a martini glass with mint, lime and a paper parasol, with the café’s teal banquettes behind it." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: A frozen strawberry drink served in a martini glass with min…</span>
+        </button>
+      </figure>
+      <figure class="print" data-print="9"
+             style="--cols:3;--ar:3 / 2;--tilt:-2.4deg;--ph:#7f5229">
+        <button type="button" data-lightbox-open="9">
+          <picture class="src"><source type="image/webp" srcset="media/drink-iced-latte-landscape-420.webp 420w, media/drink-iced-latte-landscape-635.webp 635w" sizes="(min-width: 64rem) 44vw, (min-width: 48rem) 30vw, 46vw"><img src="media/drink-iced-latte-landscape-635.jpg" srcset="media/drink-iced-latte-landscape-420.jpg 420w, media/drink-iced-latte-landscape-635.jpg 635w" sizes="(min-width: 64rem) 44vw, (min-width: 48rem) 30vw, 46vw"
+     width="635" height="423" alt="Three iced lattes in handled glass jars, the espresso layered over milk, on a dark marble counter." loading="lazy"
+     decoding="async"></picture>
+          <span class="visually-hidden">Open larger: Three iced lattes in handled glass jars, the espresso layere…</span>
+        </button>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true"
+     aria-label="Photo viewer" hidden>
+  <div class="lightbox-bar">
+    <p class="lightbox-count"><span data-lb-index>1</span> / 10</p>
+    <button class="icon-btn" type="button" id="lb-close" aria-label="Close photo viewer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="lightbox-stage">
+    <img data-lb-img src="" alt="" width="640" height="640">
+  </div>
+  <div class="lightbox-foot">
+    <p class="lightbox-caption" data-lb-caption></p>
+    <div class="lightbox-nav">
+      <button class="icon-btn" type="button" id="lb-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="icon-btn" type="button" id="lb-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</div>
+<section class="section section-band" id="contact-us" aria-labelledby="contact-us-h">
+  <div class="shell">
+    <div class="section-head" data-reveal="drop">
+      <p class="eyebrow">Get in touch</p>
+      <h2 id="contact-us-h" data-lines>
+        <span class="line"><span>Let's find you</span></span>
+        <span class="line"><span>a table.</span></span>
+      </h2>
+      <p class="lead muted prose">
+        A table request, a question or a private hire enquiry — pick
+        whichever fits and it goes straight to the café.
+      </p>
+    </div>
+    <ul class="c-options" data-reveal-group="fan">
+      <li>
+        <a class="c-option" href="contact.html#book" data-contact-open="book">
+          <span class="c-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2M8 17.5h2"/></svg></span>
+          <h3 class="c-option-title">Book a table</h3>
+          <p class="c-option-text">Tell us the day, the time and how many of you. The café confirms by phone or email.</p>
+          <span class="c-option-go">Request a table <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </li>
+      <li>
+        <a class="c-option" href="contact.html#message" data-contact-open="message">
+          <span class="c-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.8a8 8 0 1 1 15.5-3.7z"/><path d="M8.5 11.5h.01M12.5 11.5h.01M16.5 11.5h.01"/></svg></span>
+          <h3 class="c-option-title">Send a message</h3>
+          <p class="c-option-text">Questions, allergens and dietary needs, feedback, something left behind — anything else.</p>
+          <span class="c-option-go">Write to us <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </li>
+      <li>
+        <a class="c-option" href="contact.html#private-hire" data-contact-open="private-hire">
+          <span class="c-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20.5l4.5-13 8 8z"/><path d="M13.5 3.5c.5 1.5 0 3-1 4M20.5 10.5c-1.5-.5-3 0-4 1M17 4.5l.01.01M19.5 7l.01.01M21 3l.01.01"/></svg></span>
+          <h3 class="c-option-title">Private hire</h3>
+          <p class="c-option-text">Birthdays, showers, family gatherings and work lunches — parties of 12 or more.</p>
+          <span class="c-option-go">Plan an event <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </li>
+    </ul>
+    <p class="contact-teaser-foot">
+      <a class="btn btn-secondary" href="contact.html">All contact options <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      <span class="small muted">or call <a href="tel:+441992910057">01992 910057</a></span>
+    </p>
+  </div>
+</section>
+<section class="section" id="visit" aria-labelledby="visit-h">
+  <div class="shell">
+    <div class="section-head" data-reveal="drop">
+      <p class="eyebrow">Visit us</p>
+      <h2 id="visit-h" data-lines>
+        <span class="line"><span>Windmill Lane,</span></span>
+        <span class="line"><span>Cheshunt.</span></span>
+      </h2>
+      <p class="brew-aside" data-reveal="fade" style="--rv-delay: 420ms">
+        <span class="brew-aside-bean" aria-hidden="true"><svg class="bean-svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><radialGradient id="aside-bean" cx="0.36" cy="0.3" r="0.82">
+      <stop offset="0" style="stop-color:var(--brew-bean-hi)"/><stop offset="0.52" style="stop-color:var(--brew-bean)"/><stop offset="1" style="stop-color:var(--brew-bean-deep)"/>
+    </radialGradient></defs>
+    <g transform="rotate(-32 16 16)">
+      <ellipse class="bean-shade" cx="16.6" cy="17" rx="10.4" ry="13.4"/>
+      <ellipse class="bean-body" cx="16" cy="16" rx="10.4" ry="13.4" fill="url(#aside-bean)"/>
+      <path class="bean-crease" d="M16.7 3.3c-3.7 3.4-4 8-.9 12.6 3 4.7 2.7 9.2-.7 13"/>
+      <path class="bean-crease-hi" d="M18.3 5c-2.7 3.1-2.8 7-.3 10.9 2.5 3.9 2.3 7.6-.1 10.8"/>
+      <ellipse class="bean-shine" cx="11.2" cy="10.2" rx="2.2" ry="4.3" transform="rotate(14 11.2 10.2)"/>
+    </g>
+  </svg></span>
+        <span>Your coffee break is getting closer.</span>
+      </p>
+    </div>
+
+    <div class="visit-grid">
+      <dl class="visit-facts" data-reveal="left">
+        <div class="fact">
+          <dt>Address <span class="tbc">To confirm</span></dt>
+          <dd>
+            <address>
+              190 Windmill Lane<br>
+              Cheshunt, Waltham Cross<br>
+              EN8 9AF
+            </address>
+          </dd>
+        </div>
+
+        <div class="fact">
+          <dt>Opening hours <span class="tbc">To confirm</span></dt>
+          <dd>
+            <ul class="hours-list">
+              <li><span class="days">Monday to Friday</span><span class="leader" aria-hidden="true"></span><span class="time">07:00–17:00</span></li>
+              <li><span class="days">Saturday and Sunday</span><span class="leader" aria-hidden="true"></span><span class="time">08:00–17:00</span></li>
+            </ul>
+            <p class="small muted" style="margin-top:.75rem">Taken from a public profile listing. Please call ahead if you are making a special trip.</p>
+          </dd>
+        </div>
+
+        <div class="fact">
+          <dt>Telephone <span class="tbc">To confirm</span></dt>
+          <dd><a href="tel:+441992910057">01992 910057</a></dd>
+        </div>
+
+        <p class="visit-note">
+          <strong>Parking.</strong> A public listing mentions free customer parking.
+          Conditions not yet confirmed - please check on arrival.
+        </p>
+
+        <div class="visit-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Hackberries%2C%20190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF" target="_blank" rel="noopener">
+            Open in Maps <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-secondary" href="contact.html#book" data-contact-open="book">
+            Request a table
+          </a>
+        </div>
+        <p class="small muted">
+          Table requests are confirmed by the café by phone or email. In a hurry?
+          Call <a href="tel:+441992910057">01992 910057</a>.
+        </p>
+      </dl>
+
+      <div class="visit-media" data-reveal="right">
+        <picture class="frame visit-photo" style="--ph:#796e5b;">
+  <source type="image/webp" srcset="media/venue-room-landscape-420.webp 420w, media/venue-room-landscape-640.webp 640w, media/venue-room-landscape-757.webp 757w" sizes="(min-width: 64rem) 40rem, 92vw">
+  <img src="media/venue-room-landscape-640.jpg" srcset="media/venue-room-landscape-420.jpg 420w, media/venue-room-landscape-640.jpg 640w, media/venue-room-landscape-757.jpg 757w" sizes="(min-width: 64rem) 40rem, 92vw"
+       width="757" height="505" alt="Inside Hackberries: marble-topped tables with green and blue velvet chairs and banquettes, rattan pendant lights, an exposed brick wall and a foliage wall hung with white flowers."
+       loading="lazy" decoding="async">
+</picture>
+
+        <div class="map-slot" id="map-slot"
+             data-map-src="https://www.google.com/maps?q=190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF&output=embed">
+          <div class="map-invite">
+            <p class="small muted">
+              A map is not loaded until you ask, so nothing third-party runs on this
+              page by default.
+            </p>
+            <button class="btn btn-secondary" type="button" id="map-load">Load map</button>
+            <p class="small muted">Loads an embedded Google map.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="dock" id="dock" aria-label="Section navigation">
+  <span class="dock-indicator" id="dock-indicator" aria-hidden="true"></span>
+  <a href="#the-cafe" data-dock-link="the-cafe" style="--i:0">
+    <span class="dot" aria-hidden="true"></span>The café
+    <span class="dock-idx" aria-hidden="true">01</span>
+  </a>
+  <a href="#gallery" data-dock-link="gallery" style="--i:1">
+    <span class="dot" aria-hidden="true"></span>Gallery
+    <span class="dock-idx" aria-hidden="true">02</span>
+  </a>
+  <a href="#contact-us" data-dock-link="contact-us" style="--i:2">
+    <span class="dot" aria-hidden="true"></span>Contact us
+    <span class="dock-idx" aria-hidden="true">03</span>
+  </a>
+  <a href="#visit" data-dock-link="visit" style="--i:3">
+    <span class="dot" aria-hidden="true"></span>Visit us
+    <span class="dock-idx" aria-hidden="true">04</span>
+  </a>
+  <a class="dock-cta" href="menu.html" style="--i:4">View menu<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+</nav>
+<nav class="utility-strip" id="utility-strip" aria-label="Quick actions">
+  <a href="menu.html" class="is-primary" style="--i:0"><span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M8 7h8M8 11h6"/></svg></span><span>Menu</span></a>
+  <a href="contact.html#book" data-contact-open="book" style="--i:1"><span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2M8 17.5h2"/></svg></span><span>Book</span></a>
+  <a href="tel:+441992910057" style="--i:2"><span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><span>Call</span></a>
+  <a href="https://www.google.com/maps/search/?api=1&amp;query=Hackberries%2C%20190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF" target="_blank" rel="noopener" style="--i:3"><span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Directions</span></a>
+</nav>
+<footer class="site-footer u-dark leafy">
+  <div class="shell">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h2>Find us</h2>
+        <address>
+          190 Windmill Lane<br>
+          Cheshunt<br>
+          Waltham Cross EN8 9AF
+        </address>
+        <ul style="margin-top:1rem">
+          <li><a href="tel:+441992910057">01992 910057</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Hackberries%2C%20190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF" target="_blank" rel="noopener">Open in Maps</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Opening hours</h2>
+        <ul>
+          <li>Monday to Friday<br><strong>07:00–17:00</strong></li>
+          <li>Saturday and Sunday<br><strong>08:00–17:00</strong></li>
+        </ul>
+        <p class="small muted" style="margin-top:.75rem">From a public listing. <span class="tbc">To confirm</span></p>
+      </div>
+      <div class="footer-col">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="#the-cafe">The café</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact-us">Contact us</a></li>
+          <li><a href="#visit">Visit us</a></li>
+          <li><a href="contact.html">All contact options</a></li>
+          <li><a href="contact.html#book" data-contact-open="book">Book a table</a></li>
+          <li><a href="contact.html#private-hire" data-contact-open="private-hire">Private hire</a></li>
+        </ul>
+        <h2 style="margin-top:1.5rem">Follow</h2>
+        <ul>
+        <li><a href="https://www.instagram.com/_hackberries/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>&nbsp;@_hackberries</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="coffee-break" id="coffee-break">
+      <button class="coffee-btn" type="button" id="coffee-btn"
+              aria-describedby="coffee-status">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M6 2.5v2M10 2.5v2M14 2.5v2"/></svg><span>A little coffee break</span>
+      </button>
+      <button class="coffee-btn" type="button" id="coffee-clear" hidden>Clear</button>
+      <p class="coffee-status" id="coffee-status" role="status"></p>
+      <div class="bean-field" id="bean-field" aria-hidden="true"></div>
+    </div>
+
+    <p class="footer-wordmark" aria-hidden="true">Hackberries</p>
+
+    <section class="brew-payoff" aria-labelledby="brew-payoff-h">
+      <div class="brew-payoff-copy">
+        <p class="eyebrow">Bean to brew</p>
+        <h2 class="brew-payoff-title" id="brew-payoff-h">That’s your sign for a coffee break.</h2>
+        <p class="lead brew-payoff-lead">Come and find your favourite at Hackberries.</p>
+        <div class="brew-payoff-actions">
+          <a class="btn" href="menu.html">View menu <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=Hackberries%2C%20190%20Windmill%20Lane%2C%20Cheshunt%2C%20Waltham%20Cross%20EN8%209AF" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+      <!-- data-state="brewed" is the no-JavaScript state: the finished cup.
+           scripts/brew.js empties it long before it is scrolled into view. -->
+      <div class="brew-payoff-art" id="brew-art" data-state="brewed">
+        <svg class="brew-cup-svg" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="fc-bean" cx="0.36" cy="0.3" r="0.82">
+      <stop offset="0" style="stop-color:var(--brew-bean-hi)"/><stop offset="0.52" style="stop-color:var(--brew-bean)"/><stop offset="1" style="stop-color:var(--brew-bean-deep)"/>
+    </radialGradient>
+    <linearGradient id="fc-porcelain" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" style="stop-color:var(--brew-porcelain-shade)"/><stop offset="0.34" style="stop-color:var(--brew-porcelain)"/><stop offset="0.7" style="stop-color:var(--brew-porcelain)"/><stop offset="1" style="stop-color:var(--brew-porcelain-shade)"/>
+    </linearGradient>
+    <radialGradient id="fc-crema" cx="0.46" cy="0.42" r="0.62">
+      <stop offset="0" style="stop-color:var(--brew-crema-hi)"/><stop offset="0.55" style="stop-color:var(--brew-crema)"/><stop offset="1" style="stop-color:var(--brew-coffee)"/>
+    </radialGradient>
+    <clipPath id="fc-inside"><ellipse cx="120" cy="99" rx="56" ry="16.5"/></clipPath>
+    <clipPath id="fc-mouth">
+      <rect x="0" y="0" width="240" height="99"/>
+      <ellipse cx="120" cy="99" rx="56" ry="16.5"/>
+    </clipPath>
+    <clipPath id="fc-body">
+      <path d="M56 98h128c0 52-14 96-50 102h-28c-36-6-50-50-50-102z"/>
+    </clipPath>
+  </defs>
+
+  <g class="bc-backdrop">
+    <circle class="bc-disc" cx="120" cy="126" r="104"/>
+    <circle class="bc-disc-ring" cx="120" cy="126" r="92"/>
+    <g class="bc-sprig bc-sprig-left">
+      <path class="bc-sprig-stem" d="M34 176c10-22 22-40 40-54"/>
+      <path class="bc-sprig-leaf" d="M44 156c-12-2-18-12-16-24 12 1 18 11 16 24z"/>
+      <path class="bc-sprig-leaf" d="M58 138c-2-12 5-21 17-24 2 12-5 21-17 24z"/>
+    </g>
+    <g class="bc-sprig bc-sprig-right">
+      <path class="bc-sprig-stem" d="M214 150c-8-18-20-30-36-38"/>
+      <path class="bc-sprig-leaf" d="M204 134c12-4 16-15 12-26-12 3-16 14-12 26z"/>
+    </g>
+  </g>
+
+  <g class="bc-cup">
+    <ellipse class="bc-shadow" cx="120" cy="212" rx="90" ry="12"/>
+    <ellipse class="bc-saucer" cx="120" cy="204" rx="92" ry="17"/>
+    <ellipse class="bc-saucer-in" cx="120" cy="201" rx="54" ry="8.5"/>
+    <path class="bc-handle" d="M178 116c26-8 40 10 32 30-6 15-22 20-38 20"/>
+    <path class="bc-body" fill="url(#fc-porcelain)" d="M56 98h128c0 52-14 96-50 102h-28c-36-6-50-50-50-102z"/>
+    <g clip-path="url(#fc-body)">
+      <rect class="bc-band" x="40" y="134" width="160" height="13"/>
+      <rect class="bc-band-thin" x="40" y="152" width="160" height="3"/>
+    </g>
+    <ellipse class="bc-rim" cx="120" cy="98" rx="64" ry="20"/>
+    <ellipse class="bc-inside" cx="120" cy="99" rx="56" ry="16.5"/>
+
+    <g clip-path="url(#fc-inside)">
+      <g class="bc-coffee">
+        <ellipse class="bc-surface" cx="120" cy="100" rx="56" ry="16.5" fill="url(#fc-crema)"/>
+        <g transform="translate(118 100) scale(1 0.6)">
+          <g class="bc-art"><path class="bc-art-foam" d="M-40 0C-36-26 6-28 30 0 6 28-36 26-40 0z"/><path class="bc-art-line" pathLength="1" style="--k:0" d="M-33 -19Q-21 0 -33 19"/><path class="bc-art-line" pathLength="1" style="--k:1" d="M-23 -19Q-11 0 -23 19"/><path class="bc-art-line" pathLength="1" style="--k:2" d="M-13 -17Q-1 0 -13 17"/><path class="bc-art-line" pathLength="1" style="--k:3" d="M-3 -14Q9 0 -3 14"/><path class="bc-art-line" pathLength="1" style="--k:4" d="M6 -10.5Q18 0 6 10.5"/><path class="bc-art-line" pathLength="1" style="--k:5" d="M14 -6.5Q26 0 14 6.5"/><path class="bc-art-line bc-art-stem" pathLength="1" style="--k:6" d="M-36 0H27"/></g>
+        </g>
+      </g>
+      <ellipse class="bc-splash" cx="120" cy="101" rx="22" ry="6"/>
+    </g>
+
+    <g clip-path="url(#fc-mouth)">
+      <g class="bc-drop">
+        <g transform="translate(96 14) scale(1.5)"><g transform="rotate(-32 16 16)">
+      <ellipse class="bean-shade" cx="16.6" cy="17" rx="10.4" ry="13.4"/>
+      <ellipse class="bean-body" cx="16" cy="16" rx="10.4" ry="13.4" fill="url(#fc-bean)"/>
+      <path class="bean-crease" d="M16.7 3.3c-3.7 3.4-4 8-.9 12.6 3 4.7 2.7 9.2-.7 13"/>
+      <path class="bean-crease-hi" d="M18.3 5c-2.7 3.1-2.8 7-.3 10.9 2.5 3.9 2.3 7.6-.1 10.8"/>
+      <ellipse class="bean-shine" cx="11.2" cy="10.2" rx="2.2" ry="4.3" transform="rotate(14 11.2 10.2)"/>
+    </g></g>
+      </g>
+    </g>
+  </g>
+
+  <g class="bc-steam">
+    <path class="bc-steam-line" style="--k:0" pathLength="1" d="M98 76c-10-10-2-20 4-26 7-7 6-16-2-24"/>
+    <path class="bc-steam-line" style="--k:1" pathLength="1" d="M122 70c-9-12 1-22 7-28 6-7 4-17-3-26"/>
+    <path class="bc-steam-line" style="--k:2" pathLength="1" d="M145 78c-8-9-1-17 4-22 6-6 5-13-1-19"/>
+  </g>
+</svg>
+        <button class="brew-again" type="button" id="brew-again" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          <span>Brew again</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="footer-bar">
+      <p>
+        Website concept for Hackberries, Cheshunt.
+        <strong>Unpublished preview — not for public release.</strong>
+      </p>
+      <a class="to-top" href="#top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M12 19V5M6 11l6-6 6 6"/></svg> Back to top</a>
+    </div>
+  </div>
+</footer>
+<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title"
+        data-hours="[[[1,2,3,4,5],&quot;07:00&quot;,&quot;17:00&quot;],[[6,0],&quot;08:00&quot;,&quot;17:00&quot;]]" data-last-slot="60"
+        data-hire-from="12" data-endpoint=""
+        data-phone="01992 910057">
+  <div class="contact-sheet">
+    <div class="contact-head">
+      <div>
+        <h2 class="contact-title" id="contact-title">Get in touch</h2>
+        <p class="contact-sub">Straight to the café. No email app needed.</p>
+      </div>
+      <button class="contact-close" type="button" data-contact-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <p class="cf-preview" role="note"><strong>Preview.</strong>
+      These forms are not connected yet, so nothing is sent. Add the Web3Forms
+      Access Key in site/data/business.mjs to switch them on.</p>
+    <div class="contact-tabs" role="tablist" aria-label="What would you like to do?">
+      <span class="contact-tabs-thumb" aria-hidden="true"></span>
+      <button class="contact-tab" type="button" role="tab"
+              id="contact-tab-book" aria-controls="book" aria-selected="true"
+              tabindex="0" data-contact-tab="book">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2M8 17.5h2"/></svg><span>Book a table</span>
+      </button>
+      <button class="contact-tab" type="button" role="tab"
+              id="contact-tab-message" aria-controls="message" aria-selected="false"
+              tabindex="-1" data-contact-tab="message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.8a8 8 0 1 1 15.5-3.7z"/><path d="M8.5 11.5h.01M12.5 11.5h.01M16.5 11.5h.01"/></svg><span>Send a message</span>
+      </button>
+      <button class="contact-tab" type="button" role="tab"
+              id="contact-tab-private-hire" aria-controls="private-hire" aria-selected="false"
+              tabindex="-1" data-contact-tab="private-hire">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20.5l4.5-13 8 8z"/><path d="M13.5 3.5c.5 1.5 0 3-1 4M20.5 10.5c-1.5-.5-3 0-4 1M17 4.5l.01.01M19.5 7l.01.01M21 3l.01.01"/></svg><span>Private hire</span>
+      </button>
+    </div>
+    <div class="contact-panel" role="tabpanel" id="book"
+         aria-labelledby="contact-tab-book" data-contact-panel="book">
+      <h3 class="cf-panel-title">Book a table</h3>
+      <form class="contact-form" data-contact-form="book"
+            action="#" method="POST">
+        <input type="hidden" name="access_key" value="">
+        <input type="hidden" name="subject" value="Table request — Hackberries website">
+        <input type="hidden" name="from_name" value="Hackberries website">
+        <input type="hidden" name="enquiry" value="Table request">
+        <!-- Honeypot: Web3Forms silently drops any submission where this
+             checkbox is checked. A real, but off-screen, form control - never
+             merely visually hidden - so it is not in the tab order and a
+             screen reader has nothing to announce. -->
+        <input class="cf-trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="cf-required-note small muted">Fields marked <span class="cf-req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+        <div class="cf-grid">
+        <div class="cf-field">
+          <label class="cf-label" for="cf-book-name">Your name <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="text" id="cf-book-name" name="name" required
+            aria-describedby="cf-book-name-err" data-share="name" autocomplete="name" placeholder="Jane Smith">
+          
+          <p class="cf-error" id="cf-book-name-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-book-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="email" id="cf-book-email" name="email" required
+            aria-describedby="cf-book-email-err" data-share="email" autocomplete="email" placeholder="jane@example.com">
+          
+          <p class="cf-error" id="cf-book-email-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-book-phone">Phone <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="tel" id="cf-book-phone" name="phone" required
+            aria-describedby="cf-book-phone-err" data-share="phone" inputmode="tel" pattern="[0-9 +\(\)\-]{10,20}" autocomplete="tel" placeholder="07700 900000">
+          
+          <p class="cf-error" id="cf-book-phone-err" hidden></p>
+        </div>
+        <div class="cf-row-3 cf-span-2">
+        <div class="cf-field">
+          <label class="cf-label" for="cf-book-date">Date <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="date" id="cf-book-date" name="date" required
+            aria-describedby="cf-book-date-err" data-date>
+          
+          <p class="cf-error" id="cf-book-date-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-book-time"><svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Time <span class="cf-req" aria-hidden="true">*</span></label>
+          <select class="cf-input cf-select" id="cf-book-time" name="time" required
+            aria-describedby="cf-book-time-err" data-time>
+            <option value="">Select…</option>
+            <option value="07:00">7am</option>
+            <option value="07:30">7:30am</option>
+            <option value="08:00">8am</option>
+            <option value="08:30">8:30am</option>
+            <option value="09:00">9am</option>
+            <option value="09:30">9:30am</option>
+            <option value="10:00">10am</option>
+            <option value="10:30">10:30am</option>
+            <option value="11:00">11am</option>
+            <option value="11:30">11:30am</option>
+            <option value="12:00">12pm</option>
+            <option value="12:30">12:30pm</option>
+            <option value="13:00">1pm</option>
+            <option value="13:30">1:30pm</option>
+            <option value="14:00">2pm</option>
+            <option value="14:30">2:30pm</option>
+            <option value="15:00">3pm</option>
+            <option value="15:30">3:30pm</option>
+            <option value="16:00">4pm</option>
+          </select>
+          
+          <p class="cf-error" id="cf-book-time-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-book-guests">Guests <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="number" id="cf-book-guests" name="guests" required
+            aria-describedby="cf-book-guests-err" min="1" max="11" step="1" inputmode="numeric" data-guests placeholder="2">
+          
+          <p class="cf-error" id="cf-book-guests-err" hidden></p>
+        </div>
+        </div>
+        <p class="cf-switch-note cf-span-2 small muted">Party of 12 or more?
+          <a href="#private-hire" data-contact-switch="private-hire">Ask about private hire</a>.</p>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-book-requests">Special requests</label>
+          <textarea class="cf-input cf-textarea" rows="3" id="cf-book-requests" name="requests"
+            aria-describedby="cf-book-requests-err" placeholder="Allergies, a high chair, celebrating something…"></textarea>
+          
+          <p class="cf-error" id="cf-book-requests-err" hidden></p>
+        </div>
+        </div>
+        <p class="cf-alert" role="alert" data-contact-alert hidden></p>
+        <button class="btn cf-submit" type="submit">
+          <span data-submit-label>Request a table</span> <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="cf-foot small muted">This is a request, not a confirmed booking — the café will get back to you. Prefer to talk? Call <a href="tel:+441992910057">01992 910057</a>.</p>
+      </form>
+      <div class="cf-done" data-contact-done="book" tabindex="-1" hidden>
+        <span class="cf-done-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h3 class="cf-done-title">Request sent</h3>
+        <p class="cf-done-text" data-done-text></p>
+        <div class="cf-done-actions">
+          <button class="btn" type="button" data-contact-close>Done</button>
+          <button class="btn btn-secondary" type="button" data-contact-again>Send another</button>
+        </div>
+      </div>
+    </div>
+    <div class="contact-panel" role="tabpanel" id="message"
+         aria-labelledby="contact-tab-message" data-contact-panel="message">
+      <h3 class="cf-panel-title">Send a message</h3>
+      <form class="contact-form" data-contact-form="message"
+            action="#" method="POST">
+        <input type="hidden" name="access_key" value="">
+        <input type="hidden" name="subject" value="Message — Hackberries website">
+        <input type="hidden" name="from_name" value="Hackberries website">
+        <input type="hidden" name="enquiry" value="Message">
+        <!-- Honeypot: Web3Forms silently drops any submission where this
+             checkbox is checked. A real, but off-screen, form control - never
+             merely visually hidden - so it is not in the tab order and a
+             screen reader has nothing to announce. -->
+        <input class="cf-trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="cf-required-note small muted">Fields marked <span class="cf-req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+        <div class="cf-grid">
+        <div class="cf-field">
+          <label class="cf-label" for="cf-message-name">Your name <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="text" id="cf-message-name" name="name" required
+            aria-describedby="cf-message-name-err" data-share="name" autocomplete="name" placeholder="Jane Smith">
+          
+          <p class="cf-error" id="cf-message-name-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-message-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="email" id="cf-message-email" name="email" required
+            aria-describedby="cf-message-email-err" data-share="email" autocomplete="email" placeholder="jane@example.com">
+          
+          <p class="cf-error" id="cf-message-email-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-message-phone">Phone (optional)</label>
+          <input class="cf-input" type="tel" id="cf-message-phone" name="phone"
+            aria-describedby="cf-message-phone-err" data-share="phone" inputmode="tel" pattern="[0-9 +\(\)\-]{10,20}" autocomplete="tel" placeholder="07700 900000">
+          
+          <p class="cf-error" id="cf-message-phone-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-message-topic">What is it about? <span class="cf-req" aria-hidden="true">*</span></label>
+          <select class="cf-input cf-select" id="cf-message-topic" name="topic" required
+            aria-describedby="cf-message-topic-err">
+            <option value="">Choose…</option>
+            <option value="General question">General question</option>
+            <option value="Allergens and dietary needs">Allergens and dietary needs</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Lost property">Lost property</option>
+            <option value="Something else">Something else</option>
+          </select>
+          
+          <p class="cf-error" id="cf-message-topic-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-message-message">Message <span class="cf-req" aria-hidden="true">*</span></label>
+          <textarea class="cf-input cf-textarea" rows="5" id="cf-message-message" name="message" required
+            aria-describedby="cf-message-message-err" minlength="10" placeholder="How can we help?"></textarea>
+          
+          <p class="cf-error" id="cf-message-message-err" hidden></p>
+        </div>
+        </div>
+        <p class="cf-alert" role="alert" data-contact-alert hidden></p>
+        <button class="btn cf-submit" type="submit">
+          <span data-submit-label>Send message</span> <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="cf-foot small muted">We read every message and reply by email. For anything on the day, call <a href="tel:+441992910057">01992 910057</a>.</p>
+      </form>
+      <div class="cf-done" data-contact-done="message" tabindex="-1" hidden>
+        <span class="cf-done-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h3 class="cf-done-title">Message sent</h3>
+        <p class="cf-done-text" data-done-text></p>
+        <div class="cf-done-actions">
+          <button class="btn" type="button" data-contact-close>Done</button>
+          <button class="btn btn-secondary" type="button" data-contact-again>Send another</button>
+        </div>
+      </div>
+    </div>
+    <div class="contact-panel" role="tabpanel" id="private-hire"
+         aria-labelledby="contact-tab-private-hire" data-contact-panel="private-hire">
+      <h3 class="cf-panel-title">Private hire</h3>
+      <form class="contact-form" data-contact-form="private-hire"
+            action="#" method="POST">
+        <input type="hidden" name="access_key" value="">
+        <input type="hidden" name="subject" value="Private hire enquiry — Hackberries website">
+        <input type="hidden" name="from_name" value="Hackberries website">
+        <input type="hidden" name="enquiry" value="Private hire">
+        <!-- Honeypot: Web3Forms silently drops any submission where this
+             checkbox is checked. A real, but off-screen, form control - never
+             merely visually hidden - so it is not in the tab order and a
+             screen reader has nothing to announce. -->
+        <input class="cf-trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="cf-required-note small muted">Fields marked <span class="cf-req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+        <div class="cf-grid">
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-name">Your name <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="text" id="cf-private-hire-name" name="name" required
+            aria-describedby="cf-private-hire-name-err" data-share="name" autocomplete="name" placeholder="Jane Smith">
+          
+          <p class="cf-error" id="cf-private-hire-name-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="email" id="cf-private-hire-email" name="email" required
+            aria-describedby="cf-private-hire-email-err" data-share="email" autocomplete="email" placeholder="jane@example.com">
+          
+          <p class="cf-error" id="cf-private-hire-email-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-private-hire-phone">Phone <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="tel" id="cf-private-hire-phone" name="phone" required
+            aria-describedby="cf-private-hire-phone-err" data-share="phone" inputmode="tel" pattern="[0-9 +\(\)\-]{10,20}" autocomplete="tel" placeholder="07700 900000">
+          
+          <p class="cf-error" id="cf-private-hire-phone-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-occasion">Occasion <span class="cf-req" aria-hidden="true">*</span></label>
+          <select class="cf-input cf-select" id="cf-private-hire-occasion" name="occasion" required
+            aria-describedby="cf-private-hire-occasion-err">
+            <option value="">Choose…</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Baby shower">Baby shower</option>
+            <option value="Christening or family gathering">Christening or family gathering</option>
+            <option value="Work breakfast or lunch">Work breakfast or lunch</option>
+            <option value="Something else">Something else</option>
+          </select>
+          
+          <p class="cf-error" id="cf-private-hire-occasion-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-date">Preferred date <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="date" id="cf-private-hire-date" name="date" required
+            aria-describedby="cf-private-hire-date-err" data-date>
+          
+          <p class="cf-error" id="cf-private-hire-date-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-time_of_day">Time of day <span class="cf-req" aria-hidden="true">*</span></label>
+          <select class="cf-input cf-select" id="cf-private-hire-time_of_day" name="time_of_day" required
+            aria-describedby="cf-private-hire-time_of_day-err">
+            <option value="">Choose…</option>
+            <option value="Morning">Morning</option>
+            <option value="Lunchtime">Lunchtime</option>
+            <option value="Afternoon">Afternoon</option>
+            <option value="Flexible">Flexible</option>
+          </select>
+          
+          <p class="cf-error" id="cf-private-hire-time_of_day-err" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cf-private-hire-guests">Guests (approx.) <span class="cf-req" aria-hidden="true">*</span></label>
+          <input class="cf-input" type="number" id="cf-private-hire-guests" name="guests" required
+            aria-describedby="cf-private-hire-guests-err" min="1" max="200" step="1" inputmode="numeric" placeholder="20">
+          
+          <p class="cf-error" id="cf-private-hire-guests-err" hidden></p>
+        </div>
+        <div class="cf-field cf-span-2">
+          <label class="cf-label" for="cf-private-hire-details">Tell us about it</label>
+          <textarea class="cf-input cf-textarea" rows="4" id="cf-private-hire-details" name="details"
+            aria-describedby="cf-private-hire-details-err" placeholder="Food and drinks you would like, decorations, a cake, budget, accessibility…"></textarea>
+          
+          <p class="cf-error" id="cf-private-hire-details-err" hidden></p>
+        </div>
+        </div>
+        <p class="cf-alert" role="alert" data-contact-alert hidden></p>
+        <button class="btn cf-submit" type="submit">
+          <span data-submit-label>Send enquiry</span> <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="cf-foot small muted">Tell us roughly what you have in mind and the café will come back with what is possible. Or call <a href="tel:+441992910057">01992 910057</a>.</p>
+      </form>
+      <div class="cf-done" data-contact-done="private-hire" tabindex="-1" hidden>
+        <span class="cf-done-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h3 class="cf-done-title">Enquiry sent</h3>
+        <p class="cf-done-text" data-done-text></p>
+        <div class="cf-done-actions">
+          <button class="btn" type="button" data-contact-close>Done</button>
+          <button class="btn btn-secondary" type="button" data-contact-again>Send another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+<script type="module" src="scripts/main.js"></script>
+<noscript>
+  <style>
+    /* Belt and braces: if scripts are disabled, make sure nothing that the
+       enhancement layer would have revealed can ever stay hidden. */
+    [data-reveal], [data-reveal-group] > * { opacity: 1 !important; transform: none !important; }
+    .fav-controls, .fav-segments, .fav-cursor, .collage-hint, .serve-index, .serve-progress, .serve-swap { display: none !important; }
+    /* The strip is scroll-driven; without a script it would sit at zero. Its
+       height is kept so the layout does not move. */
+    .brew-strip { visibility: hidden !important; }
+    /* Contact forms. Without a script there are no tabs: on contact.html the
+       pop-up is shown in the page instead, every form stacked and posting
+       straight to the form service. */
+    .contact-tabs, .contact-close { display: none !important; }
+
+  </style>
+</noscript>
+</body>
+</html>

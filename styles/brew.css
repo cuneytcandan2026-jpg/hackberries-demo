@@ -1,0 +1,694 @@
+/* ==========================================================================
+   Hackberries - "Bean to Brew"
+   --------------------------------------------------------------------------
+   A roasted bean rolls along a grass-green track under the header, passes
+   small landmarks tied to real sections, and finishes by dropping into the
+   coffee cup in the footer.
+
+   Division of labour, matching the rest of the site:
+   - Colours, sizes and every duration are tokens (tokens.css, --brew-*).
+   - Scroll-COUPLED values (bean position, roll, lean, fill, steam) are
+     written per frame by scripts/brew.js as transforms and custom properties.
+   - One-shot moments (landmark responses, the intro, the footer sequence) are
+     CSS keyframes switched on by a class or data-state.
+   - Nothing here hides content. Without JavaScript the strip keeps its height
+     but is invisible (see the <noscript> block) and the footer shows the
+     finished cup, which is the default state of its markup.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. The strip
+   ========================================================================== */
+.brew-strip {
+  /* Light-ground palette (the solid cream header). */
+  --brew-mark-bg: var(--c-cream);
+  --brew-cup-line: color-mix(in srgb, var(--c-ink) 34%, transparent);
+  --brew-steam-colour: color-mix(in srgb, var(--c-ink) 38%, transparent);
+  --brew-p: 0;
+  position: relative;
+  height: var(--brew-strip-h);
+  transition: opacity 360ms var(--ease-soft);
+}
+
+/* Over the deep green hero the same parts invert, like the rest of the bar. */
+.site-header.is-over .brew-strip {
+  --brew-fill: var(--c-leaf);
+  --brew-rail: color-mix(in srgb, var(--c-leaf) 20%, transparent);
+  --brew-mark: color-mix(in srgb, var(--c-leaf) 52%, transparent);
+  --brew-mark-hit: var(--c-leaf);
+  --brew-mark-bg: var(--c-forest-deep);
+  --brew-bean-rim: color-mix(in srgb, var(--c-on-dark) 55%, transparent);
+  --brew-cup-line: color-mix(in srgb, var(--c-leaf) 60%, transparent);
+  --brew-steam-colour: color-mix(in srgb, var(--c-on-dark) 70%, transparent);
+}
+
+.brew-inner {
+  height: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--pad-gutter);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* The track starts far enough in that the bean (centred on the start point)
+   and the sprout beside it both clear the gutter. */
+.brew-track {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  margin-left: calc(var(--brew-bean-size) / 2 + 1.1rem);
+  margin-right: calc(var(--brew-bean-size) * 0.2);
+}
+
+.brew-rail,
+.brew-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: var(--brew-track);
+  margin-top: calc(var(--brew-track) / -2);
+  border-radius: var(--r-pill);
+  pointer-events: none;
+}
+.brew-rail { background: var(--brew-rail); }
+.brew-fill {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--brew-fill) 82%, var(--c-forest-deep)),
+    var(--brew-fill));
+  transform: scaleX(var(--brew-p));
+  transform-origin: left center;
+}
+
+/* ---- Sprout beside the start ------------------------------------------- */
+.brew-sprout {
+  position: absolute;
+  left: calc(var(--brew-bean-size) / -2 - 1.05rem);
+  top: 50%;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: -0.78rem;
+  pointer-events: none;
+}
+.sprout-svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.sprout-stem { fill: none; stroke: var(--brew-fill); stroke-width: 1.6; stroke-linecap: round; }
+.sprout-leaf path:first-child { fill: var(--brew-fill); }
+.sprout-vein {
+  fill: none;
+  stroke: var(--brew-mark-bg);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+.sprout-leaf { transform-box: view-box; transform-origin: 10px 12px; }
+
+/* ---- Landmarks --------------------------------------------------------- */
+.brew-mark {
+  position: absolute;
+  left: calc(var(--at) * 100%);
+  top: 50%;
+  width: var(--brew-mark-size);
+  height: var(--brew-mark-size);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.brew-anchor { display: none; }
+@media (max-width: 47.99rem) {
+  .brew-mark:not([data-mobile]) { display: none; }
+}
+
+.lm-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.lm-svg > *, .lm-unfold { transform-box: view-box; transform-origin: 10px 10px; }
+.lm-fill {
+  fill: var(--brew-mark-bg);
+  stroke: var(--brew-mark);
+  stroke-width: 1.5;
+  transition: stroke 300ms var(--ease-soft), fill 300ms var(--ease-soft);
+}
+.lm-inner { fill: none; stroke: var(--brew-mark); stroke-width: 1; }
+.lm-food { fill: var(--brew-mark); transition: fill 300ms var(--ease-soft); }
+.lm-line {
+  fill: none;
+  stroke: var(--brew-mark);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transition: stroke 300ms var(--ease-soft);
+}
+/* The "unfolding line" of each landmark stays undrawn until it is passed. */
+.lm-draw {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  /* Round caps paint a dot even at zero dash length, so undrawn lines also
+     hide outright. */
+  opacity: 0;
+  transition: stroke-dashoffset 520ms var(--ease-soft), stroke 300ms var(--ease-soft), opacity 160ms linear;
+}
+
+.brew-mark.is-passed .lm-fill { stroke: var(--brew-mark-hit); }
+.brew-mark.is-passed .lm-line { stroke: var(--brew-mark-hit); }
+.brew-mark.is-passed .lm-draw { stroke-dashoffset: 0; opacity: 1; }
+.brew-mark.is-passed .lm-food { fill: var(--brew-bean-hi); }
+.brew-mark.is-passed .lm-leaf .lm-fill { fill: color-mix(in srgb, var(--brew-mark-hit) 30%, var(--brew-mark-bg)); }
+
+/* One short, distinct response each, played once per forward crossing. */
+.brew-mark.is-hit .lm-plate { animation: brew-pop 520ms var(--ease-spring); }
+.brew-mark.is-hit .lm-unfold { animation: brew-unfold 640ms var(--ease-spring); }
+.brew-mark.is-hit .lm-swirl { animation: brew-swirl 700ms var(--ease-soft); }
+
+@keyframes brew-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.38) translateY(-1px); }
+  100% { transform: scale(1); }
+}
+@keyframes brew-unfold {
+  0% { transform: rotate(-50deg) scale(0.6); }
+  60% { transform: rotate(10deg) scale(1.15); }
+  100% { transform: none; }
+}
+@keyframes brew-swirl {
+  0% { transform: rotate(0) scale(1); }
+  50% { transform: rotate(-140deg) scale(1.2); }
+  100% { transform: rotate(-360deg) scale(1); }
+}
+
+/* ---- The bean ----------------------------------------------------------- */
+/* A zero-size anchor moved along the track; the button hangs centred on it.
+   scripts/brew.js writes transforms to the three nested spans, one concern
+   each, so none of them fight: hop (vertical), lean + squash, and roll. */
+.brew-bean-slot {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  z-index: 2;
+  transform: translate3d(var(--brew-x, 0px), 0, 0);
+}
+.brew-bean {
+  position: absolute;
+  /* 44px touch target, whatever the drawn size. */
+  left: -1.375rem;
+  top: -1.375rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.brew-bean:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.site-header.is-over .brew-bean:focus-visible { outline-color: var(--focus-on-dark); }
+
+.brew-bean-hop,
+.brew-bean-lean,
+.brew-bean-roll {
+  display: block;
+  width: var(--brew-bean-size);
+  height: var(--brew-bean-size);
+  will-change: transform;
+}
+.brew-bean-lean { transform-origin: 50% 80%; }
+
+.bean-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transition:
+    transform 420ms var(--ease-spring),
+    opacity 260ms var(--ease-soft);
+}
+.bean-shade { fill: color-mix(in srgb, var(--c-forest-deep) 30%, transparent); }
+.bean-body { stroke: var(--brew-bean-rim); stroke-width: 1.1; }
+.bean-crease {
+  fill: none;
+  stroke: var(--brew-bean-crease);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.bean-crease-hi {
+  fill: none;
+  stroke: var(--brew-bean-hi);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+.bean-shine { fill: #fff; opacity: 0.26; }
+
+/* A brief playful tilt on hover (desktop), a hop-and-spin on press. Neither
+   touches the progress value; they act on the drawing inside the rig. */
+@media (hover: hover) and (pointer: fine) {
+  .brew-bean:hover .bean-svg { transform: rotate(-22deg) scale(1.08); }
+}
+.brew-bean.is-spinning .bean-svg { animation: brew-spin 720ms var(--ease-soft); }
+@keyframes brew-spin {
+  0% { transform: none; }
+  35% { transform: translateY(-10px) rotate(-200deg) scale(1.1, 0.95); }
+  70% { transform: translateY(0) rotate(-340deg) scale(1.12, 0.86); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Arrival on load: the bean drops onto the track with a settle, and the
+   sprout beside the start point opens. */
+.brew-strip.is-intro .bean-svg { animation: brew-settle var(--brew-intro) var(--ease-soft) 240ms both; }
+.brew-strip.is-intro .sprout-left { animation: sprout-open-l var(--brew-intro) var(--ease-spring) 520ms both; }
+.brew-strip.is-intro .sprout-right { animation: sprout-open-r var(--brew-intro) var(--ease-spring) 640ms both; }
+@keyframes brew-settle {
+  0% { opacity: 0; transform: translateY(-14px) rotate(-40deg); }
+  45% { opacity: 1; transform: translateY(0) rotate(0) scale(1.14, 0.84); }
+  70% { transform: translateY(-2px) scale(0.95, 1.05); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes sprout-open-l {
+  from { transform: rotate(38deg) scale(0.2); }
+  to { transform: none; }
+}
+@keyframes sprout-open-r {
+  from { transform: rotate(-38deg) scale(0.2); }
+  to { transform: none; }
+}
+
+/* Brewed and back at the end: the bean has gone into the cup. */
+.brew-strip.is-cupped .bean-svg { opacity: 0; transform: translateY(6px) scale(0.4); }
+.brew-strip.is-flying .bean-svg { opacity: 0; transition-duration: 1ms; }
+/* Once the bean is in the cup the track reads as complete. */
+.brew-strip.is-cupped .brew-fill { transform: scaleX(1); }
+
+/* ---- The waiting cup ----------------------------------------------------- */
+.brew-mini-cup {
+  position: relative;
+  flex: none;
+  width: var(--brew-cup-size);
+  height: var(--brew-cup-size);
+  margin-top: -0.2rem;
+  pointer-events: none;
+}
+.mini-cup-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.mini-cup-svg > * { transition: fill 420ms var(--ease-soft), stroke 420ms var(--ease-soft), opacity 420ms var(--ease-soft); }
+
+/* Stages one and two: a quiet outline. */
+.mini-saucer,
+.mini-body,
+.mini-rim { fill: transparent; stroke: var(--brew-mark); stroke-width: 1.4; }
+.mini-handle { fill: none; stroke: var(--brew-mark); stroke-width: 1.6; stroke-linecap: round; }
+.mini-inside,
+.mini-band,
+.mini-coffee { opacity: 0; }
+.mini-inside { fill: var(--brew-cup-inside); }
+.mini-band { fill: var(--brew-fill); }
+.mini-coffee { fill: var(--brew-crema); }
+.mini-steam {
+  fill: none;
+  stroke: var(--brew-steam-colour);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  /* Drawn by scroll during stage three, fully drawn once brewed. */
+  stroke-dashoffset: var(--brew-steam-off, 1);
+}
+.mini-steam-2 { stroke-dashoffset: var(--brew-steam-off-2, 1); }
+.brew-strip:not(.is-brewed)[data-stage='1'] .mini-steam,
+.brew-strip:not(.is-brewed)[data-stage='2'] .mini-steam { opacity: 0; }
+
+/* Stage three onwards: the cup comes forward in porcelain and green. */
+.brew-strip[data-stage='3'] .mini-body,
+.brew-strip[data-stage='4'] .mini-body,
+.brew-strip[data-stage='3'] .mini-rim,
+.brew-strip[data-stage='4'] .mini-rim,
+.brew-strip[data-stage='3'] .mini-saucer,
+.brew-strip[data-stage='4'] .mini-saucer {
+  fill: var(--brew-porcelain);
+  stroke: var(--brew-cup-line);
+}
+.brew-strip[data-stage='3'] .mini-handle,
+.brew-strip[data-stage='4'] .mini-handle { stroke: var(--brew-porcelain-shade); }
+.brew-strip[data-stage='3'] .mini-inside,
+.brew-strip[data-stage='4'] .mini-inside,
+.brew-strip[data-stage='3'] .mini-band,
+.brew-strip[data-stage='4'] .mini-band { opacity: 1; }
+.brew-strip[data-stage='3'] .brew-mini-cup,
+.brew-strip[data-stage='4'] .brew-mini-cup { transform: scale(1.08); }
+.brew-mini-cup { transition: transform 420ms var(--ease-spring); }
+
+.brew-strip.is-brewed .mini-coffee { opacity: 1; }
+.brew-strip.is-brewed .mini-steam { stroke-dashoffset: 0; }
+.brew-strip.is-brewed .mini-body,
+.brew-strip.is-brewed .mini-rim,
+.brew-strip.is-brewed .mini-saucer { fill: var(--brew-porcelain); stroke: var(--brew-cup-line); }
+.brew-strip.is-brewed .mini-inside,
+.brew-strip.is-brewed .mini-band { opacity: 1; }
+.brew-mini-cup.is-catch { animation: brew-catch 520ms var(--ease-spring); }
+@keyframes brew-catch {
+  0% { transform: scale(1.08); }
+  35% { transform: scale(1.2, 0.92) translateY(2px); }
+  100% { transform: scale(1.08); }
+}
+
+/* ==========================================================================
+   2. Hero cue
+   --------------------------------------------------------------------------
+   The hero's scroll cue IS the start of the journey: the brew line, set in
+   the display face, sits bottom-centre on the fold, and under it a bean drops
+   gently down a short hairline, again and again, towards the page below. It
+   is a real link to the first section, so it also works as a skip for anyone
+   who reads the cue as an instruction. Same bean drawing as the header
+   track, so the two read as one idea.
+   ========================================================================== */
+.hero-brew {
+  --brew-bean-rim: color-mix(in srgb, var(--c-on-dark) 50%, transparent);
+  justify-self: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.75rem;
+  margin-top: clamp(1.25rem, 0.5rem + 2.5vw, 2.75rem);
+  padding: 0.25rem 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 12px rgb(4 12 2 / 0.6);
+  border-radius: var(--r-md);
+}
+.on-dark .hero-brew { color: color-mix(in srgb, var(--c-on-dark) 92%, transparent); }
+.on-dark .hero-brew:hover { color: var(--c-leaf); }
+.hero-brew:focus-visible { outline: 2px solid var(--c-leaf); outline-offset: 2px; }
+
+/* A short hairline for the bean to travel down. */
+.hero-brew-bean {
+  position: relative;
+  flex: none;
+  width: 1.375rem;
+  height: 2.5rem;
+}
+.hero-brew-bean::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--c-leaf) 0%, transparent),
+    color-mix(in srgb, var(--c-leaf) 55%, transparent) 50%,
+    color-mix(in srgb, var(--c-leaf) 0%, transparent));
+}
+.hero-brew-bean .bean-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  transition: none;
+}
+
+/* Arrives last, then the bean starts its slow, repeating descent. */
+.hero[data-hero-ready] .hero-brew {
+  opacity: 0;
+  transform: translateY(calc(12px * var(--motion-scale)));
+  transition: opacity 800ms var(--ease-soft) 1450ms, transform 800ms var(--ease-soft) 1450ms;
+}
+.hero[data-hero-ready].is-in .hero-brew { opacity: 1; transform: none; }
+.hero-brew-bean .bean-svg {
+  animation: cue-drop 3200ms cubic-bezier(0.45, 0.05, 0.35, 1) 2000ms infinite both;
+}
+@keyframes cue-drop {
+  0%   { opacity: 0; transform: translateY(-0.25rem) rotate(-20deg); }
+  18%  { opacity: 1; }
+  62%  { opacity: 1; transform: translateY(1.05rem) rotate(25deg); }
+  80%, 100% { opacity: 0; transform: translateY(1.25rem) rotate(35deg); }
+}
+/* Reduced motion: brew.css section 5 stops every animation inside .hero-brew,
+   and a stopped bean should rest visibly at the top of its line. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-brew-bean .bean-svg { opacity: 1; transform: none; }
+}
+html[data-motion='reduced'] .hero-brew-bean .bean-svg { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   3. The caption near Visit us
+   ========================================================================== */
+.brew-aside {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.55rem;
+  padding: 0.3rem 0.95rem 0.3rem 0.4rem;
+  border: 1px dashed var(--rule-green);
+  border-radius: var(--r-pill);
+  background: var(--wash-green);
+  font-family: var(--font-display);
+  font-size: var(--t-small);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  color: var(--c-mute);
+}
+.brew-aside-bean { flex: none; width: 1.3rem; height: 1.3rem; }
+.brew-aside .bean-svg { transition: none; }
+
+/* ==========================================================================
+   4. Footer payoff
+   ========================================================================== */
+.brew-payoff {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+  position: relative;
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 4.5rem) clamp(2rem, 1rem + 3vw, 3.5rem);
+}
+@media (min-width: 48rem) {
+  .brew-payoff { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+}
+
+.brew-payoff-copy {
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+  align-content: center;
+}
+.brew-payoff-title {
+  font-size: var(--t-h2);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 13ch;
+  color: var(--c-on-dark);
+}
+.brew-payoff-lead { color: var(--c-on-dark-mute); max-width: 32ch; }
+.brew-payoff-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+.brew-payoff-art {
+  position: relative;
+  justify-self: center;
+  width: min(100%, clamp(15rem, 9rem + 18vw, 23rem));
+  display: grid;
+  justify-items: center;
+  gap: var(--s-3);
+}
+@media (max-width: 47.99rem) {
+  .brew-payoff-art { width: min(78%, 17rem); }
+}
+
+.brew-again {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  padding: 0.45rem 1rem;
+  border: 2px solid color-mix(in srgb, var(--c-on-dark) 30%, transparent);
+  border-radius: var(--r-pill);
+  color: var(--c-on-dark);
+  font-weight: 700;
+  font-size: var(--t-small);
+  transition: background-color var(--d-control) var(--ease-firm),
+              color var(--d-control) var(--ease-firm),
+              border-color var(--d-control) var(--ease-firm),
+              opacity 400ms var(--ease-soft);
+}
+.brew-again svg { width: 1rem; height: 1rem; }
+.brew-again:hover { background: var(--c-leaf); border-color: var(--c-leaf); color: var(--c-forest-deep); }
+.brew-again.is-arriving { animation: brew-fade-in 500ms var(--ease-soft) both; }
+@keyframes brew-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---- The cup drawing ---------------------------------------------------- */
+.brew-cup-svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.bc-disc { fill: var(--c-canopy); }
+.bc-disc-ring {
+  fill: none;
+  stroke: color-mix(in srgb, var(--c-leaf) 38%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 7;
+}
+.bc-sprig-stem { fill: none; stroke: var(--c-leaf); stroke-width: 3; stroke-linecap: round; }
+.bc-sprig-leaf { fill: var(--c-leaf); }
+.bc-sprig-right .bc-sprig-leaf { fill: var(--c-leaf-soft); }
+
+.bc-shadow { fill: color-mix(in srgb, var(--c-forest-deep) 55%, transparent); }
+.bc-saucer { fill: var(--brew-porcelain); stroke: var(--brew-porcelain-shade); stroke-width: 2; }
+.bc-saucer-in { fill: var(--brew-porcelain-shade); opacity: 0.55; }
+.bc-handle { fill: none; stroke: var(--brew-porcelain-shade); stroke-width: 12; stroke-linecap: round; }
+.bc-band { fill: var(--c-grass); }
+.bc-band-thin { fill: var(--c-leaf); }
+.bc-rim { fill: var(--brew-porcelain); stroke: var(--brew-porcelain-shade); stroke-width: 2; }
+.bc-inside { fill: var(--brew-cup-inside); }
+
+.bc-art-line {
+  fill: none;
+  stroke: var(--brew-foam);
+  stroke-width: 4.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+}
+.bc-art-stem { stroke-width: 3.2; }
+.bc-art-foam { fill: var(--brew-foam); opacity: 0.3; transform-box: fill-box; transform-origin: 0% 50%; }
+.brew-payoff-art[data-state='brewing'] .bc-art-foam {
+  animation: bc-foam var(--brew-art) var(--ease-soft) calc(var(--brew-art-delay) - 150ms) both;
+}
+.bc-splash { fill: none; stroke: var(--brew-crema-hi); stroke-width: 3; opacity: 0; }
+.bc-steam-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--c-on-dark) 72%, transparent);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+  opacity: 0.78;
+}
+
+.bc-cup { transform-box: view-box; transform-origin: 120px 212px; }
+.bc-drop { transform-box: view-box; transform-origin: 120px 38px; opacity: 0; }
+.bc-coffee,
+.bc-splash,
+.bc-steam-line { transform-box: fill-box; transform-origin: 50% 50%; }
+.bc-steam-line { transform-origin: 50% 100%; }
+
+/* Empty: waiting for the bean. */
+.brew-payoff-art[data-state='empty'] .bc-coffee { opacity: 0; transform: translateY(22px) scale(0.64); }
+.brew-payoff-art[data-state='empty'] .bc-art-line { stroke-dashoffset: 1; opacity: 0; }
+.brew-payoff-art[data-state='empty'] .bc-art-foam { opacity: 0; }
+.brew-payoff-art[data-state='empty'] .bc-steam-line { opacity: 0; stroke-dashoffset: 1; }
+
+/* Brewing: the whole sequence, paced by tokens. Every animation ends on the
+   same values as the brewed state, so switching to it causes no jump. */
+.brew-payoff-art[data-state='brewing'] .bc-drop {
+  animation: bc-drop var(--brew-drop) cubic-bezier(0.5, 0, 0.9, 0.55) both;
+}
+.brew-payoff-art[data-state='brewing'] .bc-splash {
+  animation: bc-splash 760ms var(--ease-out) calc(var(--brew-drop) * 0.72) both;
+}
+.brew-payoff-art[data-state='brewing'] .bc-coffee {
+  animation: bc-fill var(--brew-pour) var(--ease-soft) var(--brew-pour-delay) both;
+}
+.brew-payoff-art[data-state='brewing'] .bc-art-line {
+  animation: bc-draw var(--brew-art) var(--ease-soft) calc(var(--brew-art-delay) + var(--k) * 75ms) both;
+}
+.brew-payoff-art[data-state='brewing'] .bc-steam-line {
+  animation: bc-steam var(--brew-steam) var(--ease-out) calc(var(--brew-steam-delay) + var(--k) * var(--brew-stagger)) both;
+}
+.brew-payoff-art[data-state='brewing'] .bc-cup {
+  animation: bc-settle var(--brew-settle) var(--ease-soft) var(--brew-settle-delay) both;
+}
+
+/* Finished and live on screen: the steam drifts a few times, then rests. */
+.brew-payoff-art[data-state='brewed'].is-fresh .bc-steam-line {
+  animation: bc-waft 2600ms ease-in-out calc(var(--k) * 400ms) 4 alternate;
+}
+
+@keyframes bc-drop {
+  0% { opacity: 1; transform: translateY(0) rotate(0); }
+  100% { opacity: 1; transform: translateY(112px) rotate(80deg); }
+}
+@keyframes bc-splash {
+  0% { opacity: 0; transform: scale(0.3); }
+  18% { opacity: 0.95; }
+  100% { opacity: 0; transform: scale(1.8, 1.5); }
+}
+@keyframes bc-fill {
+  0% { opacity: 0; transform: translateY(22px) scale(0.64); }
+  30% { opacity: 1; }
+  82% { transform: translateY(-1.5px) scale(1.01); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes bc-draw {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  4% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes bc-foam {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 0.3; transform: none; }
+}
+@keyframes bc-steam {
+  0% { opacity: 0; stroke-dashoffset: 1; transform: translateY(10px); }
+  55% { opacity: 0.9; }
+  100% { opacity: 0.78; stroke-dashoffset: 0; transform: none; }
+}
+@keyframes bc-settle {
+  0% { transform: none; }
+  22% { transform: rotate(-2.6deg) translateY(-2px); }
+  48% { transform: rotate(1.7deg); }
+  74% { transform: rotate(-0.6deg); }
+  100% { transform: none; }
+}
+@keyframes bc-waft {
+  from { transform: none; opacity: 0.78; }
+  to { transform: translate(2px, -5px) scaleY(1.04); opacity: 0.5; }
+}
+
+/* ---- The bean in flight ------------------------------------------------- */
+/* Created by scripts/brew.js for the length of the flight only. Fixed, above
+   the header, and it can never take a click. */
+.brew-flyer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 95;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  will-change: transform;
+}
+.brew-flyer .bean-svg { transition: none; }
+
+/* ==========================================================================
+   5. Reduced motion
+   --------------------------------------------------------------------------
+   Same information, no travel: a static bean placed at the true progress, the
+   landmarks in their passed colours without a pop, and the finished cup. The
+   JavaScript skips the spring, the hops and the flight as well; these rules
+   also cover a preference switched on mid-session.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .brew-strip *,
+  .hero-brew *,
+  .brew-payoff-art * { animation: none !important; }
+  .bean-svg,
+  .lm-draw,
+  .brew-mini-cup { transition: none; }
+  .hero[data-hero-ready] .hero-brew { transition-duration: 240ms; transition-delay: 0ms; }
+}
+html[data-motion='reduced'] .brew-strip *,
+html[data-motion='reduced'] .hero-brew *,
+html[data-motion='reduced'] .brew-payoff-art * { animation: none !important; }
+html[data-motion='reduced'] .bean-svg,
+html[data-motion='reduced'] .lm-draw,
+html[data-motion='reduced'] .brew-mini-cup { transition: none; }
+
+/* ==========================================================================
+   6. Print
+   ========================================================================== */
+@media print {
+  .brew-strip, .brew-again, .brew-flyer, .hero-brew, .brew-aside { display: none !important; }
+  .brew-payoff-art .bc-coffee, .brew-payoff-art .bc-steam-line { opacity: 1 !important; transform: none !important; }
+  .brew-payoff-art .bc-art-line, .brew-payoff-art .bc-steam-line { stroke-dashoffset: 0 !important; }
+}

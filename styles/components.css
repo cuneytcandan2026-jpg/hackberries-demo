@@ -1,0 +1,2007 @@
+/* ==========================================================================
+   Hackberries - header, hero, showcase, menu discovery
+   ========================================================================== */
+
+/* ==========================================================================
+   1. HEADER + NAVIGATION
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: color-mix(in srgb, var(--c-cream) 90%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+  transition:
+    background-color 360ms var(--ease-soft),
+    border-color 360ms var(--ease-soft),
+    color 360ms var(--ease-soft);
+}
+@supports not (backdrop-filter: blur(4px)) {
+  .site-header { background: var(--c-cream); }
+}
+
+/* ---- Over-the-hero state --------------------------------------------------- */
+/* On the homepage the header starts transparent over the deep green hero and
+   resolves to the solid cream bar as soon as the page scrolls. `is-over` is
+   added by scripts/nav.js and is removed the moment a sentinel at the top of
+   the document leaves the viewport, so the solid state is the default and a
+   failed script can only ever leave the readable version. */
+.site-header.is-over {
+  background: transparent;
+  border-bottom-color: transparent;
+  color: var(--c-on-dark);
+  /* The blur MUST go too. A backdrop-filter over a transparent background
+     still paints the filtered backdrop, and at scroll 0 that backdrop is the
+     body's cream ground - which rendered as a solid cream bar sitting on top
+     of the dark hero. */
+  backdrop-filter: none;
+}
+@supports not (backdrop-filter: blur(4px)) {
+  .site-header.is-over { background: transparent; }
+}
+
+/* With the header transparent, the hero's green ground has to run underneath
+   it rather than starting below it. The header is sticky, so it still takes
+   its space in flow; pulling the hero up by exactly that height puts the
+   ground behind it, and the matching top padding keeps the copy clear. */
+body[data-header-mode='over'] .hero {
+  margin-top: calc((var(--header-h) + var(--brew-h)) * -1);
+}
+/* Over a photograph rather than a flat ground, so the type gets a soft shadow
+   as insurance against whatever bright detail happens to sit behind it. */
+.site-header.is-over .header-bar { text-shadow: 0 1px 14px rgb(5 14 3 / 0.45); }
+.site-header.is-over .wordmark { color: var(--c-on-dark); }
+.site-header.is-over .wordmark:hover { color: var(--c-leaf); }
+.site-header.is-over .wordmark .dot-berry { background: var(--c-leaf); }
+.site-header.is-over .header-hours,
+.site-header.is-over .header-place { color: var(--c-on-dark); }
+.site-header.is-over .header-hours .icon-clock,
+.site-header.is-over .header-place:hover { color: var(--c-leaf); }
+.site-header.is-over .header-rule {
+  background: color-mix(in srgb, var(--c-on-dark) 40%, transparent);
+}
+.site-header.is-over .menu-toggle {
+  color: var(--c-on-dark);
+  border-color: color-mix(in srgb, var(--c-on-dark) 45%, transparent);
+  background: rgb(10 26 7 / 0.25);
+}
+.site-header.is-over .menu-toggle:hover { border-color: var(--c-leaf); color: var(--c-leaf); }
+.site-header.is-over :focus-visible { outline-color: var(--focus-on-dark); }
+
+/* Sentinel: a zero-height marker at the very top of the document. When it
+   scrolls out of view the header takes its solid state. */
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* ---- Scroll progress ------------------------------------------------------- */
+/* A one-pixel fresh-green line across the foot of the header. Decorative
+   reinforcement of where you are; the dock carries the real section state. */
+.header-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--c-canopy), var(--c-grass), var(--c-leaf));
+  pointer-events: none;
+}
+.site-header.is-over .header-progress { opacity: 0; }
+
+/* ---- Bar: hours · rule · WORDMARK · rule · address ----------------------- */
+/* Three columns with equal flexible sides, so the wordmark is centred on the
+   page whatever the hours and address happen to measure. Each hairline grows
+   to fill its side; on smaller screens the rules and the address step out and
+   the bar is just the wordmark and the menu button. */
+.header-bar {
+  min-height: var(--header-h);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(0.75rem, 0.2rem + 1.2vw, 1.5rem);
+}
+.header-side {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 0.2rem + 1.2vw, 1.5rem);
+  min-width: 0;
+}
+.header-side-end { justify-content: flex-end; }
+
+.header-rule {
+  display: none;
+  flex: 1 1 auto;
+  min-width: 2rem;
+  height: 1px;
+  background: var(--rule-strong);
+  /* Drawn from the wordmark outward: the left rule grows leftward from its
+     right end, the right rule rightward from its left end. */
+  transform-origin: right center;
+  animation: header-rule-draw 1200ms var(--ease-soft) 180ms both;
+}
+.header-side-end .header-rule { transform-origin: left center; }
+@keyframes header-rule-draw {
+  from { transform: scaleX(calc(1 - var(--motion-scale))); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+/* Today's listed hours. A clock, not a dot: a coloured dot reads as a live
+   "open now" light, and the site deliberately makes no such claim. */
+.header-hours {
+  display: none;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  flex: none;
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fg-mute);
+  white-space: nowrap;
+}
+.header-hours .icon-clock { flex: none; color: var(--c-grass); }
+
+.header-place {
+  display: none;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  flex: none;
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--d-control) var(--ease-firm);
+}
+.header-place .arrow {
+  width: 0.9em;
+  height: 0.9em;
+  transition: transform var(--d-control) var(--ease-firm);
+}
+.header-place:hover { color: var(--accent-text); }
+.header-place:hover .arrow { transform: translateX(calc(3px * var(--motion-scale))); }
+
+@media (min-width: 48rem) { .header-hours { display: inline-flex; } }
+@media (min-width: 64rem) {
+  .header-rule { display: block; }
+  .header-place { display: inline-flex; }
+}
+
+/* ---- Wordmark ------------------------------------------------------------ */
+/* Provisional: set as type, because no vector logo has been supplied.
+   See content-needed.md. */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 1rem + 1vw, 1.95rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--c-ink);
+  text-decoration: none;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 48;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  flex: none;
+  /* Comfortable tap target without disturbing the baseline alignment. */
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+}
+.wordmark .dot-berry {
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 50%;
+  background: var(--c-berry);
+  align-self: center;
+  flex: none;
+}
+.wordmark:hover { color: var(--c-canopy); }
+
+/* Desktop links live in the floating dock, not here - no competing bars. */
+.header-links { display: none; }
+
+/* ---- Mobile menu panel ---------------------------------------------------- */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.75rem;
+  border: 2px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: var(--t-small);
+  flex: none;
+}
+@media (max-width: 24.99rem) {
+  .menu-toggle { padding: 0.4rem; }
+  /* Visually icon-only, but still named "Menu" for assistive tech. */
+  .menu-toggle .label {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .wordmark { font-size: 1.2rem; }
+}
+.menu-toggle .bars { display: grid; gap: 4px; width: 1.05rem; }
+.menu-toggle .bars i {
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform var(--d-control) var(--ease-firm),
+              opacity var(--d-control) var(--ease-firm);
+}
+.menu-toggle[aria-expanded='true'] .bars i:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-toggle[aria-expanded='true'] .bars i:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded='true'] .bars i:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+@media (min-width: 64rem) { .menu-toggle { display: none; } }
+
+.nav-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: var(--c-forest-deep);
+  color: var(--c-on-dark);
+  display: flex;
+  flex-direction: column;
+  padding: max(var(--s-5), env(safe-area-inset-top)) var(--pad-gutter)
+           max(var(--s-6), env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.nav-panel[hidden] { display: none !important; }
+
+.nav-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 3rem;
+  margin-bottom: var(--s-7);
+}
+.nav-panel-head .wordmark { color: var(--c-on-dark); }
+.nav-panel-head .wordmark .dot-berry { background: var(--c-leaf); }
+
+.nav-panel-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--c-on-dark) 35%, transparent);
+  color: var(--c-on-dark);
+}
+.nav-panel-close:hover { background: var(--c-on-dark); color: var(--c-forest-deep); }
+.nav-panel-close svg { width: 1.125rem; height: 1.125rem; }
+
+.nav-panel-links { display: grid; gap: 0.35rem; }
+.nav-panel-links a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: 0.7rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.3rem + 3.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-on-dark);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-on-dark) 18%, transparent);
+  font-variation-settings: 'SOFT' 32, 'WONK' 1, 'opsz' 96;
+}
+.nav-panel-links a:hover { color: var(--c-leaf); }
+.nav-panel-links a span {
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--c-on-dark-mute);
+  flex: none;
+}
+
+.nav-panel-foot {
+  margin-top: auto;
+  padding-top: var(--s-7);
+  display: grid;
+  gap: var(--s-4);
+}
+.nav-panel-foot .row { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.nav-panel-foot .btn { flex: 1 1 11.5rem; }
+.nav-panel-foot address {
+  font-style: normal;
+  font-size: var(--t-small);
+  color: var(--c-on-dark-mute);
+  line-height: 1.6;
+}
+
+/* ---- Desktop floating dock ------------------------------------------------ */
+/* Appears after the hero. A glass-on-green surface, four destinations, one
+   active indicator. Hidden entirely below 64rem so it can never compete with
+   the mobile header or utility strip. */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 1.75rem;
+  z-index: 85;
+  display: none;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.4rem;
+  /* Opaque, not glass: the dock floats over whatever a visitor has scrolled
+     to (photography, gallery frames), and tools/audit.mjs asserts every
+     rendered control still meets contrast against its true background - a
+     translucent surface can't promise that once real content sits behind
+     it. background-color carries the opaque guarantee; the gradient is a
+     separate background-image layered on top purely for depth (a gradient
+     alone would leave background-color at its transparent default). */
+  background-color: var(--c-forest-deep);
+  background-image: linear-gradient(180deg, var(--c-bough), transparent 65%);
+  border: 1px solid color-mix(in srgb, var(--c-leaf) 24%, transparent);
+  border-radius: var(--r-pill);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--c-leaf) 18%, transparent),
+    var(--shadow-float);
+  transform: translate(-50%, calc(160% * var(--motion-scale)));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 420ms var(--ease-out),
+    opacity 300ms var(--ease-out),
+    visibility 0s linear 420ms;
+}
+.dock.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+@media (min-width: 64rem) { .dock { display: flex; } }
+
+/* Once the dock itself has arrived, each destination cascades in a beat
+   behind the last (--i is written per link by tools/build-html.mjs) instead
+   of appearing as one flat block. Kept as an `animation` rather than folded
+   into the hover/press `transition` below, so the stagger delay never bleeds
+   into an interaction that happens to touch the same properties. */
+.dock a,
+.dock .dock-cta {
+  opacity: 0;
+  transform: translateY(calc(6px * var(--motion-scale)));
+}
+.dock.is-visible a,
+.dock.is-visible .dock-cta {
+  animation: dock-in 380ms var(--ease-out) both;
+  animation-delay: calc(70ms + var(--stagger) * var(--i, 0));
+}
+@keyframes dock-in {
+  from { opacity: 0; transform: translateY(calc(6px * var(--motion-scale))); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* A single fresh-green pill slides between destinations rather than four
+   independent backgrounds switching on and off. Its position and width are
+   measured from the active link by scripts/nav.js. It is decorative: the
+   active link also carries aria-current and a visible dot, so the state
+   survives the indicator failing to place itself. */
+.dock-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 0.4rem;
+  left: 0;
+  height: calc(100% - 0.8rem);
+  width: var(--dock-w, 0px);
+  border-radius: var(--r-pill);
+  background: var(--c-leaf);
+  box-shadow: 0 4px 14px -4px color-mix(in srgb, var(--c-grass-bright) 65%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(var(--dock-x, 0px));
+  transition:
+    transform 460ms var(--ease-soft),
+    width 460ms var(--ease-soft),
+    opacity 240ms var(--ease-out);
+}
+.dock.has-indicator .dock-indicator { opacity: 1; }
+
+.dock a {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--r-pill);
+  color: var(--c-on-dark);
+  font-size: var(--t-small);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--d-control) var(--ease-firm),
+              color var(--d-control) var(--ease-firm),
+              transform var(--d-control) var(--ease-spring);
+}
+.dock a:hover { background: color-mix(in srgb, var(--c-leaf) 18%, transparent); color: var(--c-leaf); }
+.dock a:active { transform: scale(calc(1 - 0.05 * var(--motion-scale))); }
+.dock a[aria-current='true'] { color: var(--c-forest-deep); }
+.dock a[aria-current='true']:hover { background: transparent; color: var(--c-forest-deep); }
+/* Fallback for a browser where the indicator never gets measured: the active
+   link paints its own fill. Overridden above once .has-indicator is set. */
+.dock:not(.has-indicator) a[aria-current='true'] { background: var(--c-leaf); }
+/* Active state is also marked by a dot, not by colour alone. The dot pops
+   in with a little overshoot rather than a flat opacity swap. */
+.dock a .dot {
+  width: 0.4rem; height: 0.4rem; border-radius: 50%;
+  background: currentColor; opacity: 0; flex: none;
+  transform: scale(calc(1 - 0.5 * var(--motion-scale)));
+  transition: opacity var(--d-control) var(--ease-firm),
+              transform 380ms var(--ease-spring);
+}
+.dock a[aria-current='true'] .dot { opacity: 1; transform: scale(1); }
+
+/* A quiet "01/02/03" index, the same device the off-canvas menu uses next to
+   each of its links, surfaces only on hover/focus so it reads as a detail
+   rather than clutter. Absolutely positioned so revealing it never reflows
+   the pill (which would desync the sliding indicator's measured width). */
+.dock a .dock-idx {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-leaf);
+  opacity: 0;
+  transform: translateY(calc(2px * var(--motion-scale)));
+  transition: opacity var(--d-control) var(--ease-firm),
+              transform var(--d-control) var(--ease-firm);
+}
+.dock a:hover .dock-idx,
+.dock a:focus-visible .dock-idx { opacity: 1; transform: translateY(0); }
+.dock a[aria-current='true'] .dock-idx { color: var(--c-forest-deep); }
+
+.dock .dock-cta {
+  background: var(--c-canopy);
+  color: var(--c-cream);
+  margin-left: 0.25rem;
+  overflow: hidden;
+}
+.dock .dock-cta:hover { background: var(--c-grass); color: var(--c-cream); }
+.dock .dock-cta .arrow { transition: transform var(--d-control) var(--ease-firm); }
+.dock .dock-cta:hover .arrow,
+.dock .dock-cta:focus-visible .arrow { transform: translateX(calc(3px * var(--motion-scale))); }
+
+/* ---- Mobile utility strip -------------------------------------------------- */
+/* Menu / Book / Call / Directions. Does not duplicate the header CTA set, and
+   the page reserves space for it so it can never cover footer content. */
+.utility-strip {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Opaque for the same reason as the desktop dock (see its comment): this
+     bar sits over whatever the page has scrolled to, and rendered contrast
+     is asserted against its true background. */
+  background-color: var(--c-forest-deep);
+  background-image: linear-gradient(180deg, var(--c-bough), transparent 55%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--c-leaf) 22%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--c-leaf) 20%, transparent);
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translateY(calc(110% * var(--motion-scale)));
+  transition: transform 320ms var(--ease-out);
+}
+.utility-strip.is-visible { transform: translateY(0); }
+@media (min-width: 64rem) { .utility-strip { display: none; } }
+
+/* Each destination cascades in a beat behind the last, same device as the
+   desktop dock (--i is written per link by tools/build-html.mjs). */
+.utility-strip a {
+  opacity: 0;
+  transform: translateY(calc(6px * var(--motion-scale)));
+}
+.utility-strip.is-visible a {
+  animation: strip-in 340ms var(--ease-out) both;
+  animation-delay: calc(60ms + var(--stagger) * var(--i, 0));
+}
+@keyframes strip-in {
+  from { opacity: 0; transform: translateY(calc(6px * var(--motion-scale))); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.utility-strip a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--c-on-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+/* An inset divider rather than a full-bleed line, so the bar reads as one
+   soft surface instead of four boxed-off cells. */
+.utility-strip a + a::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.85rem; bottom: 0.85rem;
+  width: 1px;
+  background: color-mix(in srgb, var(--c-on-dark) 14%, transparent);
+}
+.utility-strip a svg { width: 1.05rem; height: 1.05rem; position: relative; }
+
+/* Each icon sits in its own pill that fills in on hover/focus and answers a
+   tap with a firm little press, instead of the whole cell flatly recolouring. */
+.utility-strip a .icon-chip {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: var(--r-pill);
+  background: transparent;
+  transition: background-color var(--d-control) var(--ease-firm),
+              transform var(--d-control) var(--ease-spring);
+}
+.utility-strip a:hover .icon-chip,
+.utility-strip a:focus-visible .icon-chip {
+  background: color-mix(in srgb, var(--c-leaf) 22%, transparent);
+}
+.utility-strip a:hover,
+.utility-strip a:focus-visible { color: var(--c-on-dark); }
+.utility-strip a:active .icon-chip { transform: scale(calc(1 - 0.12 * var(--motion-scale))); }
+
+/* "Menu" carries the same primary action as the desktop dock's CTA, so it
+   keeps a quiet permanent tint rather than looking identical to the other
+   three until touched. */
+.utility-strip a.is-primary .icon-chip {
+  background: color-mix(in srgb, var(--c-leaf) 16%, transparent);
+}
+.utility-strip a.is-primary svg { color: var(--c-leaf); }
+
+/* Space so the fixed strip/dock never sits on top of the last content. */
+body { padding-bottom: 0; }
+@media (max-width: 63.99rem) {
+  .site-footer { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom) + var(--s-6)); }
+}
+@media (min-width: 64rem) {
+  .site-footer { padding-bottom: calc(1.75rem + 3.55rem + var(--s-6)); }
+}
+
+/* ==========================================================================
+   2. HERO
+   ========================================================================== */
+/* Full-bleed photograph of the room, a deep green veil, and one decision for
+   the visitor: explore the menu. Everything else in the first viewport is
+   orientation (hours, address, the brew track) or atmosphere.
+
+   Stacking, back to front: the section's own forest-deep ground (the dark
+   fallback while the photograph loads, and all that shows if it fails), the
+   photograph, the veil, then the copy. `isolation` keeps the negative
+   z-indexes inside the section. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  /* One screen, less the preview banner above it (measured by nav.js), so the
+     scroll cue sits on the fold rather than under it. */
+  min-height: 100vh;
+  min-height: calc(100svh - var(--preview-h, 0px));
+  padding-top: calc(var(--header-h) + var(--brew-h) + clamp(2rem, 1rem + 4vw, 4rem));
+  padding-bottom: clamp(0.75rem, 0.4rem + 1vw, 1.5rem);
+  overflow: clip;
+  background: var(--c-forest-deep);
+  color: var(--c-on-dark);
+}
+
+/* ---- Photograph ------------------------------------------------------------ */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  /* A dark warm brown behind the image while it decodes, so it arrives as a
+     brightening rather than a flash. */
+  background: #2a2419;
+}
+.hero-photo,
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hero-photo img {
+  object-fit: cover;
+  /* If the file ever fails, the alt text must not be painted across the
+     header. It is still read out; the dark ground stands in for the image. */
+  color: transparent;
+  /* Landscape: keep the pendants and the foliage wall; the left edge (the
+     kitchen pass) is the part a narrower window can afford to lose. */
+  object-position: 58% 42%;
+}
+@media (max-aspect-ratio: 4/5) {
+  .hero-photo img { object-position: 50% 30%; }
+}
+
+/* ---- Veil --------------------------------------------------------------------
+   Built for THIS photograph, not a flat tint. The brightest, busiest detail in
+   the frame - glossy marble tables and red salt mills - sits bottom-left,
+   exactly where the headline lives, so the veil is heaviest there. The right
+   side, with the foliage wall and brick, is left the most open: it is the
+   best part of the picture and nothing is set over it.
+   A thin warm layer keeps the pendant glow from being greyed out by the green. */
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: rgb(14 33 8 / 0.2);
+  background-image:
+    /* the header and brew track */
+    linear-gradient(180deg, rgb(7 18 4 / 0.8) 0%, rgb(7 18 4 / 0.42) 14%, rgb(7 18 4 / 0) 30%),
+    /* the copy's corner */
+    radial-gradient(115% 95% at 0% 100%,
+      rgb(8 22 5 / 0.94) 0%, rgb(8 22 5 / 0.8) 32%, rgb(8 22 5 / 0.34) 62%, rgb(8 22 5 / 0) 82%),
+    /* a long, soft left-to-right falloff */
+    linear-gradient(90deg, rgb(9 24 6 / 0.5) 0%, rgb(9 24 6 / 0.2) 48%, rgb(9 24 6 / 0) 72%),
+    /* a pool of shade exactly behind the note and stamp: without it the
+       cream lettering vanishes into the pale marble tabletop at bottom-right */
+    radial-gradient(30% 30% at 84% 78%, rgb(8 22 5 / 0.86) 0%, rgb(8 22 5 / 0.62) 45%, rgb(8 22 5 / 0) 100%),
+    /* the fold, for the scroll cue */
+    linear-gradient(0deg, rgb(7 18 4 / 0.72) 0%, rgb(7 18 4 / 0) 24%),
+    /* warmth */
+    linear-gradient(rgb(92 52 14 / 0.1), rgb(92 52 14 / 0.1));
+}
+/* Portrait and narrow screens: the copy spans the width across the lower
+   half, so the veil becomes a vertical fade - open over the pendants, deep
+   under the type. */
+@media (max-aspect-ratio: 4/5), (max-width: 47.99rem) {
+  .hero-veil {
+    background-image:
+      linear-gradient(180deg,
+        rgb(7 18 4 / 0.82) 0%, rgb(7 18 4 / 0.3) 20%, rgb(8 22 5 / 0.18) 34%,
+        rgb(8 22 5 / 0.78) 58%, rgb(8 22 5 / 0.94) 78%, rgb(7 18 4 / 0.97) 100%),
+      linear-gradient(rgb(92 52 14 / 0.1), rgb(92 52 14 / 0.1));
+  }
+}
+
+/* ---- Copy ------------------------------------------------------------------ */
+.hero-inner {
+  align-self: end;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: var(--s-6);
+  width: 100%;
+}
+@media (min-width: 64rem) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-bottom: clamp(0.5rem, -1rem + 2.4vw, 2.5rem);
+  }
+}
+
+.hero-copy {
+  display: grid;
+  justify-items: start;
+  gap: clamp(1.1rem, 0.8rem + 1vw, 1.75rem);
+  max-width: 52rem;
+}
+
+/* Three lines on desktop, and no more than four on a phone: "Right here in
+   Cheshunt." is one masked line that may wrap once at small sizes. */
+.hero h1 {
+  font-size: clamp(2.5rem, 1.25rem + 4.1vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--c-on-dark);
+  text-shadow: 0 2px 34px rgb(4 12 2 / 0.4);
+}
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.07em; }
+.hero h1 .line > span { display: block; }
+.hero h1 em { font-style: normal; color: var(--c-leaf); }
+
+.hero-lead {
+  max-width: 36ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--c-on-dark) 90%, var(--c-leaf));
+  text-shadow: 0 1px 18px rgb(4 12 2 / 0.5);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-2);
+}
+
+/* ---- The one call to action ---------------------------------------------------
+   Glass, not a pill: a softly squared translucent panel with a hairline edge
+   and a solid grass-green arrow tile, so the eye lands on the green before it
+   reads the label. On hover a grass-to-pale-green fill sweeps in from the
+   left and the label turns forest-deep; the panel lifts 2px and the arrow
+   steps up and right. Every travel term is multiplied by --motion-scale, so
+   under reduced motion the fill simply fades in. */
+.cta-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-height: 3.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.6rem;
+  border: 1px solid color-mix(in srgb, var(--c-on-dark) 42%, transparent);
+  border-radius: var(--r-md);
+  background: rgb(12 30 8 / 0.34);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--c-on-dark) 20%, transparent),
+    0 18px 40px -22px rgb(0 0 0 / 0.7);
+  color: var(--c-on-dark);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  transition:
+    transform 460ms var(--ease-soft),
+    color 320ms var(--ease-soft),
+    border-color 320ms var(--ease-soft),
+    box-shadow 460ms var(--ease-soft);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cta-glass { background: rgb(12 30 8 / 0.72); }
+}
+.cta-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, var(--c-grass-bright) 0%, var(--c-leaf) 55%, var(--c-leaf-soft) 100%);
+  opacity: 0;
+  transform: scaleX(calc(1 - var(--motion-scale)));
+  transform-origin: left center;
+  transition:
+    transform 560ms var(--ease-soft),
+    opacity 220ms var(--ease-soft);
+}
+.cta-glass-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border-radius: calc(var(--r-md) - 0.3rem);
+  background: var(--c-grass-bright);
+  color: var(--c-forest-deep);
+  transition: background-color 320ms var(--ease-soft), color 320ms var(--ease-soft);
+}
+.cta-glass-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 460ms var(--ease-soft);
+}
+
+.cta-glass:hover,
+.cta-glass:focus-visible {
+  color: var(--c-forest-deep);
+  border-color: var(--c-grass-bright);
+  transform: translateY(calc(-2px * var(--motion-scale)));
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--c-grass-bright) 18%, transparent),
+    0 22px 44px -20px color-mix(in srgb, var(--c-grass-bright) 55%, transparent);
+}
+.cta-glass:hover::before,
+.cta-glass:focus-visible::before { opacity: 1; transform: scaleX(1); }
+.cta-glass:hover .cta-glass-icon,
+.cta-glass:focus-visible .cta-glass-icon { background: var(--c-forest-deep); color: var(--c-grass-bright); }
+.cta-glass:hover .cta-glass-icon svg,
+.cta-glass:focus-visible .cta-glass-icon svg {
+  transform: translate(calc(2px * var(--motion-scale)), calc(-2px * var(--motion-scale)));
+}
+.cta-glass:active { transform: translateY(0) scale(calc(1 - 0.015 * var(--motion-scale))); }
+.cta-glass:focus-visible { outline: 2px solid var(--c-leaf); outline-offset: 4px; }
+
+/* Phones and tablets: the header has no room for the address, so the hero
+   carries one small text link to it instead. Desktop has it in the header. */
+.hero-findus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: 2.75rem;
+  font-weight: 700;
+  font-size: var(--t-small);
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  text-decoration-color: color-mix(in srgb, var(--c-leaf) 60%, transparent);
+}
+.on-dark .hero-findus { color: var(--c-on-dark); }
+.on-dark .hero-findus:hover { color: var(--c-leaf); }
+.hero-findus .arrow { width: 0.95em; height: 0.95em; transition: transform var(--d-control) var(--ease-firm); }
+.hero-findus:hover .arrow { transform: translateX(calc(3px * var(--motion-scale))); }
+@media (min-width: 64rem) { .hero-findus { display: none; } }
+
+/* ---- Signature details (desktop) ---------------------------------------------
+   The hand-lettered note leads the eye to the stamp. Both sit bottom-right,
+   over the chairs, below the foliage wall rather than on it. Left out below
+   64rem, where the brief is one headline, one line, one action. */
+.hero-aside {
+  display: none;
+  align-items: center;
+  gap: clamp(0.75rem, 0.2rem + 1vw, 1.25rem);
+}
+@media (min-width: 64rem) { .hero-aside { display: flex; } }
+
+/* Lifted with a margin, not a transform: the entrance clips this box, and a
+   transform would move the lettering out from under its own clip. */
+.hero-note { margin: 0 0 1.75rem; }
+.hero-note svg {
+  display: block;
+  width: clamp(10rem, 5rem + 6vw, 13rem);
+  height: auto;
+  fill: var(--c-cream);
+  opacity: 0.94;
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 2px 10px rgb(4 12 2 / 0.55));
+}
+
+.hero-stamp {
+  width: clamp(6.25rem, 3.5rem + 3.4vw, 7.75rem);
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  color: var(--c-on-dark);
+  background: rgb(10 26 7 / 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.hero-stamp svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-stamp-edge { fill: none; stroke: currentColor; stroke-opacity: 0.38; stroke-width: 1; }
+.hero-stamp-inner {
+  fill: none;
+  stroke: var(--c-leaf);
+  stroke-opacity: 0.55;
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.hero-stamp text { fill: currentColor; fill-opacity: 0.9; }
+.hero-stamp-ring {
+  transform-origin: 60px 60px;
+  animation: stamp-turn 60s linear infinite;
+}
+.hero-stamp-leaf path { fill: var(--c-grass-bright); }
+.hero-stamp-leaf .vein {
+  fill: none;
+  stroke: var(--c-forest-deep);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+@keyframes stamp-turn { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   3. SIGNATURE SHOWCASE - "Find your favourite"
+   --------------------------------------------------------------------------
+   Four photographs stand side by side as slats. The chosen one opens wide,
+   the others stay narrow, and hovering a closed slat widens it a little
+   before it is clicked. A paper card beside the slats carries the dish and
+   the controls. Photographs are only ever scaled and moved a few pixels,
+   never rotated.
+   ========================================================================== */
+@property --wash {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #3f7a28;
+}
+
+#favourites .section-head { margin-bottom: clamp(1.5rem, 0.8rem + 2vw, 2.5rem); }
+
+.fav {
+  --fav-dwell: 2.5s;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
+  /* The wash spills past the grid; clipped sideways so it cannot widen the
+     page on a phone. */
+  overflow-x: clip;
+  padding-block: 1rem;
+  margin-block: -1rem;
+}
+@media (min-width: 64rem) {
+  .fav {
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+/* A soft light behind the slats, tinted by whichever dish is open. The colour
+   is a registered custom property, so it fades between dishes instead of
+   jumping. */
+.fav-wash {
+  position: absolute;
+  inset: 8% 30% 8% 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--wash) 55%, var(--c-grass)),
+    transparent);
+  filter: blur(48px);
+  opacity: 0.38;
+  transition: --wash 900ms var(--ease-soft);
+}
+
+/* ---- The slats ------------------------------------------------------------- */
+.fav-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: clamp(32rem, 140vw, 38rem);
+  touch-action: pan-y;
+}
+@media (min-width: 40rem) {
+  .fav-rail {
+    flex-direction: row;
+    gap: 0.625rem;
+    height: clamp(26rem, 58vw, 34rem);
+  }
+}
+@media (min-width: 64rem) {
+  .fav-rail { height: clamp(32rem, 72vh, 40rem); }
+}
+
+.fav-slat {
+  --grow: 1;
+  position: relative;
+  flex: var(--grow) 1 0;
+  min-width: 0;
+  min-height: 4rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ph, var(--c-shell));
+  color: var(--c-on-dark);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-print);
+  transition:
+    flex-grow 760ms var(--ease-soft),
+    box-shadow 500ms var(--ease-soft);
+}
+@media (min-width: 40rem) {
+  .fav-slat { min-height: 0; min-width: 4.25rem; }
+}
+.fav-slat[aria-selected='true'] {
+  --grow: 5;
+  cursor: default;
+  /* The shadow takes the photograph's own colour. */
+  box-shadow:
+    0 2px 6px color-mix(in srgb, var(--c-ink) 14%, transparent),
+    0 34px 60px -26px color-mix(in srgb, var(--ph, var(--c-ink)) 70%, var(--c-ink));
+}
+@media (hover: hover) and (pointer: fine) {
+  .fav-slat:not([aria-selected='true']):hover { --grow: 1.6; }
+}
+.fav-slat:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.fav-slat:active:not([aria-selected='true']) {
+  scale: calc(1 - 0.015 * var(--motion-scale));
+}
+
+.fav-slat img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  /* Closed slats sit slightly zoomed and muted; the open one resolves. */
+  scale: calc(1 + 0.14 * var(--motion-scale));
+  translate: calc(var(--px, 0) * 1px) calc(var(--py, 0) * 1px);
+  filter: saturate(0.72) brightness(0.86);
+  transition:
+    scale 900ms var(--ease-soft),
+    translate 700ms var(--ease-soft),
+    filter 600ms var(--ease-soft);
+}
+.fav-slat:hover img { filter: saturate(0.95) brightness(0.95); }
+.fav-slat[aria-selected='true'] img {
+  scale: calc(1 + 0.03 * var(--motion-scale));
+  filter: none;
+}
+/* A slow push-in while a dish is open. */
+.fav.is-live .fav-slat[aria-selected='true'] img {
+  animation: fav-push 12s var(--ease-out) both;
+}
+@keyframes fav-push {
+  from { scale: calc(1 + 0.03 * var(--motion-scale)); }
+  to { scale: calc(1 + 0.11 * var(--motion-scale)); }
+}
+
+/* Shade: heavy on a closed slat so its label reads, a low gradient on the
+   open one so the photograph shows. */
+.fav-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgb(9 22 5 / 0.82) 0%, rgb(9 22 5 / 0.35) 38%, transparent 62%),
+    rgb(9 22 5 / 0.4);
+  transition: background-color 600ms var(--ease-soft);
+}
+.fav-slat[aria-selected='true'] .fav-shade {
+  background:
+    linear-gradient(to top, rgb(9 22 5 / 0.62) 0%, rgb(9 22 5 / 0.12) 30%, transparent 48%),
+    rgb(9 22 5 / 0);
+}
+
+/* A soft light that follows the pointer across the open photograph. */
+.fav-glare {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 40%),
+    rgb(255 250 235 / 0.22), transparent 42%);
+  transition: opacity 400ms var(--ease-soft);
+}
+@media (hover: hover) and (pointer: fine) {
+  .fav-slat[aria-selected='true']:hover .fav-glare { opacity: 1; }
+}
+
+.fav-num {
+  position: absolute;
+  top: 0.875rem;
+  left: 0.875rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-cream);
+  background: rgb(9 22 5 / 0.35);
+  border: 1px solid rgb(246 241 228 / 0.35);
+  backdrop-filter: blur(6px);
+  transition: background-color 400ms var(--ease-soft), color 400ms var(--ease-soft);
+}
+.fav-slat[aria-selected='true'] .fav-num {
+  background: var(--c-cream);
+  color: var(--c-canopy);
+  border-color: var(--c-cream);
+}
+/* On a phone a closed slat is a short strip: the number sits at the left,
+   centred on the strip, beside its label. */
+@media (max-width: 39.99rem) {
+  .fav-slat:not([aria-selected='true']) .fav-num {
+    top: 50%;
+    translate: 0 -50%;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* The label of a closed slat. Upright on a phone, where the slat is a wide
+   strip; turned on its side when the slats stand up. */
+.fav-side {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: 0.01em;
+  color: var(--c-cream);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 320ms var(--ease-out) 260ms;
+  left: 3.75rem;
+  top: 50%;
+  translate: 0 -50%;
+}
+@media (min-width: 40rem) {
+  .fav-side {
+    left: 50%;
+    top: auto;
+    bottom: 1.25rem;
+    translate: -50% 0;
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+  }
+}
+.fav-slat[aria-selected='true'] .fav-side {
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out);
+}
+
+/* The open slat's label, carried on a green tag. */
+.fav-tag {
+  position: absolute;
+  left: 1rem;
+  bottom: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.45rem 0.9rem 0.45rem 0.75rem;
+  border-radius: var(--r-pill);
+  background: var(--c-canopy);
+  color: var(--c-cream);
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 0 calc(10px * var(--motion-scale));
+  transition:
+    opacity 200ms var(--ease-out),
+    translate 200ms var(--ease-out);
+}
+.fav-tag::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--c-leaf);
+}
+.fav-slat[aria-selected='true'] .fav-tag {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 420ms var(--ease-soft) 280ms,
+    translate 520ms var(--ease-soft) 280ms;
+}
+
+/* Time left on the open dish, while the showcase plays. */
+.fav-bar {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.65rem;
+  height: 3px;
+  border-radius: 3px;
+  background: rgb(246 241 228 / 0.28);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+}
+.fav-bar i {
+  display: block;
+  height: 100%;
+  background: var(--c-cream);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+.fav.is-playing .fav-slat[aria-selected='true'] .fav-bar { opacity: 1; }
+.fav.is-playing .fav-slat[aria-selected='true'] .fav-bar i {
+  animation: fav-fill var(--fav-dwell) linear both;
+}
+@keyframes fav-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* A cursor label that follows the pointer over a closed slat. */
+.fav-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: -2.25rem 0 0 -2.25rem;
+  border-radius: 50%;
+  background: var(--c-cream);
+  color: var(--c-canopy);
+  box-shadow: var(--shadow-lift);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.4;
+  transition: opacity 220ms var(--ease-out), scale 320ms var(--ease-spring);
+}
+.fav-cursor.is-on { opacity: 1; scale: 1; }
+
+/* ---- The card ---------------------------------------------------------------- */
+.fav-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  min-width: 0;
+  padding: clamp(1.25rem, 0.8rem + 2vw, 2.25rem);
+  border-radius: var(--r-lg);
+  background: var(--c-paper);
+  box-shadow: var(--shadow-print);
+}
+
+/* Four segments, one per dish: done, filling, still to come. */
+.fav-segments {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.375rem;
+}
+.fav-seg {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--rule-green);
+  overflow: hidden;
+}
+.fav-seg i {
+  display: block;
+  height: 100%;
+  background: var(--c-canopy);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 420ms var(--ease-soft);
+}
+.fav-seg.is-done i,
+.fav-seg.is-current i { transform: scaleX(1); }
+.fav.is-playing .fav-seg.is-current i {
+  transition: none;
+  animation: fav-fill var(--fav-dwell) linear both;
+}
+
+.fav-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+.fav-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-canopy);
+  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 96;
+}
+/* The number rolls: the old one leaves in the direction of travel as the new
+   one arrives from the other side. */
+.fav-count-now {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  font-size: clamp(2.5rem, 1.8rem + 2.4vw, 3.75rem);
+  line-height: 1.05;
+}
+.fav-count-now > span { display: block; }
+.fav-count-ghost {
+  position: absolute;
+  inset: 0;
+}
+.fav-count-now.is-rolling [data-sc-count] { animation: fav-roll-in 520ms var(--ease-soft) both; }
+.fav-count-now.is-rolling .fav-count-ghost { animation: fav-roll-out 520ms var(--ease-soft) both; }
+.fav-count-now[data-dir='back'].is-rolling [data-sc-count] { animation-name: fav-roll-in-back; }
+.fav-count-now[data-dir='back'].is-rolling .fav-count-ghost { animation-name: fav-roll-out-back; }
+@keyframes fav-roll-in { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes fav-roll-out { from { transform: none; } to { transform: translateY(-100%); } }
+@keyframes fav-roll-in-back { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes fav-roll-out-back { from { transform: none; } to { transform: translateY(100%); } }
+
+.fav-count .of {
+  font-family: var(--font-body);
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--fg-mute);
+}
+.fav-menu-name {
+  margin: 0 0 0 auto;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--r-pill);
+  background: var(--wash-green-strong);
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--c-canopy);
+  text-align: right;
+  min-width: 0;
+}
+
+/* A reserved height stops the card jumping as descriptions change length. */
+.fav-readout {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+  min-height: 12rem;
+}
+.fav-readout:focus-visible { outline: 3px solid var(--focus); outline-offset: 6px; border-radius: 4px; }
+.fav-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.fav-text {
+  margin: 0;
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+/* Lines leave together, quickly, and come back one after another. */
+.fav .swap {
+  transition:
+    opacity 380ms var(--ease-out),
+    translate 520ms var(--ease-soft),
+    filter 420ms var(--ease-soft);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.fav.is-swapping .swap {
+  opacity: 0;
+  translate: 0 calc(12px * var(--motion-scale));
+  filter: blur(calc(4px * var(--motion-scale)));
+  transition-duration: 140ms;
+  transition-delay: 0ms;
+}
+
+.fav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-4);
+  margin-top: auto;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+.fav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.fav-link .arrow { transition: translate var(--d-control) var(--ease-firm); }
+.fav-link:hover .arrow { translate: calc(4px * var(--motion-scale)) 0; }
+
+.fav-controls { display: flex; align-items: center; gap: var(--s-2); }
+
+/* Play/pause: the ring round the button fills in step with the segments. */
+.fav-play {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--c-canopy);
+  color: var(--c-cream);
+  cursor: pointer;
+  transition: background-color var(--d-control) var(--ease-firm), scale 200ms var(--ease-firm);
+}
+.fav-play:hover { background: var(--c-canopy-deep); }
+.fav-play:active { scale: calc(1 - 0.05 * var(--motion-scale)); }
+.fav-play [data-play-icon] { display: grid; place-items: center; }
+.fav-play [data-play-icon] svg { width: 1.05rem; height: 1.05rem; }
+/* The play triangle's mass sits left of its box; nudged to look centred. */
+.fav-play[aria-pressed='false'] [data-play-icon] { translate: 1px 0; }
+.fav-play-ring {
+  position: absolute;
+  inset: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  max-width: none;
+  pointer-events: none;
+  rotate: -90deg;
+}
+.fav-play-ring circle {
+  fill: none;
+  stroke: var(--c-grass);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 164;
+  stroke-dashoffset: 164;
+  opacity: 0;
+}
+.fav.is-playing .fav-play-ring circle {
+  opacity: 1;
+  animation: fav-ring var(--fav-dwell) linear both;
+}
+@keyframes fav-ring { from { stroke-dashoffset: 164; } to { stroke-dashoffset: 0; } }
+
+/* Every clock holds still while paused. Declared after the rules that start
+   them, and more specific, because their animation shorthand resets the play
+   state. */
+.fav.is-playing.is-paused .fav-slat[aria-selected='true'] .fav-bar i,
+.fav.is-playing.is-paused .fav-seg.is-current i,
+.fav.is-playing.is-paused .fav-play-ring circle { animation-play-state: paused; }
+
+.fav-note { margin: 0; }
+
+.fav-static { list-style: none; }
+
+/* ==========================================================================
+   4. WHAT WE SERVE
+   --------------------------------------------------------------------------
+   Narrow screens: a strip of chips over a deck of cards that is swiped
+   sideways, so four categories cost one card's worth of scrolling. From
+   64rem: the chips become a tall menu board and the cards share one cell,
+   changing in place as the board is pointed at.
+
+   Everything that hides a card or stacks the deck is gated on `.is-ready`,
+   which only scripts/serve.js sets. Without it the deck is a plain row of
+   complete cards at every width.
+   ========================================================================== */
+.serve {
+  position: relative;
+  display: grid;
+  gap: var(--s-5);
+}
+
+/* ---- The index: chips ------------------------------------------------------ */
+.serve-index {
+  position: relative;
+  display: flex;
+  gap: var(--s-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--pad-gutter));
+  padding: 0.25rem var(--pad-gutter);
+}
+.serve-index::-webkit-scrollbar { display: none; }
+
+/* One shape slides between tabs, rather than each tab filling on its own. It
+   is created by the script, so it only exists where it can be moved. */
+.serve-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: var(--w, 0);
+  height: var(--h, 0);
+  translate: var(--x, 0) var(--y, 0);
+  border-radius: var(--r-pill);
+  background: var(--c-canopy);
+  pointer-events: none;
+}
+.serve-indicator.is-measured {
+  transition:
+    translate 520ms var(--ease-soft),
+    width 520ms var(--ease-soft),
+    height 520ms var(--ease-soft);
+}
+
+.serve-tab {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: max(2.75rem, 44px);
+  padding: 0.3rem 1rem 0.3rem 0.3rem;
+  border-radius: var(--r-pill);
+  background-color: var(--c-paper);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-ink) 10%, transparent);
+  color: var(--fg);
+  font-size: var(--t-small);
+  font-weight: 700;
+  text-align: left;
+  transition:
+    color 260ms var(--ease-firm) 120ms,
+    box-shadow var(--d-control) var(--ease-firm),
+    scale 160ms var(--ease-firm);
+}
+.serve-tab:active { scale: 0.97; }
+/* The selected tab takes the indicator's colour itself once the indicator has
+   arrived, so the settled state is an ordinary solid control. */
+.serve-tab[aria-selected='true'] {
+  background-color: var(--c-canopy);
+  box-shadow: none;
+  color: var(--c-cream);
+  transition:
+    color 260ms var(--ease-firm) 120ms,
+    background-color 1ms linear 500ms,
+    scale 160ms var(--ease-firm);
+}
+.serve-tab-thumb {
+  flex: none;
+  display: block;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--ph, var(--c-shell));
+}
+.serve-tab-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.serve-tab-num,
+.serve-tab-meta,
+.serve-tab-go { display: none; }
+
+/* ---- The deck ------------------------------------------------------------ */
+.serve-deck {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(86%, 26rem);
+  align-items: stretch;
+  gap: var(--s-4);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad-gutter);
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--pad-gutter));
+  /* Room below for the card shadow, which the scroller would otherwise clip. */
+  padding: 0.5rem var(--pad-gutter) 1.5rem;
+}
+.serve-deck::-webkit-scrollbar { display: none; }
+@media (min-width: 40rem) {
+  .serve-deck { grid-auto-columns: min(62%, 30rem); }
+}
+
+.serve-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem;
+  border-radius: var(--r-lg);
+  background: var(--c-paper);
+  box-shadow: var(--shadow-print);
+  scroll-snap-align: start;
+  transition:
+    scale 460ms var(--ease-soft),
+    opacity 460ms var(--ease-soft),
+    box-shadow var(--d-control) var(--ease-firm);
+}
+
+/* The cards either side of the current one step back. Dimmed, not shrunk:
+   scaling a card would take its links below a 44px target. */
+@media (max-width: 63.99rem) {
+  .serve.is-ready .serve-card:not(.is-current) { opacity: 0.7; }
+}
+
+/* A one-off nudge the first time the deck is seen, to show it moves. */
+@keyframes serve-peek {
+  0%, 100% { translate: 0 0; }
+  45% { translate: calc(-2.5rem * var(--motion-scale)) 0; }
+}
+.serve.is-hinting .serve-card { animation: serve-peek 1000ms var(--ease-soft); }
+
+/* ---- Card media ------------------------------------------------------------ */
+.serve-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: calc(var(--r-lg) - 0.6rem);
+  overflow: hidden;
+  background: var(--ph, var(--c-shell));
+  isolation: isolate;
+}
+.serve-media::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: 55%;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--c-forest-deep) 62%, transparent),
+    transparent);
+  pointer-events: none;
+}
+.serve-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 1.06;
+  translate: calc(var(--mx, 0) * 1px) calc(var(--my, 0) * 1px);
+  transition:
+    opacity 520ms var(--ease-out),
+    scale 900ms var(--ease-soft),
+    translate 700ms var(--ease-soft);
+}
+.serve-img.is-b,
+.serve-card.is-flipped .serve-img.is-a { opacity: 0; scale: 1.16; }
+.serve-card.is-flipped .serve-img.is-b { opacity: 1; scale: 1.06; }
+
+/* The number is outlined type, and floats against the photograph. */
+.serve-stamp {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.2rem;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 2.2rem + 4vw, 6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--c-cream) 88%, transparent);
+  translate: calc(var(--mx, 0) * -1.6px) calc(var(--my, 0) * -1.6px);
+  transition: translate 700ms var(--ease-soft);
+  pointer-events: none;
+}
+
+/* The second photograph, as a print tucked into the corner. Pressing it
+   swaps the two. */
+.serve-swap {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 3;
+  width: clamp(4rem, 3rem + 3.5vw, 5.75rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--c-paper);
+  box-shadow: 0 0 0 3px var(--c-paper), var(--shadow-lift);
+  cursor: pointer;
+  translate: calc(var(--mx, 0) * -2.2px) calc(var(--my, 0) * -2.2px);
+  transition:
+    scale 420ms var(--ease-spring),
+    translate 700ms var(--ease-soft);
+}
+.serve-swap:hover { scale: calc(1 + 0.07 * var(--motion-scale)); }
+.serve-swap:active { scale: calc(1 - 0.06 * var(--motion-scale)); }
+.serve-swap:focus-visible { outline-offset: 5px; }
+.serve-swap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 360ms var(--ease-out), scale 560ms var(--ease-soft);
+}
+.serve-swap .is-b,
+.serve-card.is-flipped .serve-swap .is-a { opacity: 0; scale: 1.25; }
+.serve-card.is-flipped .serve-swap .is-b { opacity: 1; scale: 1; }
+.serve-swap-icon {
+  position: absolute;
+  right: 0.3rem;
+  top: 0.3rem;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--c-paper);
+  color: var(--c-canopy);
+  box-shadow: var(--shadow-print);
+  transition: rotate 520ms var(--ease-soft);
+}
+.serve-swap-icon svg { width: 0.85rem; height: 0.85rem; }
+.serve-swap:hover .serve-swap-icon,
+.serve-card.is-flipped .serve-swap-icon { rotate: calc(180deg * var(--motion-scale)); }
+
+/* ---- Card body ------------------------------------------------------------- */
+.serve-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-3) var(--s-3);
+}
+.serve-count {
+  margin: 0;
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.serve-count strong { font-variant-numeric: tabular-nums; }
+.serve-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'SOFT' 28, 'WONK' 1, 'opsz' 72;
+}
+.serve-text {
+  margin: 0;
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+  text-wrap: pretty;
+}
+
+.serve-lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.4rem;
+  margin: var(--s-1) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.serve-lists a {
+  display: inline-flex;
+  align-items: center;
+  /* 44px to press, a little less to look at: the transparent borders are
+     part of the target but the fill stops at the padding. */
+  min-height: max(2.75rem, 44px);
+  padding: 0.2rem 0.75rem;
+  border-block: 0.25rem solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--r-pill);
+  background: var(--c-shell);
+  color: var(--fg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color var(--d-control) var(--ease-firm),
+    translate var(--d-control) var(--ease-firm);
+}
+.serve-lists a:hover {
+  background: var(--c-leaf-soft);
+  color: var(--fg);
+  translate: 0 calc(-2px * var(--motion-scale));
+}
+.serve-lists a.is-more {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-canopy) 40%, transparent);
+  color: var(--accent-text);
+}
+.serve-lists a.is-more:hover { background: var(--c-leaf-soft); }
+
+.serve-go {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: max(2.75rem, 44px);
+  margin-top: auto;
+  font-size: var(--t-small);
+  font-weight: 700;
+  color: var(--accent-text);
+  text-decoration: none;
+}
+.serve-go .arrow { transition: translate var(--d-control) var(--ease-firm); }
+.serve-go:hover .arrow,
+.serve-go:focus-visible .arrow { translate: calc(4px * var(--motion-scale)) 0; }
+
+/* ---- Position ------------------------------------------------------------ */
+.serve-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: calc(-1 * var(--s-3));
+  font-size: var(--t-small);
+  font-weight: 700;
+  color: var(--fg-mute);
+}
+.serve-progress-count { font-variant-numeric: tabular-nums; color: var(--fg); }
+.serve-dots { display: flex; gap: 0.35rem; }
+.serve-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--c-ink) 20%, transparent);
+  transition: width 460ms var(--ease-soft), background-color 260ms var(--ease-firm);
+}
+.serve-dot.is-current { width: 1.6rem; background: var(--c-canopy); }
+.serve-hint { margin-left: auto; font-size: 0.8125rem; font-weight: 600; }
+.serve-hint::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 0.35em;
+}
+@keyframes serve-hint {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0.3rem 0; }
+}
+.serve.is-live:not(.is-touched) .serve-hint::after {
+  animation: serve-hint 1400ms var(--ease-soft) infinite;
+}
+.serve.is-touched .serve-hint { opacity: 0; transition: opacity 400ms var(--ease-out); }
+
+/* ==========================================================================
+   Wide: the menu board
+   ========================================================================== */
+@media (min-width: 64rem) {
+  .serve {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    column-gap: clamp(2rem, 4vw, 4.5rem);
+    align-items: stretch;
+  }
+  .serve-progress { display: none; }
+
+  .serve-index {
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+  .serve-indicator {
+    border-radius: var(--r-lg);
+    background: var(--c-forest);
+    box-shadow: 0 26px 48px -26px color-mix(in srgb, var(--c-forest-deep) 80%, transparent);
+  }
+
+  .serve-tab {
+    flex: 1 1 0;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto 3rem;
+    grid-template-areas:
+      'num name thumb go'
+      'num meta thumb go';
+    align-content: center;
+    column-gap: var(--s-4);
+    row-gap: 0.1rem;
+    min-height: 6.5rem;
+    padding: var(--s-4) var(--s-5);
+    border-radius: var(--r-lg);
+    background-color: transparent;
+    box-shadow: none;
+  }
+  /* Hairlines between rows, which give way around the selected one. */
+  .serve-tab::after {
+    content: '';
+    position: absolute;
+    left: var(--s-5);
+    right: var(--s-5);
+    bottom: 0;
+    height: 1px;
+    background: color-mix(in srgb, var(--c-ink) 14%, transparent);
+    transition: opacity var(--d-control) var(--ease-firm);
+  }
+  .serve-tab:last-child::after,
+  .serve-tab[aria-selected='true']::after,
+  .serve-tab:has(+ .serve-tab[aria-selected='true'])::after { opacity: 0; }
+
+  .serve-tab[aria-selected='true'] { background-color: var(--c-forest); }
+
+  .serve-tab-num {
+    grid-area: num;
+    display: block;
+    align-self: center;
+    font-size: var(--t-small);
+    font-variant-numeric: tabular-nums;
+    color: var(--fg-mute);
+    transition: color 260ms var(--ease-firm) 120ms;
+  }
+  .serve-tab-name {
+    grid-area: name;
+    align-self: end;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 0.9rem + 2.2vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-variation-settings: 'SOFT' 28, 'WONK' 1, 'opsz' 96;
+    transition: translate 460ms var(--ease-soft);
+  }
+  .serve-tab-meta {
+    grid-area: meta;
+    display: block;
+    align-self: start;
+    font-weight: 600;
+    color: var(--fg-mute);
+    transition: color 260ms var(--ease-firm) 120ms, translate 460ms var(--ease-soft) 30ms;
+  }
+  .serve-tab-thumb {
+    grid-area: thumb;
+    align-self: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: var(--r-md);
+    opacity: 0;
+    scale: 0.5;
+    transition: opacity 260ms var(--ease-out), scale 520ms var(--ease-spring);
+  }
+  .serve-tab-go {
+    grid-area: go;
+    display: grid;
+    place-items: center;
+    align-self: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-ink) 20%, transparent);
+    transition: background-color 260ms var(--ease-firm) 120ms, color 260ms var(--ease-firm) 120ms;
+  }
+  .serve-tab-go svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    rotate: calc(-45deg * var(--motion-scale));
+    transition: rotate 520ms var(--ease-soft);
+  }
+
+  .serve-tab:not([aria-selected='true']):hover .serve-tab-name,
+  .serve-tab:not([aria-selected='true']):hover .serve-tab-meta { translate: calc(0.5rem * var(--motion-scale)) 0; }
+  .serve-tab[aria-selected='true'] .serve-tab-num { color: var(--c-leaf); }
+  .serve-tab[aria-selected='true'] .serve-tab-meta { color: var(--c-on-dark-mute); }
+  .serve-tab[aria-selected='true'] .serve-tab-thumb { opacity: 1; scale: 1; }
+  .serve-tab[aria-selected='true'] .serve-tab-go {
+    background-color: var(--c-leaf);
+    color: var(--c-forest-deep);
+    box-shadow: none;
+  }
+  .serve-tab[aria-selected='true'] .serve-tab-go svg { rotate: 0deg; }
+
+  /* The deck becomes one cell. Only with the script: without it, stacking
+     the cards would lay them on top of each other. */
+  .serve.is-ready .serve-deck {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .serve.is-ready .serve-card {
+    grid-area: 1 / 1;
+    padding: 0.75rem;
+  }
+  .serve.is-ready .serve-card:not(.is-current) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 240ms var(--ease-out), visibility 0s linear 240ms;
+  }
+  .serve-media { aspect-ratio: 16 / 9; border-radius: calc(var(--r-lg) - 0.75rem); }
+  .serve-body { padding: var(--s-5) var(--s-4) var(--s-3); }
+
+  /* Arriving card: the photograph opens out from a smaller frame and the text
+     follows it in, one line after another. */
+  @keyframes serve-open {
+    from { clip-path: inset(calc(9% * var(--motion-scale)) calc(7% * var(--motion-scale)) round var(--r-lg)); }
+    to   { clip-path: inset(0 round 0); }
+  }
+  @keyframes serve-settle {
+    from { scale: calc(1.06 + 0.14 * var(--motion-scale)); }
+  }
+  @keyframes serve-rise {
+    from { opacity: 0; translate: 0 calc(0.9rem * var(--motion-scale)); }
+  }
+  .serve.is-live .serve-card.is-current .serve-media { animation: serve-open 780ms var(--ease-soft) backwards; }
+  .serve.is-live .serve-card.is-current .serve-img { animation: serve-settle 1100ms var(--ease-soft) backwards; }
+  .serve.is-live .serve-card.is-current :is(.serve-stamp, .serve-swap) { animation: serve-rise 620ms var(--ease-soft) 180ms backwards; }
+  .serve.is-live .serve-card.is-current .serve-body > * { animation: serve-rise 560ms var(--ease-soft) backwards; }
+  .serve.is-live .serve-card.is-current .serve-body > :nth-child(1) { animation-delay: 90ms; }
+  .serve.is-live .serve-card.is-current .serve-body > :nth-child(2) { animation-delay: 140ms; }
+  .serve.is-live .serve-card.is-current .serve-body > :nth-child(3) { animation-delay: 190ms; }
+  .serve.is-live .serve-card.is-current .serve-body > :nth-child(4) { animation-delay: 240ms; }
+  .serve.is-live .serve-card.is-current .serve-body > :nth-child(5) { animation-delay: 290ms; }
+}

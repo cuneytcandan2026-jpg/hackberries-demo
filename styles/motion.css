@@ -1,0 +1,524 @@
+/* ==========================================================================
+   Hackberries - motion
+   --------------------------------------------------------------------------
+   All entrance and reveal behaviour lives here, kept separate from layout.
+
+   Three rules govern the whole file:
+
+   1. CONTENT IS VISIBLE BY DEFAULT. Reveal states are only applied to elements
+      that JavaScript has marked with `data-reveal-ready`, which it sets only
+      after the observer is successfully wired. If the script fails, is blocked
+      or never runs, nothing is left hidden.
+
+   2. REDUCED MOTION IS A DESIGNED ALTERNATIVE, NOT A BROKEN LAYOUT. The
+      `--motion-scale` multiplier collapses translation to zero while opacity
+      and colour transitions remain, so interfaces still acknowledge input.
+      `html[data-motion='reduced']` is set by scripts/motion.js and tracks
+      changes to the preference live, so it is honoured in JS as well as CSS.
+
+   3. NOT EVERYTHING MOVES THE SAME WAY. Reveals are typed - rise, drop, from
+      the left or right, scale, or a clip wipe for photography - so a section
+      arrives as a composition rather than as one uniform fade-up. Each
+      section picks the variant that suits its own geometry; the type is set
+      in the markup by tools/build-html.mjs.
+   ========================================================================== */
+
+/* ==========================================================================
+   Scroll reveal
+   --------------------------------------------------------------------------
+   `--rv-*` are the per-variant start offsets. The shared rule below reads
+   them, so adding a variant means declaring three custom properties, not
+   duplicating a transition.
+   ========================================================================== */
+[data-reveal][data-reveal-ready],
+[data-reveal-group][data-reveal-ready] > * {
+  --rv-x: 0px;
+  --rv-y: 20px;
+  --rv-scale: 1;
+  opacity: 0;
+  transition:
+    opacity var(--d-reveal) var(--ease-soft),
+    transform var(--d-reveal) var(--ease-soft);
+  /* Delay is staggered by --i, which scripts/motion.js sets on group children.
+     Capped at three steps so a long row never becomes a slow cascade. */
+  transition-delay: calc(var(--stagger) * min(var(--i, 0), 3) + var(--rv-delay, 0ms));
+}
+
+/* The transform is written by a SEPARATE rule that excludes the "fade"
+   variant. A reveal's transform necessarily overrides whatever transform the
+   component already had, which silently destroys any component that positions
+   itself with one - the collage prints' resting tilt and drag offset being the
+   obvious case. Those components take `fade`, and keep their own transform. */
+[data-reveal][data-reveal-ready]:not([data-reveal='fade']),
+[data-reveal-group][data-reveal-ready]:not([data-reveal-group='fade']) > * {
+  transform:
+    translate3d(
+      calc(var(--rv-x) * var(--motion-scale)),
+      calc(var(--rv-y) * var(--motion-scale)),
+      0)
+    scale(calc(1 - (1 - var(--rv-scale)) * var(--motion-scale)));
+}
+
+[data-reveal][data-reveal-ready].is-revealed,
+[data-reveal-group][data-reveal-ready].is-revealed > * {
+  opacity: 1;
+}
+[data-reveal][data-reveal-ready].is-revealed:not([data-reveal='fade']),
+[data-reveal-group][data-reveal-ready].is-revealed:not([data-reveal-group='fade']) > * {
+  transform: none;
+}
+
+/* "fade": opacity only, for anything that owns its own transform. */
+[data-reveal='fade'][data-reveal-ready],
+[data-reveal-group='fade'][data-reveal-ready] > * { --rv-y: 0px; }
+
+/* ---- Variants ------------------------------------------------------------- */
+/* Default (no value, or "up"): a short rise. */
+[data-reveal='drop'][data-reveal-ready],
+[data-reveal-group='drop'][data-reveal-ready] > * { --rv-y: -18px; }
+
+/* Sideways entrances are sized by --rv-shift, which is zero below the
+   two-column breakpoint. Driving it from one custom property rather than
+   overriding --rv-x per variant in a media query matters: the `fan` variant's
+   :nth-child selectors outrank a plain attribute selector, so a media-query
+   override of --rv-x silently lost to them and the panels kept sliding
+   sideways on a phone. */
+:root { --rv-shift: 0px; }
+@media (min-width: 64rem) { :root { --rv-shift: 34px; } }
+
+[data-reveal='left'][data-reveal-ready],
+[data-reveal-group='left'][data-reveal-ready] > * {
+  --rv-x: calc(var(--rv-shift) * -1);
+  --rv-y: 0px;
+}
+
+[data-reveal='right'][data-reveal-ready],
+[data-reveal-group='right'][data-reveal-ready] > * {
+  --rv-x: var(--rv-shift);
+  --rv-y: 0px;
+}
+
+/* For photography and framed prints: grows the last fraction into place.
+   Deliberately scales UP from slightly small rather than DOWN from slightly
+   large. A full-width element starting at 1.045 sits 2% past each edge of the
+   viewport, which widened the page for every visitor who had not yet scrolled
+   past it. Starting under 1 cannot overflow anything. */
+[data-reveal='scale'][data-reveal-ready],
+[data-reveal-group='scale'][data-reveal-ready] > * { --rv-scale: 0.955; --rv-y: 14px; }
+
+/* A clip wipe up the frame. Used where the element is a photograph, so the
+   image is uncovered rather than faded - it reads as printing, not loading.
+
+   The clip-path is declared ONLY for this variant. Applying `clip-path:
+   inset(0)` to every revealed element (as the shared rule originally did)
+   clips anything that deliberately overflows its own box - which silently
+   sliced the corner off a deliberately overhanging badge. */
+[data-reveal='wipe'][data-reveal-ready],
+[data-reveal-group='wipe'][data-reveal-ready] > * {
+  --rv-y: 12px;
+  --rv-scale: 0.985;
+  clip-path: inset(0 0 calc(100% * var(--motion-scale)) 0);
+  transition:
+    opacity var(--d-reveal) var(--ease-soft),
+    transform var(--d-reveal) var(--ease-soft),
+    clip-path var(--d-reveal) var(--ease-soft);
+}
+[data-reveal='wipe'][data-reveal-ready].is-revealed,
+[data-reveal-group='wipe'][data-reveal-ready].is-revealed > * {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Alternating: odd children come from the left, even from the right. Used on
+   the menu panels, where the two columns already sit at different heights. */
+[data-reveal-group='fan'][data-reveal-ready] > :nth-child(odd) {
+  --rv-x: calc(var(--rv-shift) * -0.76);
+  --rv-y: 22px;
+}
+[data-reveal-group='fan'][data-reveal-ready] > :nth-child(even) {
+  --rv-x: calc(var(--rv-shift) * 0.76);
+  --rv-y: 34px;
+}
+
+/* The eyebrow's fresh-green rule draws itself in once its section arrives. */
+[data-reveal-ready] .eyebrow::before,
+[data-reveal-ready].eyebrow::before { --eyebrow-rule: 0; }
+[data-reveal-ready].is-revealed .eyebrow::before,
+[data-reveal-ready].is-revealed.eyebrow::before { --eyebrow-rule: 1; }
+
+/* ---- Headline line reveal -------------------------------------------------- */
+/* Any heading marked up as masked lines rises line by line out of its own
+   overflow box. Shared by the hero and the large section headings. */
+[data-lines][data-reveal-ready] .line { display: block; overflow: hidden; }
+[data-lines][data-reveal-ready] .line > span {
+  display: block;
+  transform: translateY(calc(105% * var(--motion-scale)));
+  transition: transform var(--d-hero-text) var(--ease-soft);
+  transition-delay: calc(var(--stagger) * var(--i, 0));
+}
+[data-lines][data-reveal-ready].is-revealed .line > span { transform: translateY(0); }
+
+/* ==========================================================================
+   Hero entrance
+   --------------------------------------------------------------------------
+   One unhurried sequence, nothing bouncing: the photograph settles from very
+   slightly oversize while the headline rises line by line, then the
+   supporting line, the call to action, the hand-lettered note (which writes
+   itself left to right), the stamp, and last the scroll cue (brew.css).
+   The header rules draw outward independently (components.css).
+
+   Menu access is never gated on it. The CTA is interactive from first paint,
+   and `data-hero-ready` - the attribute that arms the hiding styles - is only
+   ever set by scripts/main.js, so without JavaScript the hero is simply there.
+   The photograph is never hidden, only scaled, so it paints (and counts as
+   the LCP) immediately.
+   ========================================================================== */
+.hero[data-hero-ready] .hero-photo img {
+  transform: scale(calc(1 + 0.08 * var(--motion-scale)));
+  transition: transform 2800ms cubic-bezier(0.19, 0.72, 0.22, 1);
+}
+.hero[data-hero-ready].is-in .hero-photo img { transform: scale(1); }
+
+.hero[data-hero-ready] h1 .line > span {
+  transform: translateY(calc(105% * var(--motion-scale)));
+  transition: transform 980ms var(--ease-soft);
+  transition-delay: calc(220ms + var(--i, 0) * 120ms);
+}
+.hero[data-hero-ready].is-in h1 .line > span { transform: translateY(0); }
+
+.hero[data-hero-ready] .hero-lead,
+.hero[data-hero-ready] .hero-actions,
+.hero[data-hero-ready] .hero-stamp {
+  opacity: 0;
+  transform: translateY(calc(16px * var(--motion-scale)));
+  transition:
+    opacity 800ms var(--ease-soft),
+    transform 800ms var(--ease-soft);
+}
+.hero[data-hero-ready] .hero-lead { transition-delay: 640ms; }
+.hero[data-hero-ready] .hero-actions { transition-delay: 780ms; }
+.hero[data-hero-ready] .hero-stamp { transition-delay: 1150ms; }
+.hero[data-hero-ready].is-in .hero-lead,
+.hero[data-hero-ready].is-in .hero-actions,
+.hero[data-hero-ready].is-in .hero-stamp { opacity: 1; transform: none; }
+
+/* The note is revealed like ink: a clip that opens left to right. At
+   --motion-scale 0 the clip starts open and only the fade remains. */
+.hero[data-hero-ready] .hero-note {
+  opacity: 0;
+  /* Generous rem margins, because the lettering is rotated past its box. */
+  clip-path: inset(-2rem calc(100% * var(--motion-scale)) -2rem -1rem);
+  transition:
+    opacity 300ms var(--ease-soft) 1250ms,
+    clip-path 1300ms cubic-bezier(0.45, 0.1, 0.3, 1) 1250ms;
+}
+.hero[data-hero-ready].is-in .hero-note { opacity: 1; clip-path: inset(-2rem -2rem -2rem -1rem); }
+
+/* ==========================================================================
+   Cross-document view transitions
+   --------------------------------------------------------------------------
+   The site is two documents. Moving between them used to be a hard cut, which
+   threw away the fact that the header and the page title are the same
+   furniture in both. `navigation: auto` lets the browser animate the
+   navigation instead of repainting it.
+
+   Strictly progressive: a browser without cross-document view transitions
+   ignores the at-rule and every ::view-transition-* selector below, and gets
+   exactly today's behaviour. Nothing here is required for the pages to work.
+
+   NAMING. A view-transition-name must be UNIQUE within a document, so these
+   are either one-per-page elements (the header, the h1) or generated per
+   category by tools/build-html.mjs. Names are plain custom idents rather than
+   dashed idents (`vt-header`, not `--vt-header`) because dashed idents landed
+   in engines later, and there is no benefit here to being early.
+   ========================================================================== */
+@view-transition { navigation: auto; }
+
+/* Shared furniture. The header is the same component on both pages, so it
+   morphs rather than being torn down and rebuilt; on the homepage it is
+   transparent over the hero and on the menu page it is solid, which the
+   morph cross-fades for free. */
+.site-header { view-transition-name: vt-header; }
+
+/* The page title. Two different headings, deliberately given ONE name: the
+   homepage's "hero" h1 and the menu page's h1 are the same slot in the
+   hierarchy, so the large type travels between them instead of one fading
+   out while the other fades in somewhere else. */
+.hero h1,
+.m-hero h1 { view-transition-name: vt-page-title; }
+
+/* Timings, so a navigation feels like the rest of the site rather than like
+   the browser default. The root cross-fade is kept shorter than the morphing
+   furniture, so the page beneath settles first. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-soft);
+}
+::view-transition-group(*) {
+  animation-duration: var(--d-reveal);
+  animation-timing-function: var(--ease-soft);
+}
+
+/* Reduced motion: no navigation animation at all. This has to be the media
+   query rather than the --motion-scale token, because an at-rule cannot read
+   a custom property. The runtime attribute is handled further down as well,
+   for a preference switched on mid-session. */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* ==========================================================================
+   Scroll-linked motion
+   --------------------------------------------------------------------------
+   Everything in the reveal system above is scroll-TRIGGERED: the observer
+   fires once, the class lands, the element unobserves. This section is the
+   small amount of genuinely scroll-COUPLED movement - tied to scroll
+   position, reversible, no JavaScript scroll handler anywhere.
+
+   Gated behind @supports for a real reason, not caution: `animation-timeline`
+   is ignored by browsers that do not implement it, but `animation-name` is
+   NOT. Declaring these outside the guard would run them as ordinary
+   time-based animations in older engines - the drift would play once, at
+   load, at full speed, which is precisely the opposite of the intent.
+
+   Both keyframe sets multiply their travel by --motion-scale, so at 0 the
+   two ends of every animation are identical and nothing moves.
+   ========================================================================== */
+/* Registered so it interpolates smoothly. An unregistered custom property
+   animates discretely - it would jump rather than drift. The fallback in the
+   consuming declaration covers browsers without @property, which are also
+   browsers without scroll-driven animations, so they simply get 0%. */
+@property --atmos-pan {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+@keyframes atmos-pan {
+  from { --atmos-pan: calc(-9% * var(--motion-scale)); }
+  to   { --atmos-pan: calc(9% * var(--motion-scale)); }
+}
+
+/* The hero photograph drifts down at a fraction of scroll speed as the hero
+   leaves, and the copy lifts and fades a little faster - the two layers
+   separate, which is what reads as depth. */
+@keyframes hero-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, calc(24% * var(--motion-scale)), 0); }
+}
+@keyframes hero-lift {
+  from { transform: translate3d(0, 0, 0); opacity: 1; }
+  to   { transform: translate3d(0, calc(-10vh * var(--motion-scale)), 0); opacity: calc(1 - 0.75 * var(--motion-scale)); }
+}
+
+@keyframes eyebrow-draw {
+  from { transform: scaleX(calc(1 - var(--motion-scale))); }
+  to   { transform: scaleX(1); }
+}
+
+@supports (animation-timeline: view()) {
+  /* view() on .hero-media resolves against the page: .hero clips with
+     `overflow: clip`, which (unlike hidden) creates no scroll container. The
+     `exit` range runs from the hero filling the screen to it leaving. */
+  .hero-media {
+    animation: hero-drift linear both;
+    animation-timeline: view();
+    animation-range: exit;
+  }
+  .hero-inner {
+    animation: hero-lift linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 80%;
+  }
+
+  /* The café stack: the largest photography on the site. The drift is applied
+     as `object-position`, NOT as a transform, for two independent reasons.
+     First, .atmos-print already carries a transform (its resting tilt and
+     fanned offset, swapped by scripts/atmosphere.js) and an animation would
+     overwrite it - the same class of bug the `fade` reveal variant exists to
+     avoid. Second, a transform drift needs the image scaled up to have room
+     to move into, and every supplied original is only 600-800px on the long
+     edge; upscaling them is the one thing this design cannot afford.
+     `object-fit: cover` has already cropped these images, so the slack being
+     panned through is real image data, at native resolution.
+
+     THE TIMELINE IS DELIBERATELY NOT ON THE IMAGE. `view()` resolves against
+     the subject's nearest ancestor SCROLL CONTAINER, and `overflow: hidden`
+     makes one - so an animation on the img inside .atmos-print (which clips)
+     anchors to that box, which never scrolls, and the timeline sits frozen at
+     50% forever. It looks like it works: the animation is running, the
+     keyframes are correct, the progress simply never changes. So the timeline
+     lives on .atmos-stack, which nothing clips, and the value inherits down.
+     (`overflow-x: clip` on .section is fine here - unlike `hidden`, `clip`
+     does not create a scroll container. That is a second reason to keep it.) */
+  .atmos-stack {
+    animation: atmos-pan linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+
+  /* The eyebrow rules now draw with scroll position instead of on a fixed
+     delay after their section arrives. Same start and end state as the
+     --eyebrow-rule transition it supersedes, so nothing looks different at
+     rest; it is the middle that is now under the reader's control.
+     Still gated on [data-reveal-ready], so a page whose JavaScript never ran
+     keeps full-width rules rather than collapsed ones. */
+  [data-reveal-ready] .eyebrow::before,
+  [data-reveal-ready].eyebrow::before {
+    animation: eyebrow-draw linear both;
+    animation-timeline: view();
+    animation-range: entry 25% cover 20%;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   --------------------------------------------------------------------------
+   Layered so it works whether the preference comes from the media query or
+   from the runtime attribute (which also covers a mid-session change).
+
+   Everything below keeps the SAME final state. Nothing is hidden, no layout
+   changes, and every control still acknowledges input with a colour change -
+   only travel, rotation, spin and autoplay are removed.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-scale: 0; }
+}
+
+html[data-motion='reduced'] { --motion-scale: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  /* Continuous decorative movement stops entirely. */
+  .hero-stamp-ring,
+  .header-rule { animation: none; }
+
+  /* Entrances become a short, calm fade with no travel and no stagger. */
+  [data-reveal][data-reveal-ready],
+  [data-reveal-group][data-reveal-ready] > * {
+    transition-duration: 240ms;
+    transition-delay: 0ms;
+  }
+  [data-reveal='wipe'][data-reveal-ready],
+  [data-reveal-group='wipe'][data-reveal-ready] > * { clip-path: none; }
+  [data-lines][data-reveal-ready] .line > span,
+  .hero[data-hero-ready] h1 .line > span {
+    transform: none;
+    transition: none;
+  }
+  .hero[data-hero-ready] .hero-photo img { transition: none; }
+  .hero[data-hero-ready] .hero-lead,
+  .hero[data-hero-ready] .hero-actions,
+  .hero[data-hero-ready] .hero-stamp,
+  .hero[data-hero-ready] .hero-note {
+    clip-path: none;
+    transition-duration: 240ms;
+    transition-delay: 0ms;
+  }
+
+  /* The slats change instantly: no widening, no push-in, no rolling count. */
+  .fav-slat, .fav-slat img, .fav-tag, .fav-side, .fav-seg i, .fav .swap { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+  .fav-slat img { animation: none !important; }
+  .fav-wash { transition: none; }
+
+  /* The menu board: no opening frame, no nudge, no sliding indicator. */
+  .serve-card, .serve-card *, .serve-indicator, .serve-dot, .serve-tab, .serve-tab * { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+  .serve-card, .serve-card *, .serve-hint::after { animation: none !important; }
+
+  /* Prints settle into place without travel. */
+  .atmos-print,
+  .print,
+  .print.is-settling { transition-duration: 220ms; }
+
+  /* The pointer preview is disabled outright under reduced motion, and the
+     static thumbnail takes its place. The thumbnail occupies the index
+     column, so the numeral steps aside — otherwise the row has five children
+     in a four-column grid and the button wraps onto its own line. */
+  .row-preview { display: none; }
+  .row-thumb { display: block; }
+  .row-index { display: none; }
+
+  /* Decorative fills that sweep become plain colour changes. */
+  .btn::after,
+  .row-link::after { transition-duration: 1ms; }
+
+  .dock,
+  .utility-strip { transition-duration: 1ms; }
+  .dock-indicator { transition: none; }
+
+  /* Scroll-coupled movement stops entirely. The keyframes above already
+     collapse to nothing at --motion-scale: 0, so this is belt and braces -
+     but it also hands the eyebrow rules back to their transition, which is
+     the behaviour this mode had before scroll-linking existed. */
+  .atmos-stack,
+  .hero-media,
+  .hero-inner,
+  [data-reveal-ready] .eyebrow::before,
+  [data-reveal-ready].eyebrow::before { animation: none; }
+
+  /* A navigation that is already animating when the preference flips should
+     finish immediately rather than mid-morph. `navigation: none` above stops
+     new ones from starting. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation-duration: 1ms; }
+}
+
+html[data-motion='reduced'] .hero-stamp-ring,
+html[data-motion='reduced'] .header-rule { animation: none; }
+html[data-motion='reduced'] :is(.fav-slat, .fav-slat img, .fav-tag, .fav-side, .fav-seg i, .fav .swap) { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+html[data-motion='reduced'] .fav-slat img { animation: none !important; }
+html[data-motion='reduced'] :is(.serve-card, .serve-card *, .serve-indicator, .serve-dot, .serve-tab, .serve-tab *) { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+html[data-motion='reduced'] :is(.serve-card, .serve-card *) { animation: none !important; }
+html[data-motion='reduced'] .dock-indicator { transition: none; }
+html[data-motion='reduced'] .row-preview { display: none; }
+html[data-motion='reduced'] .row-thumb { display: block; }
+html[data-motion='reduced'] .row-index { display: none; }
+html[data-motion='reduced'] [data-reveal][data-reveal-ready],
+html[data-motion='reduced'] [data-reveal-group][data-reveal-ready] > * {
+  transition-delay: 0ms;
+}
+html[data-motion='reduced'] [data-reveal='wipe'][data-reveal-ready],
+html[data-motion='reduced'] [data-reveal-group='wipe'][data-reveal-ready] > * {
+  clip-path: none;
+}
+html[data-motion='reduced'] { scroll-behavior: auto; }
+
+/* The runtime half of the scroll-linked and view-transition work, for a
+   preference turned on mid-session. `@view-transition` itself cannot be
+   reached this way - it is an at-rule and reads no custom property or
+   attribute - so a navigation started after a mid-session change still
+   animates, but at 1ms, which is indistinguishable from the hard cut. */
+html[data-motion='reduced'] .atmos-stack,
+html[data-motion='reduced'] .hero-media,
+html[data-motion='reduced'] .hero-inner,
+html[data-motion='reduced'] [data-reveal-ready] .eyebrow::before,
+html[data-motion='reduced'] [data-reveal-ready].eyebrow::before { animation: none; }
+
+:root[data-motion='reduced']::view-transition-group(*),
+:root[data-motion='reduced']::view-transition-old(*),
+:root[data-motion='reduced']::view-transition-new(*) { animation-duration: 1ms; }
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+@media print {
+  .site-header, .dock, .utility-strip, .nav-panel, .lightbox,
+  .bean-field, .coffee-break, .fav-controls, .fav-cursor, .fav-segments, .serve-index, .serve-progress, .serve-swap, .gallery-actions,
+  .to-top, .preview-bar, .hero-brew, .hero-aside, .hero-media, .hero-veil, .leafy::before { display: none !important; }
+
+  [data-reveal], [data-reveal-group] > * { opacity: 1 !important; transform: none !important; }
+  [data-lines] .line > span { transform: none !important; }
+
+  /* A scroll timeline has no meaning on paper: whatever position the reader
+     happened to be at would be frozen into the printout. */
+  .atmos-stack, .eyebrow::before { animation: none !important; }
+  .serve-deck { grid-auto-flow: row !important; overflow: visible !important; }
+  .serve-card { grid-area: auto !important; opacity: 1 !important; visibility: visible !important; scale: none !important; }
+  .eyebrow::before { transform: scaleX(1) !important; }
+  body { background: #fff; color: #000; }
+  .section { padding-block: 1.5rem; break-inside: avoid; }
+  .section-dark, .section-deep, .hero { background: #fff !important; color: #000 !important; }
+  .section-dark h2, .section-deep h2, .hero h1 { color: #000 !important; }
+}

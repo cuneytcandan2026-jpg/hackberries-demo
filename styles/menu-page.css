@@ -1,0 +1,829 @@
+/* ==========================================================================
+   Hackberries - menu page
+   --------------------------------------------------------------------------
+   Two jobs, in order: show what the café cooks (a short hero, photographed
+   dishes, the Turkish kitchen), then make 201 items quick to find (one
+   sticky course bar with search and a (V) toggle, a side column on wide
+   screens, and a layout per kind of section).
+
+   Everything is readable without JavaScript. Search, the (V) toggle,
+   scroll-spy and the tucking header are added by scripts/menu-page.js.
+   ========================================================================== */
+
+.is-menu-page {
+  --m-bar-h: 3.75rem;
+  --m-price: var(--c-canopy);
+}
+/* Anchor jumps clear both the header and the course bar. */
+html:has(body.is-menu-page) {
+  scroll-padding-top: calc(var(--header-h) + var(--m-bar-h) + 1rem);
+}
+html.is-header-tucked:has(body.is-menu-page) {
+  scroll-padding-top: calc(var(--m-bar-h) + 1rem);
+}
+
+/* ---- Shared small parts ---------------------------------------------------- */
+.m-mini-label {
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* (V) exactly as printed - no allergen or dietary claim is inferred. */
+.m-tag {
+  display: inline-grid;
+  place-items: center;
+  width: 1.45em;
+  height: 1.45em;
+  margin-left: 0.4em;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-grass) 20%, var(--c-paper));
+  color: var(--c-canopy-deep);
+  font-size: 0.72em;
+  font-weight: 800;
+  line-height: 1;
+  vertical-align: 0.12em;
+  flex: none;
+}
+
+/* ==========================================================================
+   Hero: headline, facts, Turkish kitchen, photographed favourites
+   ========================================================================== */
+.m-hero {
+  --leafy-opacity: 0.05;
+  padding-block: clamp(1.5rem, 0.9rem + 2.4vw, 3rem) clamp(1.5rem, 1rem + 2vw, 2.75rem);
+}
+.m-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-5);
+  align-items: center;
+}
+@media (min-width: 64rem) {
+  .m-hero-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--s-7);
+  }
+}
+.m-hero h1 {
+  font-size: var(--t-h2);
+  margin-block: var(--s-3) var(--s-4);
+  max-width: 14ch;
+  text-wrap: balance;
+}
+
+.m-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-small);
+  font-weight: 700;
+}
+.m-facts li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: 1px solid var(--rule);
+}
+.m-facts .m-tag { margin: 0 0.4em 0 -0.25em; }
+/* On phones the facts read as one quiet line rather than a stack of pills. */
+@media (max-width: 39.99rem) {
+  .m-facts { gap: 0.15rem 0.9rem; font-weight: 600; color: var(--fg-mute); }
+  .m-facts li { padding: 0; border: 0; background: none; }
+  .m-facts .m-tag { margin-left: 0; }
+}
+
+.m-price-flag {
+  max-width: 44ch;
+  margin: 0;
+  padding-left: var(--s-3);
+  border-left: 3px solid var(--c-berry);
+  font-size: var(--t-small);
+  line-height: 1.5;
+  color: var(--fg-mute);
+}
+.m-price-flag strong { color: var(--c-berry); }
+
+/* ---- From the Turkish kitchen --------------------------------------------- */
+.m-turkish h2,
+.m-strip-head h2 {
+  font-size: var(--t-h4);
+  letter-spacing: -0.01em;
+}
+.m-turkish > p,
+.m-strip-head p {
+  margin: 0.1rem 0 0;
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+}
+.m-turkish-list {
+  display: flex;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.m-turkish-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  font-size: var(--t-small);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 200ms var(--ease-soft), background-color 200ms var(--ease-soft);
+}
+.m-turkish-list a b { color: var(--m-price); font-variant-numeric: tabular-nums; }
+.m-turkish-list a:hover { border-color: var(--c-canopy); background: var(--wash-green); }
+
+@media (max-width: 63.99rem) {
+  .m-turkish-list {
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(var(--pad-gutter) * -1);
+    padding: 0.15rem var(--pad-gutter);
+  }
+  .m-turkish-list::-webkit-scrollbar { display: none; }
+  .m-turkish-list li { flex: none; }
+}
+@media (min-width: 64rem) {
+  .m-turkish {
+    padding: var(--s-5);
+    border-radius: var(--r-lg);
+    background: var(--wash-green);
+    border: 1px solid var(--rule-green);
+  }
+  .m-turkish-list { flex-wrap: wrap; }
+}
+
+/* ---- Good places to start ------------------------------------------------- */
+.m-favs { margin-top: clamp(1.5rem, 1rem + 2vw, 2.75rem); }
+.m-fav-list {
+  display: flex;
+  gap: var(--s-3);
+  margin: var(--s-3) calc(var(--pad-gutter) * -1) 0;
+  padding: 0.25rem var(--pad-gutter) 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad-gutter);
+  scrollbar-width: thin;
+}
+.m-fav-list > li { flex: 0 0 min(10.5rem, 42vw); scroll-snap-align: start; }
+@media (min-width: 64rem) {
+  .m-fav-list {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--s-4);
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+}
+.m-fav {
+  display: grid;
+  gap: 0.15rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+.m-fav-photo {
+  display: block;
+  aspect-ratio: 1;
+  margin-bottom: var(--s-2);
+  transition: transform 320ms var(--ease-out, ease), box-shadow 320ms var(--ease-soft);
+}
+.m-fav-photo img { width: 100%; height: 100%; object-fit: cover; }
+.m-fav:hover .m-fav-photo {
+  transform: translateY(calc(-3px * var(--motion-scale)));
+  box-shadow: var(--shadow-lift);
+}
+.m-fav-name { font-weight: 700; line-height: 1.3; }
+.m-fav:hover .m-fav-name { color: var(--c-canopy); }
+.m-fav-meta { font-size: var(--t-small); color: var(--fg-mute); line-height: 1.35; }
+.m-fav-meta b { color: var(--m-price); }
+
+/* ==========================================================================
+   Sticky course bar
+   ========================================================================== */
+.m-bar-sentinel { display: block; height: 1px; margin-bottom: -1px; }
+
+.m-bar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 80;
+  background: color-mix(in srgb, var(--c-cream) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border-block: 1px solid var(--rule);
+  transition: top 320ms var(--ease-soft), box-shadow 240ms var(--ease-soft);
+}
+@supports not (backdrop-filter: blur(4px)) {
+  .m-bar { background: var(--c-cream); }
+}
+.m-bar.is-stuck { box-shadow: 0 10px 22px -18px color-mix(in srgb, var(--c-ink) 45%, transparent); }
+
+.m-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: calc(var(--m-bar-h) - 2px);
+}
+.m-bar-courses {
+  flex: 1;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+}
+.m-bar-courses ul {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0 calc(var(--pad-gutter) * -1) 0 calc(var(--s-2) * -1);
+  padding: 0 var(--pad-gutter) 0 var(--s-2);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
+}
+.m-bar-courses ul::-webkit-scrollbar { display: none; }
+.m-bar-courses li { flex: none; }
+.m-bar-courses a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.9rem;
+  border-radius: var(--r-pill);
+  color: var(--fg);
+  font-weight: 700;
+  font-size: var(--t-small);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 200ms var(--ease-soft), color 200ms var(--ease-soft);
+}
+.m-bar-courses a:hover { background: var(--wash-green-strong); }
+.m-bar-courses a[aria-current='true'] { background: var(--c-canopy); color: var(--c-cream); }
+
+/* Tools only exist once the script has wired them (the wrapper ships hidden). */
+.m-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: none;
+}
+.m-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding-inline: 0.7rem;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--rule-strong);
+  background: var(--c-paper);
+  color: var(--fg);
+  font: inherit;
+  font-size: var(--t-small);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-soft), border-color 200ms var(--ease-soft), color 200ms var(--ease-soft);
+}
+.m-tool:hover { border-color: var(--c-canopy); }
+.m-tool svg { width: 1.15rem; height: 1.15rem; }
+.m-veg .m-tag { margin: 0; }
+.m-veg[aria-pressed='true'] {
+  background: var(--c-canopy);
+  border-color: var(--c-canopy);
+  color: var(--c-cream);
+}
+.m-veg[aria-pressed='true'] .m-tag { background: var(--c-cream); color: var(--c-canopy-deep); }
+
+.m-search { position: relative; display: flex; align-items: center; }
+.m-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  display: flex;
+  color: var(--fg-mute);
+  pointer-events: none;
+}
+.m-search-icon svg { width: 1.05rem; height: 1.05rem; }
+.m-search input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 0.9rem 0 2.5rem;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--rule-strong);
+  background: var(--c-paper);
+  color: var(--fg);
+  font: inherit;
+  font-size: max(1rem, var(--t-small)); /* 16px keeps iOS from zooming in */
+}
+.m-search input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.m-search input::placeholder { color: var(--fg-mute); opacity: 1; }
+.m-search input:focus-visible { border-color: var(--c-canopy); outline-offset: 1px; }
+
+.m-icon-close { display: none; }
+.m-bar.is-searching .m-icon-open { display: none; }
+.m-bar.is-searching .m-icon-close { display: flex; }
+.m-icon-open, .m-icon-close { align-items: center; }
+.m-icon-open { display: flex; }
+
+/* Phones and tablets: a search button opens the field in place of the
+   course links, so nothing overlaps the menu below. */
+@media (max-width: 63.99rem) {
+  .m-search { display: none; }
+  .m-bar.is-searching .m-search { display: flex; flex: 1; min-width: 0; }
+  .m-bar.is-searching .m-bar-courses { display: none; }
+  .m-bar.is-searching .m-tools { flex: 1; }
+}
+@media (max-width: 22rem) {
+  .m-veg-label { display: none; }
+}
+@media (min-width: 64rem) {
+  .m-search-toggle { display: none; }
+  .m-search { width: 17rem; }
+}
+
+/* ==========================================================================
+   Layout: menu column and side guide
+   ========================================================================== */
+.m-layout {
+  display: grid;
+  gap: var(--s-7);
+  padding-block: var(--s-5) var(--pad-section);
+}
+@media (min-width: 64rem) {
+  .m-layout {
+    grid-template-columns: minmax(0, 54rem) minmax(14rem, 16rem);
+    justify-content: space-between;
+    column-gap: clamp(3rem, 5vw, 5rem);
+  }
+}
+.m-main { min-width: 0; container-type: inline-size; }
+
+/* ---- Search results line --------------------------------------------------- */
+.m-results {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+}
+.m-status { margin: 0; font-weight: 700; }
+.is-filtering .m-results { padding-block: var(--s-2) var(--s-4); }
+.m-clear { min-height: 2.75rem; padding-block: 0.4rem; }
+.m-empty {
+  margin: var(--s-4) 0;
+  padding: var(--s-5);
+  border-radius: var(--r-md);
+  background: var(--c-shell);
+  max-width: var(--measure);
+}
+
+/* ==========================================================================
+   Courses
+   ========================================================================== */
+.m-course + .m-course,
+.m-course:first-of-type { padding-top: var(--s-5); }
+.m-course + .m-course { margin-top: var(--s-6); }
+
+.m-course-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-lg);
+  background: var(--wash-green);
+  border: 1px solid var(--rule-green);
+}
+.m-course-head.leafy { --leafy-opacity: 0.35; overflow: hidden; }
+.m-course-copy { flex: 1; min-width: 0; }
+.m-course-count {
+  margin: 0;
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.m-course-head h2 {
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0.15rem 0 0;
+}
+.m-course-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.9rem;
+  margin: var(--s-2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-small);
+}
+.m-course-sections a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  color: var(--accent-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.m-course-sections a:hover { color: var(--c-ink); }
+@media (min-width: 64rem) {
+  .m-course-sections { display: none; }
+}
+.m-course-photo {
+  flex: none;
+  width: clamp(5rem, 3.5rem + 6vw, 8.5rem);
+  aspect-ratio: 1;
+  align-self: center;
+  transform: rotate(2deg);
+}
+.m-course-photo img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 26rem) {
+  .m-course-photo { width: 4.5rem; align-self: flex-start; }
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+.m-section { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); }
+
+.m-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-2);
+  border-bottom: 2px solid var(--c-canopy);
+}
+.m-section-head h3 {
+  font-size: var(--t-h3);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+}
+.m-group-price {
+  margin: 0;
+  font-weight: 700;
+  color: var(--m-price);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.m-group-price span {
+  margin-right: 0.2em;
+  font-size: var(--t-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ---- Includes, upgrades, notes --------------------------------------------- */
+.m-includes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-4);
+}
+.m-includes .m-mini-label { margin: 0; }
+.m-includes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-small);
+  font-weight: 700;
+}
+.m-includes li { display: inline-flex; align-items: center; gap: 0.3rem; }
+.m-includes svg { width: 1rem; height: 1rem; color: var(--c-grass); flex: none; }
+
+.m-upgrades {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0 0 var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  list-style: none;
+  border-radius: var(--r-md);
+  background: var(--c-shell);
+  font-size: var(--t-small);
+}
+.m-upgrades li { display: flex; justify-content: space-between; gap: var(--s-4); }
+.m-upgrades b { color: var(--m-price); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.m-note {
+  margin: 0 0 var(--s-4);
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+  max-width: var(--measure);
+}
+/* A note reads after the items it qualifies. */
+.m-section { display: flex; flex-direction: column; }
+.m-section > .m-note { order: 2; margin: var(--s-3) 0 0; }
+.m-section > .m-section-head { order: -1; }
+
+/* ---- Dishes: name, price, description -------------------------------------- */
+.m-dishes {
+  display: grid;
+  gap: var(--s-4) var(--s-7);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@container (min-width: 36rem) {
+  .m-dishes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.m-dish-line {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+.m-dish-price {
+  margin-left: 0.55em;
+  color: var(--m-price);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.m-dish-desc {
+  margin: 0.15rem 0 0;
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+  line-height: 1.5;
+  max-width: 46ch;
+}
+
+/* ---- Rows: short names with a leader --------------------------------------- */
+.m-rows {
+  display: grid;
+  gap: 0 var(--s-7);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@container (min-width: 34rem) {
+  .m-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.m-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-block: 0.35rem;
+  line-height: 1.35;
+}
+.m-row-name { font-weight: 700; min-width: 0; }
+.m-row .leader { border-bottom-color: var(--rule-green); }
+.m-row-price {
+  flex: none;
+  font-weight: 700;
+  color: var(--m-price);
+  font-variant-numeric: tabular-nums;
+}
+.m-row-price.is-ask { color: var(--fg-mute); font-weight: 400; font-size: var(--t-small); }
+
+/* ---- Chips: a group that shares one price ---------------------------------- */
+.m-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.m-chips li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: 1px solid var(--rule);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.m-chips li b {
+  margin-left: 0.45em;
+  color: var(--m-price);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Build your own: a price ladder and what to choose from --------------- */
+.m-build {
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  border-radius: var(--r-md);
+  background: var(--c-paper);
+  border: 1px solid var(--rule);
+}
+.m-ladder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: var(--s-3);
+  margin: 0;
+}
+.m-ladder > div {
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-sm);
+  background: var(--wash-green);
+}
+.m-ladder dt { font-size: var(--t-small); font-weight: 700; line-height: 1.3; }
+.m-ladder dd {
+  margin: 0.1rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  font-weight: 600;
+  color: var(--m-price);
+  font-variant-numeric: tabular-nums;
+}
+.m-build-extra { margin: var(--s-3) 0 0; font-size: var(--t-small); }
+.m-build-extra b { color: var(--m-price); }
+.m-options { margin-top: var(--s-4); }
+.m-options .m-mini-label { margin: 0 0 var(--s-2); }
+.m-options ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-small);
+}
+.m-options li {
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--rule);
+}
+
+/* ---- Add-ons: sides and extras, folded away -------------------------------- */
+.m-addons-panel {
+  border-radius: var(--r-md);
+  background: var(--c-paper);
+  border: 1px solid var(--rule);
+}
+.m-addons-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 3.5rem;
+  padding: var(--s-3) var(--s-5);
+  cursor: pointer;
+  list-style: none;
+  border-radius: inherit;
+}
+.m-addons-panel summary::-webkit-details-marker { display: none; }
+.m-addons-copy { display: grid; }
+.m-addons-name {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.m-addons-meta { font-size: var(--t-small); color: var(--fg-mute); }
+.m-addons-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--wash-green-strong);
+  color: var(--c-canopy);
+  transition: transform 260ms var(--ease-soft);
+}
+.m-addons-icon svg { width: 1.1rem; height: 1.1rem; }
+.m-addons-panel[open] .m-addons-icon { transform: rotate(45deg); }
+.m-addons-panel summary:hover .m-addons-icon { background: var(--c-canopy); color: var(--c-cream); }
+.m-addons-panel > :not(summary) { margin-inline: var(--s-5); }
+.m-addons-panel > :last-child { margin-bottom: var(--s-4); }
+.m-addons-panel > .m-note { margin-top: 0; }
+
+/* ---- About this menu ------------------------------------------------------- */
+.m-about {
+  margin-top: var(--s-8);
+  padding: var(--s-5) clamp(1.25rem, 3cqi, 2rem);
+  border-radius: var(--r-lg);
+  background: var(--c-shell);
+  font-size: var(--t-small);
+}
+.m-about h2 { font-size: var(--t-h4); margin-bottom: var(--s-2); }
+.m-about p { max-width: var(--measure); margin: 0 0 var(--s-2); }
+.m-about p:last-child { margin-bottom: 0; }
+.m-about-lead { font-size: var(--t-body); font-weight: 700; }
+
+/* ---- Side guide (wide screens) --------------------------------------------- */
+.m-aside { display: none; }
+@media (min-width: 64rem) {
+  .m-aside { display: block; }
+  .m-aside-inner {
+    position: sticky;
+    top: calc(var(--header-h) + var(--m-bar-h) + 1.5rem);
+    display: grid;
+    gap: var(--s-5);
+    max-height: calc(100vh - var(--header-h) - var(--m-bar-h) - 3rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--s-5) 0.25rem 0.25rem;
+    scrollbar-width: thin;
+    transition: top 320ms var(--ease-soft), max-height 320ms var(--ease-soft);
+  }
+  html.is-header-tucked .m-aside-inner {
+    top: calc(var(--m-bar-h) + 1.5rem);
+    max-height: calc(100vh - var(--m-bar-h) - 3rem);
+  }
+}
+.m-aside .m-mini-label { margin: 0 0 var(--s-2); }
+.m-toc,
+.m-toc ol { margin: 0; padding: 0; list-style: none; }
+.m-toc > li + li { margin-top: 0.15rem; }
+.m-toc a {
+  display: block;
+  padding: 0.3rem 0.75rem;
+  border-left: 2px solid var(--rule);
+  color: var(--fg);
+  text-decoration: none;
+  line-height: 1.35;
+}
+.m-toc a:hover { color: var(--c-canopy); border-left-color: var(--c-canopy); }
+.m-toc-course > a { font-weight: 700; }
+.m-toc ol a { padding-left: 1.4rem; font-size: var(--t-small); color: var(--fg-mute); }
+.m-toc a[aria-current='true'] { color: var(--c-canopy); border-left-color: var(--c-canopy); border-left-width: 3px; font-weight: 700; }
+.m-toc-course.is-current > a { color: var(--c-canopy); }
+/* Once scroll-spy runs, only the course being read unfolds. */
+.m-toc.is-live .m-toc-course:not(.is-current) ol { display: none; }
+
+.m-aside-card {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  background: var(--wash-green);
+  border: 1px solid var(--rule-green);
+  font-size: var(--t-small);
+  line-height: 1.5;
+}
+.m-aside-card p { margin: 0; }
+.m-aside-card .m-tag { margin: 0 0.25em 0 0; }
+.m-aside-card .btn { justify-self: start; }
+
+/* ---- Filtering -------------------------------------------------------------- */
+/* Hidden by the script with [hidden]; while filtering, the course headers drop
+   their section links and photos so matches sit close together. */
+.is-filtering .m-course-sections,
+.is-filtering .m-course-count,
+.is-filtering .m-course-photo { display: none; }
+.is-filtering .m-course-head { padding-block: var(--s-3); }
+
+/* ==========================================================================
+   Closing band
+   ========================================================================== */
+.m-closing-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-5) var(--s-7);
+}
+.m-closing h2 { font-size: var(--t-h2); margin-block: var(--s-3); }
+.m-closing .lead { margin: 0; color: var(--c-on-dark-mute); }
+.m-closing-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+/* ==========================================================================
+   Tucking header
+   ========================================================================== */
+/* Once the course bar is stuck, scrolling down slides the site header away
+   and the bar takes the top; scrolling up brings it back. */
+.is-menu-page .site-header {
+  transition:
+    transform 320ms var(--ease-soft),
+    background-color 360ms var(--ease-soft),
+    border-color 360ms var(--ease-soft),
+    color 360ms var(--ease-soft);
+}
+html.is-header-tucked .is-menu-page .site-header { transform: translateY(-100%); }
+html.is-header-tucked .is-menu-page .m-bar { top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-menu-page .site-header,
+  .m-bar,
+  .m-aside-inner,
+  .m-fav-photo,
+  .m-addons-icon { transition: none; }
+}

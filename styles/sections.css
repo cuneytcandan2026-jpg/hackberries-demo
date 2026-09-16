@@ -1,0 +1,749 @@
+/* ==========================================================================
+   Hackberries - atmosphere, editorial rows, gallery, visit, footer, extras
+   ========================================================================== */
+
+/* ==========================================================================
+   5. ATMOSPHERE - editorial split + photo stack
+   ========================================================================== */
+.atmos-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  align-items: center;
+}
+@media (min-width: 64rem) {
+  .atmos-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); }
+}
+
+.atmos-copy { display: grid; gap: var(--s-5); align-content: start; }
+.atmos-copy h2 { max-width: 15ch; }
+
+.atmos-labels { display: grid; gap: var(--s-2); }
+.atmos-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.6rem 1rem 0.6rem 0.75rem;
+  border: 2px solid transparent;
+  border-radius: var(--r-pill);
+  text-align: left;
+  font-weight: 700;
+  color: var(--c-on-dark);
+  transition: background-color var(--d-control) var(--ease-firm),
+              border-color var(--d-control) var(--ease-firm);
+}
+.atmos-label:hover { background: color-mix(in srgb, var(--c-on-dark) 10%, transparent); }
+.atmos-label .num {
+  display: grid;
+  place-items: center;
+  width: 2rem; height: 2rem;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--c-on-dark) 32%, transparent);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  transition: background-color var(--d-control) var(--ease-firm),
+              color var(--d-control) var(--ease-firm),
+              border-color var(--d-control) var(--ease-firm);
+}
+.atmos-label[aria-selected='true'] {
+  background: color-mix(in srgb, var(--c-leaf) 16%, transparent);
+  border-color: var(--c-leaf);
+}
+.atmos-label[aria-selected='true'] .num {
+  background: var(--c-leaf);
+  border-color: var(--c-leaf);
+  color: var(--c-forest-deep);
+}
+
+.atmos-readout {
+  min-height: 6.5rem;
+  color: var(--c-on-dark-mute);
+  transition: opacity var(--d-swap) var(--ease-out);
+}
+.atmos-readout.is-swapping { opacity: 0; }
+@media (min-width: 48rem) { .atmos-readout { min-height: 5.5rem; } }
+
+/* ---- The stack --------------------------------------------------------------- */
+.atmos-stack {
+  position: relative;
+  width: min(100%, 32rem);
+  margin-inline: auto;
+  /* Square: the venue photograph is landscape and the food shots are portrait,
+     so a square frame is the one crop that serves all three honestly. */
+  aspect-ratio: 1;
+}
+@media (min-width: 64rem) { .atmos-stack { width: min(100%, 34rem); margin-inline: 0 auto; } }
+
+.atmos-print {
+  position: absolute;
+  /* Inset rather than filling the stack, so the fanned offsets below have
+     room to move into. (An absolutely positioned child resolves `inset`
+     against the padding box, so padding on the stack would not do this.) */
+  inset: 6% 8%;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 8px solid var(--c-cream);
+  background: var(--ph, var(--c-shell));
+  box-shadow: var(--shadow-lift);
+  /* Rotation stays inside the brief's +/-4deg limit. */
+  transform: rotate(var(--rot, 0deg)) translate(var(--tx, 0), var(--ty, 0));
+  /* Selecting a print re-deals the stack. --ease-spring on the transform lets
+     each print overshoot its resting tilt very slightly and settle, which
+     reads as a card being placed rather than slid. Opacity stays on
+     --ease-out: a fade that overshoots would flicker. */
+  transition: transform var(--d-select) var(--ease-spring),
+              opacity var(--d-select) var(--ease-out);
+  will-change: transform;
+}
+/* --atmos-pan is driven by a scroll-linked animation on .atmos-stack (see
+   motion.css); it is 0% at rest, and in any browser without scroll-driven
+   animations the fallback keeps it at 0% permanently. `cover` has already
+   cropped these images, so panning moves through real image data rather than
+   requiring them to be scaled up. */
+.atmos-print img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% calc(50% + var(--atmos-pan, 0%));
+}
+.atmos-print[data-state='back']  { --rot: -3.8deg; --tx: -7%; --ty: -5%; z-index: 1; }
+.atmos-print[data-state='mid']   { --rot: 3.2deg;  --tx: 6%;  --ty: 4%;  z-index: 2; }
+.atmos-print[data-state='front'] { --rot: -0.8deg; --tx: 0;    --ty: 0;   z-index: 3; }
+
+.atmos-caption {
+  position: absolute;
+  left: 50%;
+  bottom: -1.1rem;
+  z-index: 4;
+  transform: translateX(-50%);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--r-pill);
+  background: var(--c-leaf);
+  color: var(--c-forest-deep);
+  font-size: var(--t-small);
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: var(--shadow-float);
+}
+
+/* ==========================================================================
+   6. EDITORIAL CALL-TO-ACTION ROWS
+   ========================================================================== */
+.rows { border-top: 1px solid var(--rule); }
+
+.row-link {
+  position: relative;
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  padding-block: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  padding-inline: clamp(0.75rem, 0.2rem + 1.6vw, 1.75rem);
+  margin-inline: clamp(-1.75rem, -0.2rem - 1.6vw, -0.75rem);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--fg);
+  /* The decorative preview sits behind this content. */
+  isolation: isolate;
+  transition: color var(--d-control) var(--ease-firm);
+}
+/* The whole row fills with the brand green on hover and keyboard focus - the
+   largest single use of the accent colour on the page, and the thing that
+   makes these rows feel like destinations rather than list items. */
+.row-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: var(--r-md);
+  background: var(--c-canopy);
+  transform-origin: left center;
+  /* A SCALE wipe, not a translate. Translating the fill out of frame by its
+     own width leaves it hanging past the left edge of the page - and because
+     the row is wider than its own distance from the viewport edge, a sliver
+     of green stayed visible in the gutter of every row. Scaling from zero
+     can never leave the element's own box. */
+  transform: scaleX(0);
+  transition: transform 520ms var(--ease-soft), opacity 200ms var(--ease-out);
+  pointer-events: none;
+}
+/* With motion reduced there is nothing to wipe, so it crossfades instead. */
+html[data-motion='reduced'] .row-link::after { transform: scaleX(1); opacity: 0; }
+html[data-motion='reduced'] .row-link:hover::after,
+html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .row-link::after { transform: scaleX(1); opacity: 0; }
+  .row-link:hover::after,
+  .row-link:focus-visible::after { opacity: 1; }
+}
+
+.row-link:hover::after,
+.row-link:focus-visible::after { transform: scaleX(1); }
+
+@media (min-width: 48rem) {
+  .row-link {
+    grid-template-columns: 3.5rem minmax(0, 1.1fr) minmax(0, 1fr) 12.5rem;
+    gap: var(--s-5);
+  }
+}
+.row-link:hover,
+.row-link:focus-visible { color: var(--c-on-dark); }
+
+/* A small printed index. Decorative numbering only - the row's destination is
+   in its title and its button. */
+.row-index {
+  position: relative;
+  z-index: 2;
+  display: none;
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--c-grass);
+  transition: color var(--d-control) var(--ease-firm);
+}
+@media (min-width: 48rem) { .row-index { display: block; } }
+.row-link:hover .row-index,
+.row-link:focus-visible .row-index { color: var(--c-leaf); }
+
+.row-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.15rem + 2.6vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.024em;
+  font-variation-settings: 'SOFT' 32, 'WONK' 1, 'opsz' 120;
+  transition: color var(--d-control) var(--ease-firm),
+              transform 460ms var(--ease-soft);
+}
+.row-link:hover .row-title,
+.row-link:focus-visible .row-title {
+  color: var(--c-on-dark);
+  transform: translateX(calc(8px * var(--motion-scale)));
+}
+
+.row-text {
+  position: relative;
+  z-index: 2;
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+  max-width: 34ch;
+  transition: color var(--d-control) var(--ease-firm);
+}
+.row-link:hover .row-text,
+.row-link:focus-visible .row-text { color: var(--c-on-dark-mute); }
+
+.row-go {
+  position: relative;
+  z-index: 2;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 3rem;
+  padding: 0.65rem 1.35rem;
+  border: 2px solid var(--rule-green);
+  border-radius: var(--r-pill);
+  font-size: var(--t-small);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color var(--d-control) var(--ease-firm),
+              border-color var(--d-control) var(--ease-firm),
+              color var(--d-control) var(--ease-firm);
+}
+.row-link:hover .row-go,
+.row-link:focus-visible .row-go {
+  background: var(--c-leaf);
+  border-color: var(--c-leaf);
+  color: var(--c-forest-deep);
+}
+.row-link:hover .row-go .arrow { transform: translateX(calc(4px * var(--motion-scale))); }
+.row-go .arrow { transition: transform var(--d-control) var(--ease-firm); }
+
+/* ---- Pointer-following preview ------------------------------------------------ */
+/* Decorative only: behind the copy, cannot intercept clicks, bounded to the row,
+   and never the sole carrier of information. */
+.row-preview {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 9rem;
+  height: 11rem;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--ph, var(--c-shell));
+  /* A cream print border, so the photograph reads as a print laid on the row
+     rather than a hole cut in it - and so it stays legible once the row has
+     filled with green. */
+  border: 5px solid var(--c-cream);
+  box-shadow: var(--shadow-float);
+  /* --pr is the resting angle; --pv is a small extra tilt derived from how
+     fast the pointer is travelling, so the print leans into the movement. */
+  transform:
+    translate3d(var(--px, 0), var(--py, 0), 0)
+    rotate(calc(var(--pr, -3deg) + var(--pv, 0deg)))
+    scale(0.92);
+  transition: opacity 180ms var(--ease-out), transform 240ms var(--ease-out);
+  will-change: transform, opacity;
+}
+.row-preview img { width: 100%; height: 100%; object-fit: cover; }
+/* A deep-green scrim over the print. The preview sits BEHIND the row's copy
+   by design, so without this the body text landed on a bright photograph and
+   became hard to read. The tint also makes the print read as part of the
+   green fill it appears on rather than a cut-out pasted over it. */
+.row-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+    color-mix(in srgb, var(--c-forest-deep) 52%, transparent),
+    color-mix(in srgb, var(--c-canopy) 62%, transparent));
+  pointer-events: none;
+}
+/* Belt and braces for the copy that can end up over it. */
+.row-link.is-previewing .row-text,
+.row-link.is-previewing .row-title {
+  text-shadow:
+    0 1px 3px var(--c-forest-deep),
+    0 0 14px color-mix(in srgb, var(--c-forest-deep) 85%, transparent);
+}
+.row-link.is-previewing .row-preview {
+  opacity: 1;
+  transform:
+    translate3d(var(--px, 0), var(--py, 0), 0)
+    rotate(calc(var(--pr, -3deg) + var(--pv, 0deg)))
+    scale(1);
+}
+
+/* Keyboard focus gets a stationary preview instead of a following one:
+   parked at the right-hand end of the row, with no pointer-following. */
+.row-link:focus-visible .row-preview {
+  opacity: 1;
+  left: auto;
+  right: 14rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(-3deg) scale(1);
+  transition: opacity 180ms var(--ease-out);
+}
+@media (max-width: 47.99rem) {
+  .row-link:focus-visible .row-preview { display: none; }
+}
+
+/* Coarse pointers get a static thumbnail in the flow, not a floating one. */
+.row-thumb {
+  display: none;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  flex: none;
+  background: var(--ph, var(--c-shell));
+}
+.row-thumb img { width: 100%; height: 100%; object-fit: cover; }
+@media (hover: none) {
+  .row-preview { display: none; }
+  .row-thumb { display: block; }
+  /* The static thumbnail takes the index column's place on touch. */
+  .row-index { display: none; }
+  .row-link { grid-template-columns: auto minmax(0, 1fr); }
+  .row-link .row-text { grid-column: 1 / -1; }
+  .row-link .row-go { grid-column: 1 / -1; justify-self: start; }
+}
+@media (hover: none) and (min-width: 48rem) {
+  .row-link { grid-template-columns: auto minmax(0, 1.1fr) minmax(0, 1fr) 12.5rem; }
+  .row-link .row-text { grid-column: auto; }
+  .row-link .row-go { grid-column: auto; justify-self: auto; }
+}
+
+/* ==========================================================================
+   7. GALLERY - "Life at Hackberries"
+   ========================================================================== */
+.gallery-head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: clamp(2rem, 1.2rem + 2.6vw, 3.25rem);
+}
+@media (min-width: 48rem) {
+  .gallery-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--s-6);
+  }
+}
+.gallery-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+/* Mobile: an ordinary two-column gallery. Vertical scrolling stays native and
+   nothing here sets touch-action: none. */
+.collage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.85rem, 0.5rem + 1.6vw, 1.75rem);
+}
+@media (min-width: 48rem) {
+  .collage { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .collage { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+/* Each photograph is presented as a physical print: a cream border, a soft
+   drop shadow and a resting tilt. On the deepest green ground this is what
+   turns a tidy grid into a collage. */
+.print {
+  position: relative;
+  margin: 0;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--ph, var(--c-shell));
+  border: 5px solid var(--c-cream);
+  box-shadow: var(--shadow-float);
+  aspect-ratio: 1;
+  /* Drag offset is a pure transform on top of the grid position, so the
+     layout stays deterministic at every breakpoint. */
+  transform:
+    translate3d(var(--dx, 0px), var(--dy, 0px), 0)
+    rotate(calc(var(--tilt, 0deg) * var(--motion-scale)));
+  transition: transform var(--d-select) var(--ease-soft),
+              box-shadow var(--d-select) var(--ease-out),
+              border-color var(--d-control) var(--ease-out);
+}
+@media (min-width: 48rem) { .print { border-width: 8px; } }
+.print button {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.print img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 640ms var(--ease-soft);
+}
+
+/* Lift and straighten on hover or keyboard focus: the print you are pointing
+   at comes forward and squares up. */
+@media (hover: hover) and (pointer: fine) {
+  .print:hover,
+  .print:focus-within {
+    z-index: 15;
+    border-color: var(--c-leaf);
+    box-shadow:
+      0 6px 14px color-mix(in srgb, var(--c-forest-deep) 30%, transparent),
+      0 50px 80px -28px color-mix(in srgb, var(--c-forest-deep) 70%, transparent);
+    transform:
+      translate3d(var(--dx, 0px), calc(var(--dy, 0px) - 8px * var(--motion-scale)), 0)
+      rotate(calc(var(--tilt, 0deg) * 0.2 * var(--motion-scale)))
+      scale(calc(1 + 0.02 * var(--motion-scale)));
+  }
+  .print:hover img { transform: scale(calc(1 + 0.05 * var(--motion-scale))); }
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .collage { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  /* The exact tiling described in data/media.mjs. */
+  .print {
+    grid-column: span var(--cols, 2);
+    aspect-ratio: var(--ar, 1);
+  }
+}
+
+/* Drag enhancement, desktop pointer only. */
+.collage.is-draggable .print { cursor: grab; }
+/* Stops a native image drag hijacking the gesture. */
+.collage.is-draggable .print img { user-select: none; -webkit-user-drag: none; }
+.collage.is-draggable .print.is-dragging {
+  cursor: grabbing;
+  z-index: 20;
+  border-color: var(--c-leaf);
+  box-shadow:
+    0 10px 20px color-mix(in srgb, var(--c-forest-deep) 34%, transparent),
+    0 60px 90px -26px color-mix(in srgb, var(--c-forest-deep) 78%, transparent);
+  transition: none;
+}
+.print.is-settling { transition: transform 520ms var(--ease-soft); }
+
+.collage-hint {
+  font-size: var(--t-small);
+  color: var(--c-on-dark-mute);
+  display: none;
+  align-items: center;
+  gap: 0.5em;
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 64rem) {
+  .collage-hint { display: flex; }
+}
+.collage-hint svg { width: 1.05rem; height: 1.05rem; color: var(--c-leaf); flex: none; }
+
+/* ---- Lightbox ---------------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--s-4);
+  padding: max(var(--s-4), env(safe-area-inset-top)) var(--pad-gutter)
+           max(var(--s-5), env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--c-forest-deep) 97%, transparent);
+  color: var(--c-on-dark);
+}
+.lightbox[hidden] { display: none !important; }
+
+.lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.lightbox-count {
+  font-size: var(--t-small);
+  font-weight: 700;
+  color: var(--c-on-dark-mute);
+}
+.lightbox .icon-btn {
+  background: transparent;
+  color: var(--c-on-dark);
+  border-color: color-mix(in srgb, var(--c-on-dark) 35%, transparent);
+}
+.lightbox .icon-btn:hover { background: var(--c-on-dark); color: var(--c-forest-deep); }
+
+.lightbox-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+.lightbox-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-md);
+}
+.lightbox-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.lightbox-caption {
+  font-size: var(--t-small);
+  color: var(--c-on-dark-mute);
+  max-width: 52ch;
+}
+.lightbox-nav { display: flex; gap: var(--s-3); flex: none; }
+
+/* ==========================================================================
+   8. VISIT
+   ========================================================================== */
+.visit-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 1.2rem + 3.4vw, 3.5rem);
+  align-items: start;
+}
+@media (min-width: 64rem) {
+  .visit-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+}
+
+.visit-facts { display: grid; gap: var(--s-6); align-content: start; }
+
+.fact { display: grid; gap: var(--s-2); }
+.fact dt {
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.fact dd {
+  margin: 0;
+  font-size: var(--t-lead);
+  line-height: 1.4;
+}
+.fact dd a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.fact address { font-style: normal; }
+
+.hours-list { display: grid; gap: var(--s-2); }
+.hours-list li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-size: var(--t-body);
+}
+.hours-list .days { flex: none; }
+.hours-list .time { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.visit-note {
+  font-size: var(--t-small);
+  color: var(--fg-mute);
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--c-canopy) 10%, transparent);
+  border-left: 3px solid var(--c-grass);
+}
+
+.visit-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+.visit-media { display: grid; gap: var(--s-4); }
+.visit-photo { aspect-ratio: 3 / 2; }
+
+/* The hours list gets the fresh-green leader, so the one piece of information
+   visitors scan for carries the brand colour. */
+.hours-list .leader { border-bottom-color: var(--rule-green); }
+.hours-list .time { color: var(--c-canopy); }
+
+/* Click-to-load map: nothing third-party loads until the visitor asks. */
+.map-slot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-frame);
+  overflow: hidden;
+  background: var(--c-shell);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--s-5);
+  border: 1px solid var(--rule);
+}
+.map-slot iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map-slot .map-invite { display: grid; gap: var(--s-3); justify-items: center; max-width: 30ch; }
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+.site-footer {
+  background: var(--c-forest-deep);
+  color: var(--c-on-dark);
+  padding-top: var(--pad-section);
+  position: relative;
+  overflow: clip;
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--s-7);
+  padding-bottom: var(--s-8);
+}
+@media (min-width: 48rem) {
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); }
+}
+
+.footer-col h2 {
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-on-dark-mute);
+  margin-bottom: var(--s-4);
+}
+.footer-col ul { display: grid; gap: var(--s-1); }
+.footer-col a {
+  color: var(--c-on-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+.footer-col a:hover { color: var(--c-leaf); text-decoration: underline; }
+.footer-col address { font-style: normal; color: var(--c-on-dark-mute); line-height: 1.7; }
+
+.footer-bar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  font-size: var(--t-small);
+  color: var(--c-on-dark-mute);
+}
+
+/* Large background wordmark. Decorative only: the real name is in the header,
+   the footer columns and the page title, so clipping this costs nothing. */
+.footer-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 0.5rem + 15vw, 16rem);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--c-leaf) 22%, transparent);
+  font-variation-settings: 'SOFT' 48, 'WONK' 1, 'opsz' 144;
+  margin-top: var(--s-5);
+  margin-bottom: -0.1em;
+  user-select: none;
+  white-space: nowrap;
+  overflow: clip;
+}
+
+.to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  border: 2px solid color-mix(in srgb, var(--c-on-dark) 32%, transparent);
+  border-radius: var(--r-pill);
+  color: var(--c-on-dark);
+  font-weight: 700;
+  font-size: var(--t-small);
+  text-decoration: none;
+}
+.to-top:hover { background: var(--c-on-dark); color: var(--c-forest-deep); }
+
+/* ==========================================================================
+   10. "A little coffee break" - optional, explicitly activated
+   ========================================================================== */
+.coffee-break {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  padding-bottom: 6rem;
+}
+.coffee-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  border: 2px solid color-mix(in srgb, var(--c-on-dark) 32%, transparent);
+  border-radius: var(--r-pill);
+  color: var(--c-on-dark);
+  font-weight: 700;
+  font-size: var(--t-small);
+}
+.coffee-btn:hover { background: var(--c-leaf); border-color: var(--c-leaf); color: var(--c-forest-deep); }
+.coffee-btn svg { width: 1.1rem; height: 1.1rem; }
+
+/* The bean layer is decorative, bounded, and cannot intercept input. */
+.bean-field {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 6rem;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.bean-field canvas { display: block; width: 100%; height: 100%; }
+.coffee-status { font-size: var(--t-small); color: var(--c-on-dark-mute); }
