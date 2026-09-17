@@ -114,7 +114,12 @@ export function initHours() {
       .format(new Date());
     const today = DAYS.indexOf(short);
     const group = groups.find(([days]) => days.includes(today));
-    if (group) text.textContent = `Open today · ${group[1]}–${group[2]}`;
+    if (!group) return;
+    // Same shape as the static markup: a lead-in phones hide visually.
+    const lead = document.createElement('span');
+    lead.className = 'hours-lead';
+    lead.textContent = 'Open today · ';
+    text.replaceChildren(lead, `${group[1]}–${group[2]}`);
   };
   paint();
 
@@ -188,10 +193,11 @@ export function initMenuPanel() {
   const onPanelClick = (event) => {
     if (event.target.closest('a')) setOpen(false);
   };
-  // A resize into desktop width must not leave the body scroll-locked.
+  // A resize into desktop width must not leave the body scroll-locked, unless
+  // this page keeps its toggle on desktop (no dock), where the panel still works.
   const desktop = window.matchMedia('(min-width: 64rem)');
   const onBreakpoint = () => {
-    if (desktop.matches && open) setOpen(false);
+    if (desktop.matches && open && !toggle.classList.contains('menu-toggle-desktop')) setOpen(false);
   };
 
   toggle.addEventListener('click', onToggle);

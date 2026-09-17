@@ -4,6 +4,9 @@
  * SINGLE SOURCE OF TRUTH. Editing this file updates the header, visit section,
  * footer, menu page and structured data together.
  *
+ * Every file in site/ is published, comments included. Keep notes about the
+ * client, the sources or other businesses in content-needed.md instead.
+ *
  * `confirmed: false` means the value came from a public listing and has NOT
  * been approved by the owner. Anything unconfirmed is rendered with a visible
  * preview qualifier and is excluded from JSON-LD structured data.
@@ -14,11 +17,15 @@ export const STATUS = {
   isPreview: true,
   previewNote:
     'Concept by Laara Digital. Details and prices are unconfirmed.',
+  /**
+   * Where the pages are published, with a trailing slash. Link previews
+   * (og:image, og:url) need absolute URLs, so change this with the domain.
+   */
+  siteUrl: 'https://laaradigital.co.uk/hackberries-demo/',
 };
 
 export const BUSINESS = {
   name: 'Hackberries',
-  // Do not conflate with "Huckleberry", a different business.
   tagline: 'A little more local. A lot more character.',
   locality: 'Cheshunt',
 
@@ -83,13 +90,19 @@ export const BUSINESS = {
   parking: {
     confirmed: false,
     note: 'A public listing mentions free customer parking.',
-    qualifier: 'Conditions not yet confirmed - please check on arrival.',
+    qualifier: 'Conditions not yet confirmed — please check on arrival.',
   },
 
   /**
-   * No ordering or booking provider has been confirmed. The Uber Eats listing
-   * reviewed on 15 September 2026 reported the store as unavailable; that is a
-   * platform status, NOT evidence the cafe has closed. Nothing links to it.
+   * "Breakfast served all day". Not printed on the menu photographs, so the
+   * copy only makes the claim once the owner confirms it. Until then the
+   * hero stamp, headings and descriptions use wording that holds either way.
+   */
+  breakfastAllDay: { confirmed: false },
+
+  /**
+   * No ordering or booking provider has been confirmed, so nothing links to
+   * one. Background is in content-needed.md (not deployed).
    */
   ordering: { available: false },
   booking: { available: false, fallbackLabel: 'Call to enquire' },

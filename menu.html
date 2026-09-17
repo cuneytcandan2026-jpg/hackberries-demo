@@ -14,14 +14,16 @@
 <meta property="og:site_name" content="Hackberries">
 <meta property="og:title" content="Menu — Hackberries, Cheshunt">
 <meta property="og:description" content="The Hackberries menu: Turkish and full English breakfasts, benedicts, pancakes and French toast, grills, burgers, salads, coffee and shakes.">
-<meta property="og:image" content="media/dessert-french-toast-square-640.jpg">
-<meta property="og:image:width" content="640">
-<meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate.">
+<meta property="og:url" content="https://laaradigital.co.uk/hackberries-demo/menu.html">
+<meta property="og:image" content="https://laaradigital.co.uk/hackberries-demo/media/venue-hero-share-1200.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Inside Hackberries: rattan pendant lights over marble tables, velvet chairs, and a foliage wall hung with white flowers beside exposed brick.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f7f3ea">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preload" as="font" type="font/woff2" href="fonts/fraunces-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/karla-latin.woff2" crossorigin>
@@ -48,7 +50,7 @@
   <div class="shell header-bar">
     <div class="header-side header-side-start">
       <p class="header-hours" id="header-hours" data-hours="[[[1,2,3,4,5],&quot;7am&quot;,&quot;5pm&quot;],[[6,0],&quot;8am&quot;,&quot;5pm&quot;]]">
-        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-hours-text>Open daily · until 5pm</span>
+        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-hours-text><span class="hours-lead">Open daily · </span>until 5pm</span>
       </p>
       <span class="header-rule" aria-hidden="true"></span>
     </div>
@@ -60,10 +62,10 @@
       <a class="header-place" href="index.html#visit">
         <span>190 Windmill Lane, Cheshunt</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
       </a>
-      <button class="menu-toggle" type="button" id="menu-toggle"
+      <button class="menu-toggle menu-toggle-desktop" type="button" id="menu-toggle"
               aria-expanded="false" aria-controls="nav-panel">
         <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="label">Menu</span>
+        <span class="label">Explore</span>
       </button>
     </div>
   </div>
@@ -89,7 +91,7 @@
         <a href="index.html#gallery" data-nav-section="gallery">
           Gallery<span aria-hidden="true">03</span>
         </a>
-        <a href="index.html#contact-us" data-nav-section="contact-us">
+        <a href="contact.html" data-nav-section="contact-us">
           Contact us<span aria-hidden="true">04</span>
         </a>
         <a href="index.html#visit" data-nav-section="visit">
@@ -118,13 +120,13 @@
       <div class="m-hero-copy" data-reveal="drop">
         <p class="eyebrow">The menu</p>
         <h1 data-lines>
-          <span class="line"><span>Breakfast all day,</span></span>
+          <span class="line"><span>Breakfast, brunch,</span></span>
           <span class="line"><span>grills and good coffee.</span></span>
         </h1>
         <ul class="m-facts">
-          <li>Breakfast served all day</li>
+          
           <li>Turkish &amp; English kitchen</li>
-          <li><span class="m-tag" aria-hidden="true">V</span> Vegetarian, as printed</li>
+          <li><span class="m-tag" aria-hidden="true">V</span> Vegetarian dishes marked</li>
         </ul>
         <p class="m-price-flag" role="note">
           <strong>Prices need confirming.</strong> They come from a printed menu about a year old.
@@ -157,7 +159,7 @@
           <picture class="frame m-fav-photo" style="--ph:#948153;">
   <source type="image/webp" srcset="media/food-menemen-square-300.webp 300w, media/food-menemen-square-480.webp 480w, media/food-menemen-square-637.webp 637w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/food-menemen-square-480.jpg" srcset="media/food-menemen-square-300.jpg 300w, media/food-menemen-square-480.jpg 480w, media/food-menemen-square-637.jpg 637w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="637" height="637" alt="A cast-iron pan of eggs cooked in tomato and pepper sauce, scattered with chives, served on a wooden board with toasted bread, in front of the café’s foliage and white-flower wall."
+       width="637" height="637" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">Homemade menemen<span class="m-tag" title="Marked vegetarian on the printed menu"><span aria-hidden="true">V</span><span class="visually-hidden">(vegetarian)</span></span></span>
@@ -169,7 +171,7 @@
           <picture class="frame m-fav-photo" style="--ph:#908a70;">
   <source type="image/webp" srcset="media/food-avocado-eggs-square-300.webp 300w, media/food-avocado-eggs-square-480.webp 480w, media/food-avocado-eggs-square-636.webp 636w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/food-avocado-eggs-square-480.jpg" srcset="media/food-avocado-eggs-square-300.jpg 300w, media/food-avocado-eggs-square-480.jpg 480w, media/food-avocado-eggs-square-636.jpg 636w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="636" height="636" alt="Two poached eggs dusted with paprika on crushed avocado toast, with a dressed side salad, on a deep blue glazed oval plate set on marble."
+       width="636" height="636" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">Egg &amp; avocado toast<span class="m-tag" title="Marked vegetarian on the printed menu"><span aria-hidden="true">V</span><span class="visually-hidden">(vegetarian)</span></span></span>
@@ -181,7 +183,7 @@
           <picture class="frame m-fav-photo" style="--ph:#8e5e37;">
   <source type="image/webp" srcset="media/dessert-french-toast-square-300.webp 300w, media/dessert-french-toast-square-480.webp 480w, media/dessert-french-toast-square-640.webp 640w, media/dessert-french-toast-square-707.webp 707w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/dessert-french-toast-square-480.jpg" srcset="media/dessert-french-toast-square-300.jpg 300w, media/dessert-french-toast-square-480.jpg 480w, media/dessert-french-toast-square-640.jpg 640w, media/dessert-french-toast-square-707.jpg 707w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="707" height="707" alt="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate."
+       width="707" height="707" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">French toast</span>
@@ -193,7 +195,7 @@
           <picture class="frame m-fav-photo" style="--ph:#bdb477;">
   <source type="image/webp" srcset="media/food-omelette-square-300.webp 300w, media/food-omelette-square-480.webp 480w, media/food-omelette-square-637.webp 637w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/food-omelette-square-480.jpg" srcset="media/food-omelette-square-300.jpg 300w, media/food-omelette-square-480.jpg 480w, media/food-omelette-square-637.jpg 637w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="637" height="637" alt="A folded omelette scattered with chives and paprika on a long white plate, with toasted bread and a dressed side salad, on a marble table."
+       width="637" height="637" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">Omelette, your way</span>
@@ -205,7 +207,7 @@
           <picture class="frame m-fav-photo" style="--ph:#7f7a52;">
   <source type="image/webp" srcset="media/drink-smoothies-square-300.webp 300w, media/drink-smoothies-square-480.webp 480w, media/drink-smoothies-square-592.webp 592w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/drink-smoothies-square-480.jpg" srcset="media/drink-smoothies-square-300.jpg 300w, media/drink-smoothies-square-480.jpg 480w, media/drink-smoothies-square-592.jpg 592w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="592" height="592" alt="A berry smoothie topped with a blackberry and raspberry beside a green smoothie garnished with orange and mint, both in handled glass jars on a marble table dressed with fresh flowers."
+       width="592" height="592" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">Smoothies</span>
@@ -217,7 +219,7 @@
           <picture class="frame m-fav-photo" style="--ph:#7f5229;">
   <source type="image/webp" srcset="media/drink-iced-latte-square-300.webp 300w, media/drink-iced-latte-square-480.webp 480w, media/drink-iced-latte-square-635.webp 635w" sizes="(min-width: 64rem) 13rem, 11rem">
   <img src="media/drink-iced-latte-square-480.jpg" srcset="media/drink-iced-latte-square-300.jpg 300w, media/drink-iced-latte-square-480.jpg 480w, media/drink-iced-latte-square-635.jpg 635w" sizes="(min-width: 64rem) 13rem, 11rem"
-       width="635" height="635" alt="Three iced lattes in handled glass jars, the espresso layered over milk, on a dark marble counter."
+       width="635" height="635" alt=""
        loading="lazy" decoding="async">
 </picture>
           <span class="m-fav-name">Iced latte</span>
@@ -251,7 +253,7 @@
               aria-expanded="false" aria-controls="m-search" aria-label="Search the menu"><span class="m-icon-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg></span><span class="m-icon-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
       <button class="m-tool m-veg" type="button" id="m-veg" aria-pressed="false"
               title="Show only dishes marked (V) on the printed menu">
-        <span class="m-tag" aria-hidden="true">V</span><span class="m-veg-label">only<span class="visually-hidden"> vegetarian dishes</span></span>
+        <span class="m-tag" aria-hidden="true">V</span><span class="visually-hidden">Show </span><span class="m-veg-label">only</span><span class="visually-hidden"> vegetarian dishes</span>
       </button>
     </div>
   </div>
@@ -453,8 +455,8 @@
         <li class="m-row" id="on-toast--toast-2-with-scrambled-egg" data-item>
           <span class="m-row-name">Toast (2) with scrambled egg</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£7</span>
         </li>
-        <li class="m-row" id="on-toast--toast-2-with-mushroom" data-item>
-          <span class="m-row-name">Toast (2) with mushroom</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£7</span>
+        <li class="m-row" id="on-toast--toast-2-with-mushrooms" data-item>
+          <span class="m-row-name">Toast (2) with mushrooms</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£7</span>
         </li>
       </ul>
     </section>
@@ -491,8 +493,8 @@
         <li class="m-row" id="extras--veggie-sausage" data-item>
           <span class="m-row-name">Veggie sausage</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£2</span>
         </li>
-        <li class="m-row" id="extras--1-toast" data-item>
-          <span class="m-row-name">1 toast</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£1.20</span>
+        <li class="m-row" id="extras--1-slice-of-toast" data-item>
+          <span class="m-row-name">1 slice of toast</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£1.20</span>
         </li>
         <li class="m-row" id="extras--baked-beans" data-item>
           <span class="m-row-name">Baked beans</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£1.50</span>
@@ -548,8 +550,8 @@
     <header class="m-course-head has-photo">
       <div class="m-course-copy">
         <p class="m-course-count">2 sections · 11 items</p>
-        <h2 id="h-course-sweet">Sweet</h2>
-        <ul class="m-course-sections" aria-label="Sweet sections">
+        <h2 id="h-course-sweet">Sweet things</h2>
+        <ul class="m-course-sections" aria-label="Sweet things sections">
           <li><a href="#sweet-breakfast">Sweet breakfast</a></li>
           <li><a href="#desserts">Cakes &amp; desserts</a></li>
         </ul>
@@ -582,7 +584,7 @@
         </li>
         <li class="m-dish" id="sweet-breakfast--granola-protein" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Granola protein</span></p>
-          <p class="m-dish-desc">Homemade yogurt with season’s fruits and honey.</p>
+          <p class="m-dish-desc">Homemade yogurt with seasonal fruit and honey.</p>
         </li>
       </ul>
     </section>
@@ -603,8 +605,8 @@
         <li class="m-row" id="desserts--red-velvet" data-item>
           <span class="m-row-name">Red velvet</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.50</span>
         </li>
-        <li class="m-row" id="desserts--cheese-cake" data-item>
-          <span class="m-row-name">Cheese cake</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.50</span>
+        <li class="m-row" id="desserts--cheesecake" data-item>
+          <span class="m-row-name">Cheesecake</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.50</span>
         </li>
         <li class="m-row" id="desserts--chocolate-cake" data-item>
           <span class="m-row-name">Chocolate cake</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£5</span>
@@ -687,11 +689,11 @@
       <ul class="m-dishes">
         <li class="m-dish" id="burgers--hackberries-burger" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Hackberries burger</span><span class="m-dish-price">£12.90</span></p>
-          <p class="m-dish-desc">High quality beef, bacon, cheese, grilled onion served with Parmesan cheese, chips, salad &amp; gherkins.</p>
+          <p class="m-dish-desc">High-quality beef, bacon, cheese, grilled onion served with Parmesan cheese, chips, salad &amp; gherkins.</p>
         </li>
         <li class="m-dish" id="burgers--cheese-burger" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Cheese burger</span><span class="m-dish-price">£9.90</span></p>
-          <p class="m-dish-desc">High quality beef with chips, salad &amp; gherkins.</p>
+          <p class="m-dish-desc">High-quality beef with chips, salad &amp; gherkins.</p>
         </li>
         <li class="m-dish" id="burgers--fried-chicken-burger" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Fried chicken burger</span><span class="m-dish-price">£9.90</span></p>
@@ -713,7 +715,7 @@
       <ul class="m-dishes">
         <li class="m-dish" id="pasta--penne" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Penne</span><span class="m-dish-price">£10</span></p>
-          <p class="m-dish-desc">With a choice of homemade tomato sauce or homemade creamy mushroom sauce. Add chicken, bacon or mushroom +£2.00.</p>
+          <p class="m-dish-desc">With a choice of homemade tomato sauce or homemade creamy mushroom sauce. Add chicken, bacon or mushroom +£2.</p>
         </li>
         <li class="m-dish" id="pasta--spaghetti-bolognese-and-parmesan-cheese" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Spaghetti bolognese &amp; Parmesan cheese</span><span class="m-dish-price">£11</span></p>
@@ -751,7 +753,7 @@
         </li>
         <li class="m-dish" id="wraps--homemade-lamb-kofte-wrap" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Homemade lamb köfte wrap</span><span class="m-dish-price">£10</span></p>
-          <p class="m-dish-desc">Served in tortilla with parsley, red onion, tomatoes &amp; fries.</p>
+          <p class="m-dish-desc">Served in a tortilla with parsley, red onion, tomatoes &amp; fries.</p>
         </li>
         <li class="m-dish" id="wraps--breakfast-wrap" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Breakfast wrap</span><span class="m-dish-price">£10.90</span></p>
@@ -767,7 +769,7 @@
     <section class="m-section m-layout-group" id="panini" data-course="lunch" aria-labelledby="h-panini">
       <div class="m-section-head">
         <h3 id="h-panini">Panini</h3>
-        <p class="m-group-price"><span>Most</span> £8</p>
+        <p class="m-group-price"><span>Usually</span> £8</p>
       </div>
       <p class="m-note">Served with chips or salad.</p>
       <ul class="m-chips">
@@ -787,16 +789,16 @@
       
       <ul class="m-dishes">
         <li class="m-dish" id="salad-bowls--grilled-cajun-chicken" data-item>
-          <p class="m-dish-line"><span class="m-dish-name">Grilled cajun chicken</span><span class="m-dish-price">£9.90</span></p>
-          <p class="m-dish-desc">Mixed salad, crispy tortilla strips, topped with sliced avocado and creamy cajun dressing.</p>
+          <p class="m-dish-line"><span class="m-dish-name">Grilled Cajun chicken</span><span class="m-dish-price">£9.90</span></p>
+          <p class="m-dish-desc">Mixed salad, crispy tortilla strips, topped with sliced avocado and creamy Cajun dressing.</p>
         </li>
         <li class="m-dish" id="salad-bowls--grilled-halloumi" data-item data-v>
           <p class="m-dish-line"><span class="m-dish-name">Grilled halloumi</span><span class="m-tag" title="Marked vegetarian on the printed menu"><span aria-hidden="true">V</span><span class="visually-hidden">(vegetarian)</span></span><span class="m-dish-price">£9.90</span></p>
           <p class="m-dish-desc">Mixed salad, Kalamata olives, and avocado, topped with garlic dressing.</p>
         </li>
         <li class="m-dish" id="salad-bowls--grilled-chicken-caesar" data-item>
-          <p class="m-dish-line"><span class="m-dish-name">Grilled chicken caesar</span><span class="m-dish-price">£9.90</span></p>
-          <p class="m-dish-desc">Mixed salad, topped with caesar dressing.</p>
+          <p class="m-dish-line"><span class="m-dish-name">Grilled chicken Caesar</span><span class="m-dish-price">£9.90</span></p>
+          <p class="m-dish-desc">Mixed salad, topped with Caesar dressing.</p>
         </li>
         <li class="m-dish" id="salad-bowls--smoked-salmon" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Smoked salmon</span><span class="m-dish-price">£11.90</span></p>
@@ -842,15 +844,15 @@
       <ul class="m-dishes">
         <li class="m-dish" id="dinner--roast-chicken" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Roast chicken</span><span class="m-dish-price">£9.90</span></p>
-          <p class="m-dish-desc">Served with potatoes, mix vegetables and gravy.</p>
+          <p class="m-dish-desc">Served with potatoes, mixed vegetables and gravy.</p>
         </li>
         <li class="m-dish" id="dinner--roast-beef" data-item>
           <p class="m-dish-line"><span class="m-dish-name">Roast beef</span><span class="m-dish-price">£15</span></p>
-          <p class="m-dish-desc">Served with potatoes, mix vegetables and gravy.</p>
+          <p class="m-dish-desc">Served with potatoes, mixed vegetables and gravy.</p>
         </li>
-        <li class="m-dish" id="dinner--shepherd-pie" data-item>
-          <p class="m-dish-line"><span class="m-dish-name">Shepherd pie</span><span class="m-dish-price">£15</span></p>
-          <p class="m-dish-desc">Served with potatoes, mix vegetables and gravy.</p>
+        <li class="m-dish" id="dinner--shepherd-s-pie" data-item>
+          <p class="m-dish-line"><span class="m-dish-name">Shepherd’s pie</span><span class="m-dish-price">£15</span></p>
+          <p class="m-dish-desc">Served with potatoes, mixed vegetables and gravy.</p>
         </li>
       </ul>
     </section>
@@ -909,8 +911,8 @@
           <p class="m-dish-line"><span class="m-dish-name">Dirty fries</span><span class="m-dish-price">£6.50</span></p>
           <p class="m-dish-desc">Chips topped with crispy Southern fried chicken &amp; mixture of sauces.</p>
         </li>
-        <li class="m-dish" id="appetisers--hummus-cacik-olives" data-item data-v>
-          <p class="m-dish-line"><span class="m-dish-name">Hummus cacık olives</span><span class="m-tag" title="Marked vegetarian on the printed menu"><span aria-hidden="true">V</span><span class="visually-hidden">(vegetarian)</span></span><span class="m-dish-price">£6.50</span></p>
+        <li class="m-dish" id="appetisers--hummus-cacik-and-olives" data-item data-v>
+          <p class="m-dish-line"><span class="m-dish-name">Hummus, cacık &amp; olives</span><span class="m-tag" title="Marked vegetarian on the printed menu"><span aria-hidden="true">V</span><span class="visually-hidden">(vegetarian)</span></span><span class="m-dish-price">£6.50</span></p>
           <p class="m-dish-desc">Served with Turkish bread.</p>
         </li>
         <li class="m-dish" id="appetisers--halloumi-3-pcs" data-item data-v>
@@ -955,8 +957,8 @@
     <header class="m-course-head has-photo">
       <div class="m-course-copy">
         <p class="m-course-count">9 sections · 58 items</p>
-        <h2 id="h-course-drinks">Drinks</h2>
-        <ul class="m-course-sections" aria-label="Drinks sections">
+        <h2 id="h-course-drinks">Coffee &amp; drinks</h2>
+        <ul class="m-course-sections" aria-label="Coffee &amp; drinks sections">
           <li><a href="#hot-drinks">Coffee &amp; tea</a></li>
           <li><a href="#herbal-tea">Herbal tea</a></li>
           <li><a href="#iced-coffee">Iced coffee</a></li>
@@ -1043,7 +1045,7 @@
       </div>
       
       <ul class="m-chips">
-        <li id="herbal-tea--earl-grey" data-item>Earl grey</li>
+        <li id="herbal-tea--earl-grey" data-item>Earl Grey</li>
         <li id="herbal-tea--green" data-item>Green</li>
         <li id="herbal-tea--mint" data-item>Mint</li>
         <li id="herbal-tea--chamomile" data-item>Chamomile</li>
@@ -1233,7 +1235,7 @@
     <section class="m-section m-layout-group" id="cocktails" data-course="bar" aria-labelledby="h-cocktails">
       <div class="m-section-head">
         <h3 id="h-cocktails">Cocktails</h3>
-        <p class="m-group-price"><span>Most</span> £10</p>
+        <p class="m-group-price"><span>Usually</span> £10</p>
       </div>
       
       <ul class="m-chips">
@@ -1305,8 +1307,8 @@
         <li class="m-row" id="beers--budweiser" data-item>
           <span class="m-row-name">Budweiser</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.40</span>
         </li>
-        <li class="m-row" id="beers--efes-draft-500ml" data-item>
-          <span class="m-row-name">Efes draft (500ml)</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.90</span>
+        <li class="m-row" id="beers--efes-draught-500ml" data-item>
+          <span class="m-row-name">Efes draught (500ml)</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£4.90</span>
         </li>
       </ul>
     </section>
@@ -1327,8 +1329,8 @@
         <li class="m-row" id="spirits--hendrick-s" data-item>
           <span class="m-row-name">Hendrick's</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£7</span>
         </li>
-        <li class="m-row" id="spirits--jack-daniels-no7" data-item>
-          <span class="m-row-name">Jack Daniels No7</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£5</span>
+        <li class="m-row" id="spirits--jack-daniel-s-old-no-7" data-item>
+          <span class="m-row-name">Jack Daniel’s Old No. 7</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£5</span>
         </li>
         <li class="m-row" id="spirits--courvoisier" data-item>
           <span class="m-row-name">Courvoisier</span><span class="leader" aria-hidden="true"></span><span class="m-row-price">£6.10</span>
@@ -1355,8 +1357,8 @@
     <section class="m-about" id="allergens" aria-labelledby="h-allergens">
       <h2 id="h-allergens">Allergens &amp; this menu</h2>
       <p class="m-about-lead">Allergen information is not published here. Please ask a member of the team about ingredients and allergens before ordering.</p>
-      <p>Transcribed from the printed in-café menu. Dishes marked (V) are marked vegetarian on the printed menu; no other dietary or allergen information has been added.</p>
-      <p><strong>Prices need confirming.</strong> Prices are transcribed from a photograph of a printed menu dated about a year ago. They are shown so the layout can be reviewed and must be replaced with current prices before this site goes live.</p>
+      <p>Dishes marked (V) are marked vegetarian on the café’s printed menu. No other dietary or allergen information is given here.</p>
+      <p><strong>Prices need confirming.</strong> Prices come from a printed menu from about a year ago, so some may have changed. Please check with the team when you order.</p>
     </section>
   </div>
   <aside class="m-aside" aria-label="Menu guide">
@@ -1377,7 +1379,7 @@
           </ol>
         </li>
         <li class="m-toc-course" data-course="sweet">
-          <a href="#course-sweet" data-spy="course-sweet">Sweet</a>
+          <a href="#course-sweet" data-spy="course-sweet">Sweet things</a>
           <ol>
             <li><a href="#sweet-breakfast" data-spy="sweet-breakfast">Sweet breakfast</a></li>
             <li><a href="#desserts" data-spy="desserts">Cakes &amp; desserts</a></li>
@@ -1401,7 +1403,7 @@
           </ol>
         </li>
         <li class="m-toc-course" data-course="drinks">
-          <a href="#course-drinks" data-spy="course-drinks">Drinks</a>
+          <a href="#course-drinks" data-spy="course-drinks">Coffee &amp; drinks</a>
           <ol>
             <li><a href="#hot-drinks" data-spy="hot-drinks">Coffee &amp; tea</a></li>
             <li><a href="#herbal-tea" data-spy="herbal-tea">Herbal tea</a></li>
@@ -1427,7 +1429,7 @@
         </ol>
       </nav>
       <div class="m-aside-card">
-        <p><span class="m-tag" aria-hidden="true">V</span> Marked vegetarian on the printed menu. Nothing else is inferred.</p>
+        <p><span class="m-tag" aria-hidden="true">V</span> Marked vegetarian on the café’s menu.</p>
         <p><strong>Allergies?</strong> Please ask the team about ingredients before you order.</p>
         <a class="btn" href="contact.html#book" data-contact-open="book">Book a table <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -1476,13 +1478,12 @@
       </div>
       <div class="footer-col">
         <h2>Explore</h2>
-        <ul>
+        <ul class="footer-explore">
           <li><a href="menu.html">Menu</a></li>
           <li><a href="index.html#the-cafe">The café</a></li>
           <li><a href="index.html#gallery">Gallery</a></li>
-          <li><a href="index.html#contact-us">Contact us</a></li>
+          <li><a href="contact.html">Contact us</a></li>
           <li><a href="index.html#visit">Visit us</a></li>
-          <li><a href="contact.html">All contact options</a></li>
           <li><a href="contact.html#book" data-contact-open="book">Book a table</a></li>
           <li><a href="contact.html#private-hire" data-contact-open="private-hire">Private hire</a></li>
         </ul>
@@ -1491,16 +1492,6 @@
         <li><a href="https://www.instagram.com/_hackberries/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>&nbsp;@_hackberries</a></li>
         </ul>
       </div>
-    </div>
-
-    <div class="coffee-break" id="coffee-break">
-      <button class="coffee-btn" type="button" id="coffee-btn"
-              aria-describedby="coffee-status">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M6 2.5v2M10 2.5v2M14 2.5v2"/></svg><span>A little coffee break</span>
-      </button>
-      <button class="coffee-btn" type="button" id="coffee-clear" hidden>Clear</button>
-      <p class="coffee-status" id="coffee-status" role="status"></p>
-      <div class="bean-field" id="bean-field" aria-hidden="true"></div>
     </div>
 
     <p class="footer-wordmark" aria-hidden="true">Hackberries</p>
@@ -1807,7 +1798,7 @@
         <div class="cf-field">
           <label class="cf-label" for="cf-private-hire-guests">Guests (approx.) <span class="cf-req" aria-hidden="true">*</span></label>
           <input class="cf-input" type="number" id="cf-private-hire-guests" name="guests" required
-            aria-describedby="cf-private-hire-guests-err" min="1" max="200" step="1" inputmode="numeric" placeholder="20">
+            aria-describedby="cf-private-hire-guests-err" min="12" max="200" step="1" inputmode="numeric" placeholder="20">
           
           <p class="cf-error" id="cf-private-hire-guests-err" hidden></p>
         </div>

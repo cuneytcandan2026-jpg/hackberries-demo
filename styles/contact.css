@@ -414,3 +414,24 @@ html.has-contact-open { overflow: hidden; }
    <noscript> block in the page), so it needs its own frame there. */
 .c-noscript-forms .contact-dialog:not([open]) { max-height: none; }
 .c-noscript-forms .contact-dialog:not([open]) .contact-sheet { max-height: none; }
+
+/* ---- 404 page -------------------------------------------------------------- */
+.not-found {
+  min-height: min(64vh, 40rem);
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3rem, 2rem + 5vw, 7rem);
+  text-align: center;
+}
+.not-found .shell { max-width: 34rem; margin-inline: auto; }
+.not-found h1 {
+  font-size: var(--t-h2);
+  margin-block: var(--s-3) var(--s-4);
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+}

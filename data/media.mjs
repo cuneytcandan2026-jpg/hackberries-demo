@@ -4,26 +4,24 @@
  * Every entry maps to a real client photograph in Assets/Images. Derivatives in
  * site/media are produced by tools/build-images.mjs; originals are untouched.
  *
- * `alt` describes what is genuinely visible. Where a photograph matches a named
+ * `alt` describes what is genuinely visible, and `title` is a few words for
+ * places where the full description would be read twice (gallery buttons).
+ * Where a photograph matches a named
  * menu item with confidence, `dish` records it; where it does not, `dish` is
  * null and the copy stays descriptive rather than inventing a product name.
  *
- * The lamb chops and burger images were added later by the site owner as
- * generated stand-ins for the lunch and grill dishes; the rest are real
- * Hackberries images. No stock photography is used
- * anywhere on this site.
- *
- * The hero background is the one exception to "untouched": it is the same room
- * and angle as Venue.png, supplied as an enhanced, widened 16:9 version. Small
- * details (chair texture, sauce-bottle labels, the outer edges of the frame)
- * were redrawn in that process, so the client must confirm it is a fair
- * picture of the room before launch. Tracked in content-needed.md.
+ * Every photograph is of Hackberries' own food, drinks or room. No stock
+ * photography is used anywhere on this site. Some were retouched before
+ * they were supplied; which ones, and what the client still has to approve,
+ * is tracked in content-needed.md (not deployed).
  */
+import { BUSINESS } from './business.mjs';
 
 export const PHOTOS = {
   'dessert-french-toast': {
     source: 'Dessert 1.png',
     dish: 'French toast',
+    title: 'French toast',
     alt:
       'Two thick slices of French toast dusted with icing sugar, piled with ' +
       'banana, strawberries, blueberries, redcurrants, cream and wafer rolls, ' +
@@ -33,6 +31,7 @@ export const PHOTOS = {
   'food-menemen': {
     source: 'Food 1.png',
     dish: 'Homemade menemen',
+    title: 'Menemen',
     alt:
       'A cast-iron pan of eggs cooked in tomato and pepper sauce, scattered ' +
       'with chives, served on a wooden board with toasted bread, in front of ' +
@@ -42,6 +41,7 @@ export const PHOTOS = {
   'food-avocado-eggs': {
     source: 'Food 3.png',
     dish: 'Egg and avocado toast',
+    title: 'Egg and avocado toast',
     alt:
       'Two poached eggs dusted with paprika on crushed avocado toast, with a ' +
       'dressed side salad, on a deep blue glazed oval plate set on marble.',
@@ -50,6 +50,7 @@ export const PHOTOS = {
   'food-omelette': {
     source: 'Food 2.png',
     dish: 'Omelette',
+    title: 'Omelette',
     alt:
       'A folded omelette scattered with chives and paprika on a long white ' +
       'plate, with toasted bread and a dressed side salad, on a marble table.',
@@ -58,6 +59,7 @@ export const PHOTOS = {
   'drink-iced-latte': {
     source: 'Drink 4.png',
     dish: 'Iced latte',
+    title: 'Iced lattes',
     alt:
       'Three iced lattes in handled glass jars, the espresso layered over ' +
       'milk, on a dark marble counter.',
@@ -66,6 +68,7 @@ export const PHOTOS = {
   'drink-coffee-smoothie': {
     source: 'Coffe & Smoothie.png',
     dish: null,
+    title: 'Iced coffee and a green smoothie',
     alt:
       'An iced coffee and a green smoothie in handled glass jars with red ' +
       'striped straws, in front of the café’s foliage wall and orange neon ' +
@@ -75,6 +78,7 @@ export const PHOTOS = {
   'drink-smoothies': {
     source: 'Drink 2.png',
     dish: null,
+    title: 'Two smoothies',
     alt:
       'A berry smoothie topped with a blackberry and raspberry beside a green ' +
       'smoothie garnished with orange and mint, both in handled glass jars on ' +
@@ -84,6 +88,7 @@ export const PHOTOS = {
   'drink-coolers': {
     source: 'Drink 1.png',
     dish: null,
+    title: 'Three iced drinks',
     alt:
       'Three tall iced drinks side by side - a dark berry one topped with ' +
       'blackberries, a red one, and a bright blue one with lime and a sour ' +
@@ -93,6 +98,7 @@ export const PHOTOS = {
   'drink-strawberry': {
     source: 'Drink 3.png',
     dish: null,
+    title: 'Frozen strawberry drink',
     alt:
       'A frozen strawberry drink served in a martini glass with mint, lime ' +
       'and a paper parasol, with the café’s teal banquettes behind it.',
@@ -101,6 +107,7 @@ export const PHOTOS = {
   'food-lamb-chops': {
     source: 'Lamb Chops.png',
     dish: 'Lamb chops',
+    title: 'Lamb chops',
     alt:
       'Grilled lamb chops with roast potatoes, red pepper, a lemon wedge, ' +
       'salad and a pot of chilli sauce on a long white plate.',
@@ -109,6 +116,7 @@ export const PHOTOS = {
   'food-burger': {
     source: 'Burger.png',
     dish: 'Burger',
+    title: 'Burger',
     alt:
       'A cheeseburger with bacon, topped with a whole pickle, beside seasoned ' +
       'chips and a wire basket of fries on a blue glazed plate, on marble.',
@@ -117,6 +125,7 @@ export const PHOTOS = {
   'venue-hero': {
     source: 'Hero background image.png',
     dish: null,
+    title: 'Inside Hackberries',
     // Short on purpose: it is read immediately before the page's h1.
     alt:
       'Inside Hackberries: rattan pendant lights over marble tables, velvet ' +
@@ -126,6 +135,7 @@ export const PHOTOS = {
   'venue-room': {
     source: 'Venue.png',
     dish: null,
+    title: 'Inside Hackberries',
     alt:
       'Inside Hackberries: marble-topped tables with green and blue velvet ' +
       'chairs and banquettes, rattan pendant lights, an exposed brick wall and ' +
@@ -138,6 +148,8 @@ export const PHOTOS = {
  * "Find your favourite" - four selectable moments.
  * Each is a real photograph paired with a dish that genuinely appears on the
  * archived Hackberries menu. Descriptions quote the printed menu wording.
+ * Each dish's category label is the course its `href` points into, read from
+ * data/menu.mjs, so the showcase, the panels and the menu page share one name.
  *
  * `label` is the CATEGORY the visitor chooses - a way of grouping the menu for
  * browsing, not a claim that the printed menu has a section with that name.
@@ -147,8 +159,7 @@ export const PHOTOS = {
 export const SHOWCASE = [
   {
     id: 'menemen',
-    href: 'menu.html#breakfast',
-    label: 'Breakfast',
+    href: 'menu.html#brunch-plates--homemade-menemen',
     photo: 'food-menemen',
     title: 'Homemade menemen',
     menuName: 'HOMEMADE MENEMEN (V)',
@@ -160,21 +171,18 @@ export const SHOWCASE = [
   },
   {
     id: 'avocado',
-    href: 'menu.html#breakfast',
-    label: 'Brunch',
+    href: 'menu.html#brunch-plates--egg-and-avocado-toast',
     photo: 'food-avocado-eggs',
     title: 'Egg & avocado toast',
     menuName: 'EGG & AVOCADO TOAST (V)',
     text:
-      'Two poached eggs on sourdough with crushed avocado and a mixed salad. ' +
-      'The quiet, reliable one — and the plate it arrives on is half the ' +
-      'reason people photograph it.',
+      'Two poached eggs on sourdough with mashed avocado and a mixed salad. ' +
+      'The lighter way to start, here on a deep blue glazed plate.',
     group: 'breakfast',
   },
   {
     id: 'french-toast',
     href: 'menu.html#sweet-breakfast',
-    label: 'Sweet treats',
     photo: 'dessert-french-toast',
     title: 'French toast',
     menuName: 'FRENCH TOAST',
@@ -187,7 +195,6 @@ export const SHOWCASE = [
   {
     id: 'iced-latte',
     href: 'menu.html#iced-coffee',
-    label: 'Coffee',
     photo: 'drink-iced-latte',
     title: 'Iced latte',
     menuName: 'ICED LATTE',
@@ -203,24 +210,27 @@ export const SHOWCASE = [
  * "What we serve" - the four parts of the menu. Each `id` is also a course id
  * in data/menu.mjs, which is where the dish counts and the list links on each
  * card are read from, so they cannot drift from the menu page. `hoverPhoto` is
- * the second photograph behind the card's swap thumbnail.
+ * the second photograph behind the card's swap thumbnail. `countNoun` names
+ * what is counted (default 'dishes'). Each card's name is its course label in
+ * data/menu.mjs.
  */
+const allDay = BUSINESS.breakfastAllDay.confirmed;
+
 export const MENU_PANELS = [
   {
     id: 'breakfast',
-    name: 'Breakfast',
     // Deliberately not the menemen: that photograph leads the showcase
     // immediately above this section.
     photo: 'food-omelette',
     hoverPhoto: 'food-avocado-eggs',
     text:
-      'Served until close. Turkish, full English, American, veggie and vegan ' +
-      'breakfasts, benedicts, omelettes, set breakfasts and things on toast.',
+      `${allDay ? 'Served until close. ' : ''}Turkish, full English, American, ` +
+      'veggie and vegan breakfasts, benedicts, omelettes, set breakfasts and ' +
+      'things on toast.',
     href: 'menu.html#breakfast',
   },
   {
     id: 'sweet',
-    name: 'Sweet things',
     photo: 'dessert-french-toast',
     hoverPhoto: 'drink-smoothies',
     text:
@@ -230,17 +240,16 @@ export const MENU_PANELS = [
   },
   {
     id: 'drinks',
-    name: 'Coffee & drinks',
     photo: 'drink-coolers',
     hoverPhoto: 'drink-strawberry',
     text:
       'A full coffee list, Turkish coffee and tea, herbal teas, frappés, ' +
       'milkshakes, protein shakes, fresh juice and smoothies — plus a bar list.',
+    countNoun: 'drinks',
     href: 'menu.html#hot-drinks',
   },
   {
     id: 'lunch',
-    name: 'Lunch & grills',
     photo: 'food-lamb-chops',
     hoverPhoto: 'food-burger',
     text:
@@ -270,44 +279,53 @@ export const ATMOSPHERE = [
     label: 'The coffee',
     photo: 'drink-coffee-smoothie',
     text:
-      'Iced, hot, Turkish or blended. The neon sign is behind the counter, ' +
-      'which is why roughly half the photographs taken in here have it in the ' +
-      'corner of the frame.',
+      'Iced, hot, Turkish or blended, from flat whites and cortados to ' +
+      'frappés and smoothies. Here in front of the foliage wall and the ' +
+      'orange neon sign.',
   },
   {
     id: 'table',
     label: 'At the table',
     photo: 'food-omelette',
     text:
-      'Fresh flowers on the marble, a side salad you were not expecting, and ' +
-      'enough room to put your phone down. Breakfast here tends to overrun.',
+      'A folded omelette on the marble, with toasted bread and a dressed side ' +
+      'salad. On the menu you choose your own toppings.',
   },
 ];
+
+/* Read from business.mjs, so a change to the hours or address reaches this
+   copy too. "190 Windmill Lane" -> "Windmill Lane"; "07:00" -> "7am". */
+const streetName = BUSINESS.address.street.replace(/^\d+\s*/, '');
+const weekdays = BUSINESS.hours.groups.find((g) => g.dow.includes(1)) || BUSINESS.hours.groups[0];
+const ampm = (hhmm) => {
+  const [h, m] = hhmm.split(':').map(Number);
+  return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''}${h < 12 ? 'am' : 'pm'}`;
+};
 
 /** Editorial rows. Each preview thumbnail is a real photograph. */
 export const EDITORIAL_ROWS = [
   {
     id: 'menu',
     title: 'Explore the menu',
-    text: 'Breakfast until close, a grill, and a drinks list that runs long.',
+    text: `${allDay ? 'Breakfast until close' : 'Breakfasts and brunch plates'}, a grill, and a drinks list that runs long.`,
     href: 'menu.html',
     cta: 'See the full menu',
     photo: 'food-menemen',
   },
   {
-    id: 'meet',
-    title: 'Meet at Hackberries',
-    text: 'Two seats, two coffees, and no one hurrying you along.',
-    href: '#the-cafe',
-    cta: 'See the café',
+    id: 'look',
+    title: 'Take a look around',
+    text: 'Plates, glasses and the green wall, photographed at the café.',
+    href: '#gallery',
+    cta: 'See the photos',
     photo: 'drink-strawberry',
   },
   {
     id: 'find',
     title: 'Find your way here',
-    text: 'Windmill Lane, Cheshunt. Open from seven on weekdays.',
+    text: `${streetName}, ${BUSINESS.locality}. Open from ${ampm(weekdays.opens)} on weekdays.`,
     href: '#visit',
-    cta: 'Get directions',
+    cta: 'See how to find us',
     photo: 'venue-room',
   },
 ];

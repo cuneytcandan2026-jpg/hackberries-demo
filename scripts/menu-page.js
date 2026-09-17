@@ -306,11 +306,26 @@ function initSpy() {
   mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   paint();
 
+  // A course chip that takes keyboard focus while only partly inside the
+  // list is not scrolled by the browser, which would leave it half under the
+  // search button. Bring the whole chip into the list.
+  const onFocus = (event) => {
+    const chip = event.target.closest?.('a');
+    if (!chip || !barList) return;
+    const list = barList.getBoundingClientRect();
+    const r = chip.getBoundingClientRect();
+    const inset = 12;
+    if (r.left < list.left) barList.scrollLeft -= list.left - r.left + inset;
+    else if (r.right > list.right - inset) barList.scrollLeft += r.right - list.right + inset * 2;
+  };
+  barList?.addEventListener('focusin', onFocus);
+
   return () => {
     paint.cancel();
     mo.disconnect();
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onScroll);
+    barList?.removeEventListener('focusin', onFocus);
     toc?.classList.remove('is-live');
     for (const a of links) a.removeAttribute('aria-current');
   };

@@ -5,7 +5,7 @@
  * page can be torn down cleanly, and so a failure in one enhancement can never
  * take the rest of the page with it.
  */
-import { motion, initReveals } from './motion.js';
+import { initReveals } from './motion.js';
 import { initMenuPanel, initDock, initHeader, initHours } from './nav.js';
 import { initShowcase } from './showcase.js';
 import { initAtmosphere } from './atmosphere.js';
@@ -50,67 +50,6 @@ function initHero() {
 }
 
 /* ==========================================================================
-   "A little coffee break"
-   ========================================================================== */
-function initCoffeeBreak() {
-  const button = document.getElementById('coffee-btn');
-  const clearBtn = document.getElementById('coffee-clear');
-  const field = document.getElementById('bean-field');
-  const status = document.getElementById('coffee-status');
-  if (!button || !field) return () => {};
-
-  let cleanup = null;
-  let busy = false;
-
-  const reset = () => {
-    cleanup?.();
-    cleanup = null;
-    clearBtn?.setAttribute('hidden', '');
-    if (status) status.textContent = '';
-  };
-
-  const onClick = async () => {
-    if (busy) return;
-
-    // Under reduced motion this stays a calm, static acknowledgement.
-    if (motion.reduced) {
-      if (status) status.textContent = 'Put the kettle on. ☕';
-      return;
-    }
-
-    busy = true;
-    try {
-      const { runCoffeeBreak } = await import('./coffee-break.js');
-      cleanup?.();
-      cleanup = runCoffeeBreak({
-        field,
-        onDone: () => { busy = false; },
-      });
-      clearBtn?.removeAttribute('hidden');
-      if (status) status.textContent = 'Beans everywhere. Sorry.';
-    } catch (error) {
-      // A failed optional feature must not break anything else.
-      console.error('[hackberries] coffee break unavailable', error);
-      if (status) status.textContent = 'Put the kettle on. ☕';
-      busy = false;
-    }
-  };
-
-  const onClear = () => { reset(); busy = false; button.focus(); };
-  const offMotion = motion.onChange((reduced) => { if (reduced) reset(); });
-
-  button.addEventListener('click', onClick);
-  clearBtn?.addEventListener('click', onClear);
-
-  return () => {
-    reset();
-    offMotion();
-    button.removeEventListener('click', onClick);
-    clearBtn?.removeEventListener('click', onClear);
-  };
-}
-
-/* ==========================================================================
    Boot
    ========================================================================== */
 mount('hero', initHero);
@@ -126,7 +65,6 @@ mount('what we serve', initServe);
 mount('lightbox', initLightbox);
 mount('collage drag', initCollageDrag);
 mount('map', initMap);
-mount('coffee break', initCoffeeBreak);
 mount('bean to brew', initBrew);
 mount('contact', initContact);
 

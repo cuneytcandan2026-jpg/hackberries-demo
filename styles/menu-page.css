@@ -11,11 +11,14 @@
    ========================================================================== */
 
 .is-menu-page {
-  --m-bar-h: 3.75rem;
   --m-price: var(--c-canopy);
 }
-/* Anchor jumps clear both the header and the course bar. */
+/* Anchor jumps clear both the header and the course bar. The bar height is
+   declared here on <html>, not on the body: scroll-padding lives on <html>,
+   and a variable it can't inherit makes the calc() invalid, which silently
+   drops the padding to 0 and parks every anchor under the sticky bar. */
 html:has(body.is-menu-page) {
+  --m-bar-h: 3.75rem;
   scroll-padding-top: calc(var(--header-h) + var(--m-bar-h) + 1rem);
 }
 html.is-header-tucked:has(body.is-menu-page) {
@@ -259,6 +262,12 @@ html.is-header-tucked:has(body.is-menu-page) {
   mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
 }
 .m-bar-courses ul::-webkit-scrollbar { display: none; }
+/* With the tools beside it, the list must stop at its own edge: bleeding to
+   the screen edge would slide course chips underneath the search button. */
+.m-bar-inner:has(.m-tools:not([hidden])) .m-bar-courses ul {
+  margin-right: 0;
+  padding-right: var(--s-3);
+}
 .m-bar-courses li { flex: none; }
 .m-bar-courses a {
   display: inline-flex;
@@ -349,8 +358,19 @@ html.is-header-tucked:has(body.is-menu-page) {
   .m-bar.is-searching .m-bar-courses { display: none; }
   .m-bar.is-searching .m-tools { flex: 1; }
 }
-@media (max-width: 22rem) {
-  .m-veg-label { display: none; }
+/* Phones: the (V) toggle drops its visible word so the course chips get the
+   room. "only" stays in the accessible name. */
+@media (max-width: 39.99rem) {
+  .m-veg-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .m-veg { position: relative; padding-inline: 0; }
+  .m-bar-courses a { padding-inline: 0.75rem; }
 }
 @media (min-width: 64rem) {
   .m-search-toggle { display: none; }

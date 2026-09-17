@@ -505,7 +505,7 @@ html[data-motion='reduced'] [data-reveal-ready].eyebrow::before { animation: non
    ========================================================================== */
 @media print {
   .site-header, .dock, .utility-strip, .nav-panel, .lightbox,
-  .bean-field, .coffee-break, .fav-controls, .fav-cursor, .fav-segments, .serve-index, .serve-progress, .serve-swap, .gallery-actions,
+  .fav-controls, .fav-cursor, .fav-segments, .serve-index, .serve-progress, .serve-swap, .gallery-actions,
   .to-top, .preview-bar, .hero-brew, .hero-aside, .hero-media, .hero-veil, .leafy::before { display: none !important; }
 
   [data-reveal], [data-reveal-group] > * { opacity: 1 !important; transform: none !important; }

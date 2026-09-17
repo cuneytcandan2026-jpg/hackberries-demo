@@ -58,7 +58,6 @@ export function initShowcase() {
   let index = 0;
   let playing = false;
   let paused = false;
-  let started = false;
   let swapTimer = null;
   let ghostTimer = null;
 
@@ -183,7 +182,6 @@ export function initShowcase() {
   let suppressClick = false;
 
   function select(next, direction) {
-    started = true;
     if (playing) setPlaying(false);
     render(next, direction);
   }
@@ -193,7 +191,6 @@ export function initShowcase() {
       if (suppressClick) return;
       // Clicking the open photograph is a sign of interest: autoplay stops.
       if (i === index) {
-        started = true;
         if (playing) setPlaying(false);
         return;
       }
@@ -224,10 +221,7 @@ export function initShowcase() {
 
   on(btnPrev, 'click', () => select(index - 1, -1));
   on(btnNext, 'click', () => select(index + 1, 1));
-  on(btnPlay, 'click', () => {
-    started = true;
-    setPlaying(!playing);
-  });
+  on(btnPlay, 'click', () => setPlaying(!playing));
 
   /* ---- Pausing ------------------------------------------------------------ */
   // Scoped to the photographs and the text, never the controls: pausing on
@@ -321,16 +315,11 @@ export function initShowcase() {
   on(rail, 'pointercancel', () => { startX = null; });
 
   /* ---- Visibility and preferences ---------------------------------------- */
-  // Autoplay starts by itself the first time the section is seen, unless the
-  // visitor has already chosen a dish or asked for less motion.
+  // Autoplay is opt-in: nothing moves until the visitor presses Play, so the
+  // dish being read never changes under a thumb. Once playing, it pauses
+  // while the section is off screen and resumes when it returns.
   const stopVisibility = whileVisible(root, {
-    onActive: () => {
-      if (!started) {
-        started = true;
-        setPlaying(true);
-      }
-      setPaused(false);
-    },
+    onActive: () => setPaused(false),
     onIdle: () => setPaused(true),
   });
 

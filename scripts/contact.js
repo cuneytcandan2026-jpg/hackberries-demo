@@ -42,6 +42,12 @@ function prettyDate(iso) {
   });
 }
 
+/** "2026-09-19" -> "Saturday". */
+function weekdayOf(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-GB', { weekday: 'long' });
+}
+
 /** Today as yyyy-mm-dd in the visitor's own time zone. */
 function isoToday(offsetDays = 0) {
   const t = new Date();
@@ -200,19 +206,36 @@ export function initContact() {
     return group ? [minutes(group[1]), minutes(group[2])] : null;
   };
 
+  /** Every time slot each select was built with, so a date can narrow the
+      list and a later date widen it again. */
+  const allSlots = new WeakMap();
+
+  /** Lists only the slots inside that day's hours. The options are removed,
+      not hidden: iOS Safari's picker ignores `hidden` on <option>. Returns the
+      label of a chosen time it had to clear (so the change can be explained),
+      else ''. */
   const syncTimes = (form) => {
     const date = form.elements.date;
     const time = form.elements.time;
-    if (!date || !time || !hours.length) return;
-    const range = hoursFor(date.value);
-    for (const option of time.options) {
-      if (!option.value) continue;
-      const t = minutes(option.value);
-      const ok = range === undefined || (range && t >= range[0] && t <= range[1] - lastSlot);
-      option.disabled = !ok;
-      option.hidden = !ok;
+    if (!date || !time || !hours.length) return '';
+    if (!allSlots.has(time)) {
+      allSlots.set(time, Array.from(time.options).filter((option) => option.value));
     }
-    if (time.selectedOptions[0]?.disabled) time.value = '';
+    const range = hoursFor(date.value);
+    const chosen = time.value;
+    const chosenLabel = time.selectedOptions[0]?.textContent.trim() || '';
+    const slots = allSlots.get(time).filter((option) => {
+      const t = minutes(option.value);
+      return range === undefined || (range && t >= range[0] && t <= range[1] - lastSlot);
+    });
+    const placeholder = Array.from(time.options).filter((option) => !option.value);
+    time.replaceChildren(...placeholder, ...slots);
+    if (chosen && !slots.some((option) => option.value === chosen)) {
+      time.value = '';
+      return chosenLabel;
+    }
+    time.value = chosen;
+    return '';
   };
 
   /* ---- Validation ------------------------------------------------------ */
@@ -223,11 +246,14 @@ export function initContact() {
 
     if (v.valueMissing) return MISSING[control.name] || `Please fill in ${label}.`;
     if (v.typeMismatch && control.type === 'email') return 'That email address does not look quite right.';
-    if (v.patternMismatch && control.type === 'tel') return 'Please enter a phone number, digits only.';
+    if (v.patternMismatch && control.type === 'tel') return 'Please enter a full phone number, e.g. 07700 900000.';
     if (v.tooShort) return `A little more detail, please (at least ${control.minLength} characters).`;
     if (control.name === 'guests') {
       if (v.rangeOverflow && form.dataset.contactForm === 'book') {
         return `For ${hireFrom} or more, please use the private hire form.`;
+      }
+      if (v.rangeUnderflow && form.dataset.contactForm === 'private-hire' && Number(control.value) >= 1) {
+        return `Private hire starts at ${hireFrom} guests. For a smaller group, request a table instead.`;
       }
       if (v.rangeUnderflow || v.stepMismatch || v.badInput) return 'Please enter a whole number of guests.';
       if (v.rangeOverflow) return `That is more than we can seat — call ${phone} to talk it through.`;
@@ -275,9 +301,17 @@ export function initContact() {
     });
     on(form, 'change', (event) => {
       if (event.target.matches?.('[data-date]')) {
-        syncTimes(form);
+        const cleared = syncTimes(form);
         check(event.target);
-        if (form.elements.time?.dataset.touched) check(form.elements.time);
+        const time = form.elements.time;
+        // A time picked before the date can fall outside that day's hours.
+        // Say so now, rather than leaving an empty field to find on submit.
+        if (cleared && hoursFor(event.target.value)) {
+          time.dataset.touched = 'true';
+          check(time);
+          const slot = document.getElementById(`${time.id}-err`);
+          if (slot) slot.textContent = `${cleared} is not available on ${weekdayOf(event.target.value)}s. Please choose another time.`;
+        } else if (time?.dataset.touched) check(time);
       }
       if (event.target.tagName === 'SELECT') {
         event.target.dataset.touched = 'true';

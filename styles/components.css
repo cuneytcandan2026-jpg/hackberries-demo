@@ -44,9 +44,11 @@
 /* With the header transparent, the hero's green ground has to run underneath
    it rather than starting below it. The header is sticky, so it still takes
    its space in flow; pulling the hero up by exactly that height puts the
-   ground behind it, and the matching top padding keeps the copy clear. */
+   ground behind it, and the matching top padding keeps the copy clear.
+   The extra 1px is the header's (transparent) bottom border: leave it out and
+   a hairline of the cream body ground shows between the banner and the hero. */
 body[data-header-mode='over'] .hero {
-  margin-top: calc((var(--header-h) + var(--brew-h)) * -1);
+  margin-top: calc((var(--header-h) + var(--brew-h) + 1px) * -1);
 }
 /* Over a photograph rather than a flat ground, so the type gets a soft shadow
    as insurance against whatever bright detail happens to sit behind it. */
@@ -172,6 +174,18 @@ body[data-header-mode='over'] .hero {
 .header-place:hover .arrow { transform: translateX(calc(3px * var(--motion-scale))); }
 
 @media (min-width: 48rem) { .header-hours { display: inline-flex; } }
+/* Phones: the side beside the centred wordmark is free, so today's hours sit
+   there as just the times. "Open today" stays for screen readers. */
+@media (max-width: 47.99rem) {
+  .header-hours { display: inline-flex; gap: 0.35em; font-size: 0.8125rem; }
+  .header-hours .hours-lead {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
 @media (min-width: 64rem) {
   .header-rule { display: block; }
   .header-place { display: inline-flex; }
@@ -188,7 +202,7 @@ body[data-header-mode='over'] .hero {
   line-height: 1;
   color: var(--c-ink);
   text-decoration: none;
-  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 48;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
   display: inline-flex;
   align-items: baseline;
   gap: 0.35em;
@@ -227,7 +241,8 @@ body[data-header-mode='over'] .hero {
 }
 @media (max-width: 24.99rem) {
   .menu-toggle { padding: 0.4rem; }
-  /* Visually icon-only, but still named "Menu" for assistive tech. */
+  /* Visually icon-only, but still named "Explore" for assistive tech. (Not
+     "Menu": on a café site that means food, and menu.html shows this button.) */
   .menu-toggle .label {
     position: absolute;
     width: 1px; height: 1px;
@@ -252,7 +267,8 @@ body[data-header-mode='over'] .hero {
 .menu-toggle[aria-expanded='true'] .bars i:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
-@media (min-width: 64rem) { .menu-toggle { display: none; } }
+/* Only the homepage has the desktop dock; everywhere else the toggle stays. */
+@media (min-width: 64rem) { .menu-toggle:not(.menu-toggle-desktop) { display: none; } }
 
 .nav-panel {
   position: fixed;
@@ -308,7 +324,7 @@ body[data-header-mode='over'] .hero {
   color: var(--c-on-dark);
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--c-on-dark) 18%, transparent);
-  font-variation-settings: 'SOFT' 32, 'WONK' 1, 'opsz' 96;
+  font-variation-settings: 'SOFT' 32, 'WONK' 1;
 }
 .nav-panel-links a:hover { color: var(--c-leaf); }
 .nav-panel-links a span {
@@ -587,6 +603,9 @@ body[data-header-mode='over'] .hero {
 /* Space so the fixed strip/dock never sits on top of the last content. */
 body { padding-bottom: 0; }
 @media (max-width: 63.99rem) {
+  /* Keyboard focus scrolls clear of the strip rather than stopping under it
+     (WCAG 2.4.11). Only on pages that have the strip. */
+  html:has(#utility-strip) { scroll-padding-bottom: calc(3.5rem + env(safe-area-inset-bottom) + 1rem); }
   .site-footer { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom) + var(--s-6)); }
 }
 @media (min-width: 64rem) {
@@ -725,6 +744,21 @@ body { padding-bottom: 0; }
 .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.07em; }
 .hero h1 .line > span { display: block; }
 .hero h1 em { font-style: normal; color: var(--c-leaf); }
+/* At phone sizes the tight display tracking closes Fraunces' word spaces up
+   until "Good food" reads as one word; open them back out. */
+@media (max-width: 47.99rem) {
+  .hero h1 { letter-spacing: -0.022em; word-spacing: 0.08em; }
+  /* Balanced, so the lead doesn't strand "good company." on a line alone. */
+  .hero-lead { text-wrap: balance; }
+}
+/* Short phones (iPhone SE and the like): tighten the vertical rhythm so the
+   scroll cue still lands on the fold rather than just under it. */
+@media (max-width: 47.99rem) and (max-height: 720px) {
+  .hero { padding-top: calc(var(--header-h) + var(--brew-h) + 1rem); }
+  .hero-copy { gap: 0.875rem; }
+  .hero .hero-brew { margin-top: 0.75rem; }
+  .hero .hero-brew-bean { height: 2rem; }
+}
 
 .hero-lead {
   max-width: 36ch;
@@ -732,6 +766,7 @@ body { padding-bottom: 0; }
   line-height: 1.5;
   color: color-mix(in srgb, var(--c-on-dark) 90%, var(--c-leaf));
   text-shadow: 0 1px 18px rgb(4 12 2 / 0.5);
+  text-wrap: pretty;
 }
 
 .hero-actions {
@@ -830,8 +865,9 @@ body { padding-bottom: 0; }
 .cta-glass:active { transform: translateY(0) scale(calc(1 - 0.015 * var(--motion-scale))); }
 .cta-glass:focus-visible { outline: 2px solid var(--c-leaf); outline-offset: 4px; }
 
-/* Phones and tablets: the header has no room for the address, so the hero
-   carries one small text link to it instead. Desktop has it in the header. */
+/* Tablets: the header has no room for the address, so the hero carries one
+   small text link to it instead. Desktop has it in the header; phones leave
+   it out (see below). */
 .hero-findus {
   display: inline-flex;
   align-items: center;
@@ -850,6 +886,22 @@ body { padding-bottom: 0; }
 .hero-findus .arrow { width: 0.95em; height: 0.95em; transition: transform var(--d-control) var(--ease-firm); }
 .hero-findus:hover .arrow { transform: translateX(calc(3px * var(--motion-scale))); }
 @media (min-width: 64rem) { .hero-findus { display: none; } }
+
+/* Phones: the two glass buttons stack as a matching pair, each with its green
+   arrow tile, sized together to the wider label rather than to the screen.
+   "Find us" is left out here for a cleaner hero (the Visit section and the
+   Directions button in the bottom bar cover it). Tablets keep the Find us
+   link, since their header has no room for the address. */
+@media (max-width: 47.99rem) {
+  .hero-actions {
+    display: grid;
+    grid-template-columns: max-content;
+    gap: 0.75rem;
+    margin-top: 0;
+  }
+  .hero-actions > .cta-glass { justify-content: space-between; }
+  .hero-actions .hero-findus { display: none; }
+}
 
 /* ---- Signature details (desktop) ---------------------------------------------
    The hand-lettered note leads the eye to the stamp. Both sit bottom-right,
@@ -1296,7 +1348,7 @@ body { padding-bottom: 0; }
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--c-canopy);
-  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 96;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
 }
 /* The number rolls: the old one leaves in the direction of travel as the new
    one arrives from the other side. */
@@ -1322,6 +1374,7 @@ body { padding-bottom: 0; }
 @keyframes fav-roll-out-back { from { transform: none; } to { transform: translateY(100%); } }
 
 .fav-count .of {
+  white-space: nowrap;
   font-family: var(--font-body);
   font-size: var(--t-small);
   font-weight: 700;
@@ -1737,7 +1790,7 @@ body { padding-bottom: 0; }
   font-size: var(--t-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
-  font-variation-settings: 'SOFT' 28, 'WONK' 1, 'opsz' 72;
+  font-variation-settings: 'SOFT' 28, 'WONK' 1;
 }
 .serve-text {
   margin: 0;
@@ -1910,7 +1963,7 @@ body { padding-bottom: 0; }
     font-weight: 600;
     line-height: 1.02;
     letter-spacing: -0.025em;
-    font-variation-settings: 'SOFT' 28, 'WONK' 1, 'opsz' 96;
+    font-variation-settings: 'SOFT' 28, 'WONK' 1;
     transition: translate 460ms var(--ease-soft);
   }
   .serve-tab-meta {

@@ -14,14 +14,16 @@
 <meta property="og:site_name" content="Hackberries">
 <meta property="og:title" content="Contact — Hackberries, Cheshunt">
 <meta property="og:description" content="Request a table, send a message or enquire about private hire at Hackberries, the café on Windmill Lane, Cheshunt.">
-<meta property="og:image" content="media/dessert-french-toast-square-640.jpg">
-<meta property="og:image:width" content="640">
-<meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="Two thick slices of French toast dusted with icing sugar, piled with banana, strawberries, blueberries, redcurrants, cream and wafer rolls, drizzled with syrup on a blue glazed plate.">
+<meta property="og:url" content="https://laaradigital.co.uk/hackberries-demo/contact.html">
+<meta property="og:image" content="https://laaradigital.co.uk/hackberries-demo/media/venue-hero-share-1200.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Inside Hackberries: rattan pendant lights over marble tables, velvet chairs, and a foliage wall hung with white flowers beside exposed brick.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f7f3ea">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preload" as="font" type="font/woff2" href="fonts/fraunces-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/karla-latin.woff2" crossorigin>
@@ -47,7 +49,7 @@
   <div class="shell header-bar">
     <div class="header-side header-side-start">
       <p class="header-hours" id="header-hours" data-hours="[[[1,2,3,4,5],&quot;7am&quot;,&quot;5pm&quot;],[[6,0],&quot;8am&quot;,&quot;5pm&quot;]]">
-        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-hours-text>Open daily · until 5pm</span>
+        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-hours-text><span class="hours-lead">Open daily · </span>until 5pm</span>
       </p>
       <span class="header-rule" aria-hidden="true"></span>
     </div>
@@ -59,10 +61,10 @@
       <a class="header-place" href="index.html#visit">
         <span>190 Windmill Lane, Cheshunt</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
       </a>
-      <button class="menu-toggle" type="button" id="menu-toggle"
+      <button class="menu-toggle menu-toggle-desktop" type="button" id="menu-toggle"
               aria-expanded="false" aria-controls="nav-panel">
         <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="label">Menu</span>
+        <span class="label">Explore</span>
       </button>
     </div>
   </div>
@@ -88,7 +90,7 @@
         <a href="index.html#gallery" data-nav-section="gallery">
           Gallery<span aria-hidden="true">03</span>
         </a>
-        <a href="index.html#contact-us" data-nav-section="contact-us">
+        <a href="contact.html" data-nav-section="contact-us">
           Contact us<span aria-hidden="true">04</span>
         </a>
         <a href="index.html#visit" data-nav-section="visit">
@@ -492,7 +494,7 @@
         <div class="cf-field">
           <label class="cf-label" for="cf-private-hire-guests">Guests (approx.) <span class="cf-req" aria-hidden="true">*</span></label>
           <input class="cf-input" type="number" id="cf-private-hire-guests" name="guests" required
-            aria-describedby="cf-private-hire-guests-err" min="1" max="200" step="1" inputmode="numeric" placeholder="20">
+            aria-describedby="cf-private-hire-guests-err" min="12" max="200" step="1" inputmode="numeric" placeholder="20">
           
           <p class="cf-error" id="cf-private-hire-guests-err" hidden></p>
         </div>
@@ -550,13 +552,12 @@
       </div>
       <div class="footer-col">
         <h2>Explore</h2>
-        <ul>
+        <ul class="footer-explore">
           <li><a href="menu.html">Menu</a></li>
           <li><a href="index.html#the-cafe">The café</a></li>
           <li><a href="index.html#gallery">Gallery</a></li>
-          <li><a href="index.html#contact-us">Contact us</a></li>
+          <li><a href="contact.html">Contact us</a></li>
           <li><a href="index.html#visit">Visit us</a></li>
-          <li><a href="contact.html">All contact options</a></li>
           <li><a href="#book" data-contact-open="book">Book a table</a></li>
           <li><a href="#private-hire" data-contact-open="private-hire">Private hire</a></li>
         </ul>
@@ -565,16 +566,6 @@
         <li><a href="https://www.instagram.com/_hackberries/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>&nbsp;@_hackberries</a></li>
         </ul>
       </div>
-    </div>
-
-    <div class="coffee-break" id="coffee-break">
-      <button class="coffee-btn" type="button" id="coffee-btn"
-              aria-describedby="coffee-status">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M6 2.5v2M10 2.5v2M14 2.5v2"/></svg><span>A little coffee break</span>
-      </button>
-      <button class="coffee-btn" type="button" id="coffee-clear" hidden>Clear</button>
-      <p class="coffee-status" id="coffee-status" role="status"></p>
-      <div class="bean-field" id="bean-field" aria-hidden="true"></div>
     </div>
 
     <p class="footer-wordmark" aria-hidden="true">Hackberries</p>

@@ -126,8 +126,11 @@ h1, h2, h3 {
   font-weight: 600;
   line-height: var(--lh-snug);
   letter-spacing: -0.015em;
-  /* Fraunces' soft/wonk axes give the headings warmth without a second face. */
-  font-variation-settings: 'SOFT' 28, 'WONK' 1, 'opsz' 96;
+  /* Fraunces' soft/wonk axes give the headings warmth without a second face.
+     Never set 'opsz' here: the browser already sizes it from font-size, and a
+     forced value makes WebKit space glyphs for one optical size while drawing
+     another, so letters collide and word spaces vanish ("Contactus"). */
+  font-variation-settings: 'SOFT' 28, 'WONK' 1;
   text-wrap: balance;
 }
 
@@ -136,7 +139,7 @@ h1 {
   line-height: var(--lh-tight);
   letter-spacing: -0.028em;
   font-weight: 700;
-  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 144;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
 }
 h2 { font-size: var(--t-h2); letter-spacing: -0.022em; }
 h3 { font-size: var(--t-h3); }

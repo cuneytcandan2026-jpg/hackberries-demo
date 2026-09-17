@@ -3,13 +3,9 @@
  *
  * PROVENANCE, READ BEFORE PUBLISHING
  * ----------------------------------
- * Transcribed from three photographs of the printed Hackberries menu supplied
- * with this brief. Those photographs are Google image-search screenshots
- * captioned "Hackberries - a year ago", so:
- *
- *   - the dish names and descriptions are genuinely Hackberries', but
- *   - the PRICES ARE ARCHIVED and are almost certainly out of date, and
- *   - availability of any individual item is unconfirmed.
+ * Transcribed from photographs of the printed Hackberries menu. The prices and
+ * the availability of each item are unconfirmed until the client supplies a
+ * current menu; the details are in content-needed.md (not deployed).
  *
  * `PRICE_POLICY` below controls how prices render. It ships as 'archived',
  * which shows the figures with a visible "archived, to be confirmed" notice.
@@ -21,8 +17,12 @@
  *
  * STRUCTURE (menu page redesign)
  * ------------------------------
- * Item names, prices, descriptions and (V) marks are exactly as printed. What
- * the redesign changed is grouping and presentation only:
+ * Item names, prices, descriptions and (V) marks are as printed, with spelling
+ * and punctuation tidied (e.g. "Cheese cake" -> "Cheesecake", "mix vegetables"
+ * -> "mixed vegetables"); every such change is listed in content-needed.md.
+ * Anything that could change meaning (names, measures, apparent duplicates)
+ * is left as printed and asked about instead. What the redesign changed
+ * beyond that is grouping and presentation only:
  *
  *   - Sections are ordered by course, and some are renamed so the name says
  *     what is in them. `printed` records the name on the printed menu; every
@@ -50,16 +50,16 @@
 /** 'archived' | 'confirmed' | 'hidden' */
 export const PRICE_POLICY = 'archived';
 
+/** Public wording. Before launch the archived prices must be replaced with
+    current ones and PRICE_POLICY set to 'confirmed' (see content-needed.md). */
 export const PRICE_NOTE =
-  'Prices are transcribed from a photograph of a printed menu dated about a ' +
-  'year ago. They are shown so the layout can be reviewed and must be ' +
-  'replaced with current prices before this site goes live.';
+  'Prices come from a printed menu from about a year ago, so some may have ' +
+  'changed. Please check with the team when you order.';
 
 export const MENU_META = {
   sourceNote:
-    'Transcribed from the printed in-café menu. Dishes marked (V) are marked ' +
-    'vegetarian on the printed menu; no other dietary or allergen information ' +
-    'has been added.',
+    'Dishes marked (V) are marked vegetarian on the café’s printed menu. No ' +
+    'other dietary or allergen information is given here.',
   allergenNote:
     'Allergen information is not published here. Please ask a member of the ' +
     'team about ingredients and allergens before ordering.',
@@ -67,9 +67,9 @@ export const MENU_META = {
 
 export const COURSES = [
   { id: 'breakfast', label: 'Breakfast', short: 'Breakfast', photo: 'food-menemen' },
-  { id: 'sweet', label: 'Sweet', short: 'Sweet', photo: 'dessert-french-toast' },
+  { id: 'sweet', label: 'Sweet things', short: 'Sweet', photo: 'dessert-french-toast' },
   { id: 'lunch', label: 'Lunch & grills', short: 'Lunch', photo: null },
-  { id: 'drinks', label: 'Drinks', short: 'Drinks', photo: 'drink-iced-latte' },
+  { id: 'drinks', label: 'Coffee & drinks', short: 'Drinks', photo: 'drink-iced-latte' },
   { id: 'bar', label: 'Bar', short: 'Bar', photo: null },
 ];
 
@@ -187,7 +187,7 @@ export const MENU = [
       { name: 'Toast (2) with jam or marmalade', price: 5.0 },
       { name: 'Toast (2) with baked beans', price: 5.0 },
       { name: 'Toast (2) with scrambled egg', price: 7.0 },
-      { name: 'Toast (2) with mushroom', price: 7.0 },
+      { name: 'Toast (2) with mushrooms', price: 7.0 },
     ],
   },
   {
@@ -200,7 +200,7 @@ export const MENU = [
       { name: 'Ham', price: 2.0 }, { name: 'Halloumi', price: 2.5 },
       { name: 'Turkish sucuk', price: 2.5 }, { name: 'Smoked salmon', price: 4.0 },
       { name: 'Egg', price: 1.5 }, { name: 'Turkish pastry', price: 1.5 },
-      { name: 'Veggie sausage', price: 2.0 }, { name: '1 toast', price: 1.2 },
+      { name: 'Veggie sausage', price: 2.0 }, { name: '1 slice of toast', price: 1.2 },
       { name: 'Baked beans', price: 1.5 }, { name: 'Feta cheese', price: 2.0 },
       { name: 'Avocado', price: 3.0 }, { name: 'Hollandaise sauce', price: 2.5 },
       { name: 'Grilled onion', price: 1.5 }, { name: 'Hummus', price: 3.0 },
@@ -233,7 +233,7 @@ export const MENU = [
       },
       {
         name: 'Granola protein', price: 9.9,
-        desc: "Homemade yogurt with season's fruits and honey.",
+        desc: 'Homemade yogurt with seasonal fruit and honey.',
       },
     ],
   },
@@ -247,7 +247,7 @@ export const MENU = [
       { name: 'Victoria sponge cake', price: 4.5 },
       { name: 'Carrot cake', price: 4.5 },
       { name: 'Red velvet', price: 4.5 },
-      { name: 'Cheese cake', price: 4.5 },
+      { name: 'Cheesecake', price: 4.5 },
       { name: 'Chocolate cake', price: 5.0 },
       { name: 'Apple pie & custard', price: 4.0 },
       { name: 'Ice cream', price: null },
@@ -285,11 +285,11 @@ export const MENU = [
     items: [
       {
         name: 'Hackberries burger', price: 12.9,
-        desc: 'High quality beef, bacon, cheese, grilled onion served with Parmesan cheese, chips, salad & gherkins.',
+        desc: 'High-quality beef, bacon, cheese, grilled onion served with Parmesan cheese, chips, salad & gherkins.',
       },
       {
         name: 'Cheese burger', price: 9.9,
-        desc: 'High quality beef with chips, salad & gherkins.',
+        desc: 'High-quality beef with chips, salad & gherkins.',
       },
       { name: 'Fried chicken burger', price: 9.9, desc: 'Served with chips and salad.' },
       { name: 'Veggie burger', price: 9.9, tags: ['V'], desc: 'Served with chips and salad.' },
@@ -302,7 +302,7 @@ export const MENU = [
     items: [
       {
         name: 'Penne', price: 10.0,
-        desc: 'With a choice of homemade tomato sauce or homemade creamy mushroom sauce. Add chicken, bacon or mushroom +£2.00.',
+        desc: 'With a choice of homemade tomato sauce or homemade creamy mushroom sauce. Add chicken, bacon or mushroom +£2.',
       },
       { name: 'Spaghetti bolognese & Parmesan cheese', price: 11.0 },
       { name: 'Pasta with meatballs & cheese', price: 9.9 },
@@ -328,7 +328,7 @@ export const MENU = [
       },
       {
         name: 'Homemade lamb köfte wrap', price: 10.0,
-        desc: 'Served in tortilla with parsley, red onion, tomatoes & fries.',
+        desc: 'Served in a tortilla with parsley, red onion, tomatoes & fries.',
       },
       {
         name: 'Breakfast wrap', price: 10.9,
@@ -360,16 +360,16 @@ export const MENU = [
     name: 'Salad bowls',
     items: [
       {
-        name: 'Grilled cajun chicken', price: 9.9,
-        desc: 'Mixed salad, crispy tortilla strips, topped with sliced avocado and creamy cajun dressing.',
+        name: 'Grilled Cajun chicken', price: 9.9,
+        desc: 'Mixed salad, crispy tortilla strips, topped with sliced avocado and creamy Cajun dressing.',
       },
       {
         name: 'Grilled halloumi', price: 9.9, tags: ['V'],
         desc: 'Mixed salad, Kalamata olives, and avocado, topped with garlic dressing.',
       },
       {
-        name: 'Grilled chicken caesar', price: 9.9,
-        desc: 'Mixed salad, topped with caesar dressing.',
+        name: 'Grilled chicken Caesar', price: 9.9,
+        desc: 'Mixed salad, topped with Caesar dressing.',
       },
       {
         name: 'Smoked salmon', price: 11.9,
@@ -398,9 +398,9 @@ export const MENU = [
     name: 'Roasts & pie',
     printed: 'Homemade dinner',
     items: [
-      { name: 'Roast chicken', price: 9.9, desc: 'Served with potatoes, mix vegetables and gravy.' },
-      { name: 'Roast beef', price: 15.0, desc: 'Served with potatoes, mix vegetables and gravy.' },
-      { name: 'Shepherd pie', price: 15.0, desc: 'Served with potatoes, mix vegetables and gravy.' },
+      { name: 'Roast chicken', price: 9.9, desc: 'Served with potatoes, mixed vegetables and gravy.' },
+      { name: 'Roast beef', price: 15.0, desc: 'Served with potatoes, mixed vegetables and gravy.' },
+      { name: 'Shepherd’s pie', price: 15.0, desc: 'Served with potatoes, mixed vegetables and gravy.' },
     ],
   },
   {
@@ -450,7 +450,7 @@ export const MENU = [
         desc: 'Chips topped with crispy Southern fried chicken & mixture of sauces.',
       },
       {
-        name: 'Hummus cacık olives', price: 6.5, tags: ['V'],
+        name: 'Hummus, cacık & olives', price: 6.5, tags: ['V'],
         desc: 'Served with Turkish bread.',
       },
       {
@@ -500,7 +500,7 @@ export const MENU = [
     name: 'Herbal tea',
     layout: 'group',
     items: [
-      { name: 'Earl grey', price: 2.2 }, { name: 'Green', price: 2.2 },
+      { name: 'Earl Grey', price: 2.2 }, { name: 'Green', price: 2.2 },
       { name: 'Mint', price: 2.2 }, { name: 'Chamomile', price: 2.2 },
       { name: 'Lemon & ginger', price: 2.2 },
     ],
@@ -639,7 +639,7 @@ export const MENU = [
     items: [
       { name: 'Non-alcoholic Peroni', price: 4.9 }, { name: 'Peroni', price: 4.4 },
       { name: 'Corona', price: 4.4 }, { name: 'Budweiser', price: 4.4 },
-      { name: 'Efes draft (500ml)', price: 4.9 },
+      { name: 'Efes draught (500ml)', price: 4.9 },
     ],
   },
   {
@@ -650,7 +650,7 @@ export const MENU = [
     note: 'Large glass.',
     items: [
       { name: 'Bacardi Blanche', price: 5.0 }, { name: "Gordon's", price: 5.0 },
-      { name: "Hendrick's", price: 7.0 }, { name: 'Jack Daniels No7', price: 5.0 },
+      { name: "Hendrick's", price: 7.0 }, { name: 'Jack Daniel’s Old No. 7', price: 5.0 },
       { name: 'Courvoisier', price: 6.1 }, { name: 'Bacardi Blanca', price: 4.0 },
       { name: 'Absolut', price: 6.0 }, { name: 'Grey Goose', price: 7.0 },
       { name: 'Smirnoff', price: 5.0 }, { name: 'Tekirdağ Gold', price: 7.0 },
@@ -659,9 +659,9 @@ export const MENU = [
 ];
 
 /**
- * House favourites: the photo row at the top of the menu page. Only real café
- * photographs are used here: on a menu a photo reads as "this is what
- * arrives", so the generated lamb chops and burger images stay off this page.
+ * House favourites: the photo row at the top of the menu page. On a menu a
+ * photo reads as "this is what arrives", so only untouched photographs are
+ * used here; the retouched lamb chops and burger wait for client approval.
  * `dish` names a single item (its price is shown); without it the card stands
  * for its whole section ("from" the lowest price).
  */

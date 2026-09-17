@@ -112,6 +112,12 @@
 .atmos-print[data-state='back']  { --rot: -3.8deg; --tx: -7%; --ty: -5%; z-index: 1; }
 .atmos-print[data-state='mid']   { --rot: 3.2deg;  --tx: 6%;  --ty: 4%;  z-index: 2; }
 .atmos-print[data-state='front'] { --rot: -0.8deg; --tx: 0;    --ty: 0;   z-index: 3; }
+/* On a phone the same percentages push the back prints well past the front
+   one, so the fan closes up to an even border. */
+@media (max-width: 47.99rem) {
+  .atmos-print[data-state='back'] { --rot: -2.6deg; --tx: -3.5%; --ty: -2.5%; }
+  .atmos-print[data-state='mid']  { --rot: 2.2deg;  --tx: 3%;    --ty: 2%; }
+}
 
 .atmos-caption {
   position: absolute;
@@ -217,7 +223,7 @@ html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.024em;
-  font-variation-settings: 'SOFT' 32, 'WONK' 1, 'opsz' 120;
+  font-variation-settings: 'SOFT' 32, 'WONK' 1;
   transition: color var(--d-control) var(--ease-firm),
               transform 460ms var(--ease-soft);
 }
@@ -556,7 +562,8 @@ html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
   .visit-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
 }
 
-.visit-facts { display: grid; gap: var(--s-6); align-content: start; }
+.visit-facts,
+.visit-list { display: grid; gap: var(--s-6); align-content: start; }
 
 .fact { display: grid; gap: var(--s-2); }
 .fact dt {
@@ -664,6 +671,11 @@ html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
 }
 .footer-col a:hover { color: var(--c-leaf); text-decoration: underline; }
 .footer-col address { font-style: normal; color: var(--c-on-dark-mute); line-height: 1.7; }
+/* Phones: the Explore links run in two columns, so the footer is not a long
+   single-file list. */
+@media (max-width: 47.99rem) {
+  .footer-col .footer-explore { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
+}
 
 .footer-bar {
   position: relative;
@@ -686,12 +698,16 @@ html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
   line-height: 0.82;
   letter-spacing: -0.04em;
   color: color-mix(in srgb, var(--c-leaf) 22%, transparent);
-  font-variation-settings: 'SOFT' 48, 'WONK' 1, 'opsz' 144;
+  font-variation-settings: 'SOFT' 48, 'WONK' 1;
   margin-top: var(--s-5);
   margin-bottom: -0.1em;
   user-select: none;
   white-space: nowrap;
   overflow: clip;
+}
+/* Decorative, and on a phone it only adds length to an already long footer. */
+@media (max-width: 47.99rem) {
+  .footer-wordmark { display: none; }
 }
 
 .to-top {
@@ -708,42 +724,3 @@ html[data-motion='reduced'] .row-link:focus-visible::after { opacity: 1; }
   text-decoration: none;
 }
 .to-top:hover { background: var(--c-on-dark); color: var(--c-forest-deep); }
-
-/* ==========================================================================
-   10. "A little coffee break" - optional, explicitly activated
-   ========================================================================== */
-.coffee-break {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--s-4);
-  flex-wrap: wrap;
-  padding-bottom: 6rem;
-}
-.coffee-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-  min-height: 2.75rem;
-  padding: 0.5rem 1.1rem;
-  border: 2px solid color-mix(in srgb, var(--c-on-dark) 32%, transparent);
-  border-radius: var(--r-pill);
-  color: var(--c-on-dark);
-  font-weight: 700;
-  font-size: var(--t-small);
-}
-.coffee-btn:hover { background: var(--c-leaf); border-color: var(--c-leaf); color: var(--c-forest-deep); }
-.coffee-btn svg { width: 1.1rem; height: 1.1rem; }
-
-/* The bean layer is decorative, bounded, and cannot intercept input. */
-.bean-field {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  height: 6rem;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-.bean-field canvas { display: block; width: 100%; height: 100%; }
-.coffee-status { font-size: var(--t-small); color: var(--c-on-dark-mute); }

@@ -15,6 +15,25 @@ import { motion, trapFocus } from './motion.js';
 /* ==========================================================================
    Lightbox
    ========================================================================== */
+
+/** Widest candidate in an opener's srcset, in the format the browser chose.
+    A print that has not loaded yet (lazy, off-screen) has no currentSrc, so
+    it falls back to WebP, which every supported browser decodes. */
+function largestSource(opener) {
+  const image = opener.querySelector('img');
+  if (!image) return '';
+  const webp = opener.querySelector('source[type="image/webp"]');
+  const wantJpg = /\.jpe?g$/i.test(image.currentSrc) || !webp;
+  const srcset = (wantJpg ? image : webp).getAttribute('srcset') || '';
+  let best = { url: image.getAttribute('src') || '', w: 0 };
+  for (const candidate of srcset.split(',')) {
+    const [url, descriptor = ''] = candidate.trim().split(/\s+/);
+    const w = parseInt(descriptor, 10) || 0;
+    if (url && w > best.w) best = { url, w };
+  }
+  return best.url;
+}
+
 export function initLightbox() {
   const box = document.getElementById('lightbox');
   const openers = Array.from(document.querySelectorAll('[data-lightbox-open]'));
@@ -37,10 +56,10 @@ export function initLightbox() {
     index = ((next % GALLERY.length) + GALLERY.length) % GALLERY.length;
     const item = GALLERY[index];
     const photo = PHOTOS[item.photo];
-    // Full-size viewing uses the largest derivative available for the photo.
-    const source = openers[index].querySelector('img');
-    const best = source?.currentSrc || source?.src || '';
-    img.src = best.replace(/-(\d+)\.(jpg|webp)$/, (m, w, ext) => `-${Math.max(Number(w), 600)}.${ext}`);
+    // Full-size viewing uses the largest derivative the build actually made,
+    // read from the print's own srcset in the format the browser picked.
+    // (Derivative widths differ per crop, so a width can't be guessed.)
+    img.src = largestSource(openers[index]);
     img.alt = photo.alt;
     if (caption) caption.textContent = photo.alt;
     if (counter) counter.textContent = String(index + 1);

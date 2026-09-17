@@ -16,7 +16,7 @@ export function initMap() {
 
     const frame = document.createElement('iframe');
     frame.src = src;
-    frame.title = 'Map showing Hackberries, 190 Windmill Lane, Cheshunt';
+    frame.title = slot.dataset.mapTitle || 'Map';
     frame.loading = 'lazy';
     frame.referrerPolicy = 'no-referrer-when-downgrade';
     frame.setAttribute('allowfullscreen', '');
